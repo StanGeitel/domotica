@@ -10,7 +10,7 @@
 
 int main(void)
 {
-    
+	clear_output_gpio(0xB, 0);
     while (1) 
     {
     }

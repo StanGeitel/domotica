@@ -38,6 +38,7 @@ SUBDIRS :=
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
 ../gpio.c \
+../knx.c \
 ../main.c \
 ../timer.c
 
@@ -50,21 +51,25 @@ ASM_SRCS +=
 
 OBJS +=  \
 gpio.o \
+knx.o \
 main.o \
 timer.o
 
 OBJS_AS_ARGS +=  \
 gpio.o \
+knx.o \
 main.o \
 timer.o
 
 C_DEPS +=  \
 gpio.d \
+knx.d \
 main.d \
 timer.d
 
 C_DEPS_AS_ARGS +=  \
 gpio.d \
+knx.d \
 main.d \
 timer.d
 
@@ -82,6 +87,8 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
 
 
 

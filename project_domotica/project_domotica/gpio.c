@@ -7,32 +7,33 @@
  #include <avr/io.h>
  #include "gpio.h"
  
- void set_output_gpio(void){
-	DDRD &= ~(1 << DDD6);
-	PORTD |= (1 << PORTD6);
+ void set_output_gpio(unsigned char port, int pin){
+	DDR(port) &= ~(1 << pin);
+	PORT(port) |= (1 << pin);
 
-	DDRD |= (1 << DDD6);
-	PORTD |= (1 << PORTD6);
+	DDR(port) |= (1 << pin);
+	PORT(port) |= (1 << pin);
  }
 
- void clear_output_gpio(void){
-	DDRD &= ~(1 << DDD6);
-	PORTD &= ~(1 << PORTD6);
+ void clear_output_gpio(unsigned char port, int pin){
+	DDR(port) &= ~(1 << pin);
+	PORT(port) &= ~(1 << pin);
 	
-	DDRD |= (1 << DDD6);
-	PORTD &= ~(1 << PORTD6);
+	DDR(port) |= (1 << pin);
+	PORT(port) &= ~(1 << pin);
  }
 
- void enable_input_gpio(void){
-	DDRD &= ~(1 << DDD6);
+ void enable_input_gpio(unsigned char port, int pin){
+	DDR(port) &= ~(1 << pin);
+ }
+ 
+ void enable_pullup_gpio(unsigned char port, int pin){
+	PORT(port) |= (1 << pin);
  }
 
- void enable_pullup_gpio(void){
-	PORTD |= (1 << PORTD6);
- }
-
- int read_gpio(void){
-	return(PIND6);
+ int read_gpio(unsigned char port, int pin){
+	int ret = (PIN(port) & (1 << pin));
+	return(ret);
  }
 
  void init_interrupt_gpio(void){
@@ -40,11 +41,11 @@
 	GIMSK |= (1 << PCIE2);				//enable pin change interrupt 2 in general interrupt mask register
 	SREG |= (1 << SREG_I);				//enable interrupts I in global status register
  }
- 
+/* 
  ISR(PCINT2_vect){						//interrupt service routine 
 	
  }
-
+ */
 
  void init_external_interrupt0_gpio(void){
 	MCUCR |= (1 << ISC01);				//The rising edge of INT0 generates an interrupt request
@@ -54,6 +55,7 @@
 	SREG |= (1 << SREG_I);				//enable interrupts I in global status register	
  }
 
- ISR(INT0_vect){						//interrupt service routine
+/* ISR(INT0_vect){						//interrupt service routine
 	 
  }
+*/

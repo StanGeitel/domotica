@@ -4,6 +4,8 @@
 
 gpio.c
 
+knx.c
+
 main.c
 
 timer.c
