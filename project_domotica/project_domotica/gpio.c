@@ -5,7 +5,8 @@
  *  Author: Stan Geitel
  */ 
 #include <avr/io.h>
- #include <avr/interrupt.h>
+#include <avr/common.h>
+#include <avr/interrupt.h>
 #include "gpio.h"
  
  void set_output_gpio(unsigned char port, int pin){

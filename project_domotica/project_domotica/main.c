@@ -5,15 +5,14 @@
  * Author : Stan Geitel
  */ 
 
-#include <avr/io.h>
 #include "gpio.h"
-#include "knx.h"
 #include "timer.h"
 
 int main(void)
 {
-//	init_timer0();
-	clear_output_gpio(0xB, 7);
+	set_output_gpio(0xB, 7);
+	init_timer0();
+//	clear_output_gpio(0xB, 7);
     while (1) 
     {
     }
