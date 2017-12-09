@@ -40,7 +40,9 @@ C_SRCS +=  \
 ../gpio.c \
 ../knx.c \
 ../main.c \
-../timer.c
+../switch.c \
+../timer.c \
+../usart.c
 
 
 PREPROCESSING_SRCS += 
@@ -53,25 +55,33 @@ OBJS +=  \
 gpio.o \
 knx.o \
 main.o \
-timer.o
+switch.o \
+timer.o \
+usart.o
 
 OBJS_AS_ARGS +=  \
 gpio.o \
 knx.o \
 main.o \
-timer.o
+switch.o \
+timer.o \
+usart.o
 
 C_DEPS +=  \
 gpio.d \
 knx.d \
 main.d \
-timer.d
+switch.d \
+timer.d \
+usart.d
 
 C_DEPS_AS_ARGS +=  \
 gpio.d \
 knx.d \
 main.d \
-timer.d
+switch.d \
+timer.d \
+usart.d
 
 OUTPUT_FILE_PATH +=project_domotica.elf
 
@@ -87,6 +97,10 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
+
+
 
 
 

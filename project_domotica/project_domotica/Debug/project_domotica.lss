@@ -3,37 +3,39 @@ project_domotica.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         000001b8  00000000  00000000  00000054  2**1
+  0 .text         00000200  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         00000000  00800060  00800060  0000020c  2**0
+  1 .data         00000000  00800060  00800060  00000274  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .comment      00000030  00000000  00000000  0000020c  2**0
+  2 .bss          00000001  00800060  00800060  00000274  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  00000274  2**0
                   CONTENTS, READONLY
-  3 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  0000023c  2**2
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000002a4  2**2
                   CONTENTS, READONLY
-  4 .debug_aranges 000000b8  00000000  00000000  0000027c  2**0
+  5 .debug_aranges 000000d8  00000000  00000000  000002e4  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   0000083f  00000000  00000000  00000334  2**0
+  6 .debug_info   000008a7  00000000  00000000  000003bc  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 0000060b  00000000  00000000  00000b73  2**0
+  7 .debug_abbrev 00000630  00000000  00000000  00000c63  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   00000429  00000000  00000000  0000117e  2**0
+  8 .debug_line   000004e8  00000000  00000000  00001293  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  0000017c  00000000  00000000  000015a8  2**2
+  9 .debug_frame  000001f8  00000000  00000000  0000177c  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    0000040f  00000000  00000000  00001724  2**0
+ 10 .debug_str    00000427  00000000  00000000  00001974  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    000001f4  00000000  00000000  00001b33  2**0
+ 11 .debug_loc    0000030a  00000000  00000000  00001d9b  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000088  00000000  00000000  00001d27  2**0
+ 12 .debug_ranges 000000a8  00000000  00000000  000020a5  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
 
 00000000 <__vectors>:
    0:	14 c0       	rjmp	.+40     	; 0x2a <__ctors_end>
-   2:	82 c0       	rjmp	.+260    	; 0x108 <__vector_1>
-   4:	20 c0       	rjmp	.+64     	; 0x46 <__bad_interrupt>
+   2:	b2 c0       	rjmp	.+356    	; 0x168 <__vector_1>
+   4:	bb c0       	rjmp	.+374    	; 0x17c <__vector_2>
    6:	1f c0       	rjmp	.+62     	; 0x46 <__bad_interrupt>
    8:	1e c0       	rjmp	.+60     	; 0x46 <__bad_interrupt>
    a:	1d c0       	rjmp	.+58     	; 0x46 <__bad_interrupt>
@@ -42,16 +44,16 @@ Disassembly of section .text:
   10:	1a c0       	rjmp	.+52     	; 0x46 <__bad_interrupt>
   12:	19 c0       	rjmp	.+50     	; 0x46 <__bad_interrupt>
   14:	18 c0       	rjmp	.+48     	; 0x46 <__bad_interrupt>
-  16:	17 c0       	rjmp	.+46     	; 0x46 <__bad_interrupt>
+  16:	6e c0       	rjmp	.+220    	; 0xf4 <__vector_11>
   18:	16 c0       	rjmp	.+44     	; 0x46 <__bad_interrupt>
-  1a:	9b c0       	rjmp	.+310    	; 0x152 <__vector_13>
+  1a:	bf c0       	rjmp	.+382    	; 0x19a <__vector_13>
   1c:	14 c0       	rjmp	.+40     	; 0x46 <__bad_interrupt>
   1e:	13 c0       	rjmp	.+38     	; 0x46 <__bad_interrupt>
   20:	12 c0       	rjmp	.+36     	; 0x46 <__bad_interrupt>
   22:	11 c0       	rjmp	.+34     	; 0x46 <__bad_interrupt>
   24:	10 c0       	rjmp	.+32     	; 0x46 <__bad_interrupt>
-  26:	0f c0       	rjmp	.+30     	; 0x46 <__bad_interrupt>
-  28:	65 c0       	rjmp	.+202    	; 0xf4 <__vector_20>
+  26:	8c c0       	rjmp	.+280    	; 0x140 <__vector_19>
+  28:	95 c0       	rjmp	.+298    	; 0x154 <__vector_20>
 
 0000002a <__ctors_end>:
   2a:	11 24       	eor	r1, r1
@@ -69,16 +71,22 @@ Disassembly of section .text:
   3a:	1d 92       	st	X+, r1
 
 0000003c <.do_clear_bss_start>:
-  3c:	a0 36       	cpi	r26, 0x60	; 96
+  3c:	a1 36       	cpi	r26, 0x61	; 97
   3e:	b2 07       	cpc	r27, r18
   40:	e1 f7       	brne	.-8      	; 0x3a <.do_clear_bss_loop>
-  42:	6c d0       	rcall	.+216    	; 0x11c <main>
-  44:	b7 c0       	rjmp	.+366    	; 0x1b4 <_exit>
+  42:	a6 d0       	rcall	.+332    	; 0x190 <main>
+  44:	db c0       	rjmp	.+438    	; 0x1fc <_exit>
 
 00000046 <__bad_interrupt>:
   46:	dc cf       	rjmp	.-72     	; 0x0 <__vectors>
 
 00000048 <set_output_gpio>:
+ void init_external_interrupt1_gpio(void){
+	 MCUCR |= (1 << ISC10);				//The rising edge of INT1 generates an interrupt request
+	 MCUCR |= (1 << ISC11);
+	 
+	 GIMSK |= (1 << INT1);				//enable external interrupt 1 in general interrupt mask register
+	 SREG |= (1 << SREG_I);				//enable interrupts I in global status register
   48:	e8 2f       	mov	r30, r24
   4a:	f0 e0       	ldi	r31, 0x00	; 0
   4c:	3a 97       	sbiw	r30, 0x0a	; 10
@@ -170,121 +178,175 @@ Disassembly of section .text:
   f0:	93 23       	and	r25, r19
   f2:	08 95       	ret
 
-000000f4 <__vector_20>:
+000000f4 <__vector_11>:
   f4:	1f 92       	push	r1
   f6:	0f 92       	push	r0
   f8:	0f b6       	in	r0, 0x3f	; 63
   fa:	0f 92       	push	r0
   fc:	11 24       	eor	r1, r1
-  fe:	0f 90       	pop	r0
- 100:	0f be       	out	0x3f, r0	; 63
- 102:	0f 90       	pop	r0
- 104:	1f 90       	pop	r1
- 106:	18 95       	reti
+  fe:	8f 93       	push	r24
+ 100:	9f 93       	push	r25
+ 102:	cf 93       	push	r28
+ 104:	df 93       	push	r29
+ 106:	1f 92       	push	r1
+ 108:	cd b7       	in	r28, 0x3d	; 61
+ 10a:	dd 27       	eor	r29, r29
+ 10c:	96 b3       	in	r25, 0x16	; 22
+ 10e:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <_edata>
+ 112:	89 27       	eor	r24, r25
+ 114:	89 83       	std	Y+1, r24	; 0x01
+ 116:	86 b3       	in	r24, 0x16	; 22
+ 118:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <_edata>
+ 11c:	89 81       	ldd	r24, Y+1	; 0x01
+ 11e:	89 81       	ldd	r24, Y+1	; 0x01
+ 120:	89 81       	ldd	r24, Y+1	; 0x01
+ 122:	89 81       	ldd	r24, Y+1	; 0x01
+ 124:	89 81       	ldd	r24, Y+1	; 0x01
+ 126:	89 81       	ldd	r24, Y+1	; 0x01
+ 128:	89 81       	ldd	r24, Y+1	; 0x01
+ 12a:	89 81       	ldd	r24, Y+1	; 0x01
+ 12c:	0f 90       	pop	r0
+ 12e:	df 91       	pop	r29
+ 130:	cf 91       	pop	r28
+ 132:	9f 91       	pop	r25
+ 134:	8f 91       	pop	r24
+ 136:	0f 90       	pop	r0
+ 138:	0f be       	out	0x3f, r0	; 63
+ 13a:	0f 90       	pop	r0
+ 13c:	1f 90       	pop	r1
+ 13e:	18 95       	reti
 
-00000108 <__vector_1>:
- 108:	1f 92       	push	r1
- 10a:	0f 92       	push	r0
- 10c:	0f b6       	in	r0, 0x3f	; 63
- 10e:	0f 92       	push	r0
- 110:	11 24       	eor	r1, r1
- 112:	0f 90       	pop	r0
- 114:	0f be       	out	0x3f, r0	; 63
- 116:	0f 90       	pop	r0
- 118:	1f 90       	pop	r1
- 11a:	18 95       	reti
+00000140 <__vector_19>:
+ 140:	1f 92       	push	r1
+ 142:	0f 92       	push	r0
+ 144:	0f b6       	in	r0, 0x3f	; 63
+ 146:	0f 92       	push	r0
+ 148:	11 24       	eor	r1, r1
+ 14a:	0f 90       	pop	r0
+ 14c:	0f be       	out	0x3f, r0	; 63
+ 14e:	0f 90       	pop	r0
+ 150:	1f 90       	pop	r1
+ 152:	18 95       	reti
 
-0000011c <main>:
+00000154 <__vector_20>:
+ 154:	1f 92       	push	r1
+ 156:	0f 92       	push	r0
+ 158:	0f b6       	in	r0, 0x3f	; 63
+ 15a:	0f 92       	push	r0
+ 15c:	11 24       	eor	r1, r1
+ 15e:	0f 90       	pop	r0
+ 160:	0f be       	out	0x3f, r0	; 63
+ 162:	0f 90       	pop	r0
+ 164:	1f 90       	pop	r1
+ 166:	18 95       	reti
+
+00000168 <__vector_1>:
+ 168:	1f 92       	push	r1
+ 16a:	0f 92       	push	r0
+ 16c:	0f b6       	in	r0, 0x3f	; 63
+ 16e:	0f 92       	push	r0
+ 170:	11 24       	eor	r1, r1
+ 172:	0f 90       	pop	r0
+ 174:	0f be       	out	0x3f, r0	; 63
+ 176:	0f 90       	pop	r0
+ 178:	1f 90       	pop	r1
+ 17a:	18 95       	reti
+
+0000017c <__vector_2>:
+ }
+ 
+ ISR(INT1_vect){						//External interrupt1 service routine
+ 17c:	1f 92       	push	r1
+ 17e:	0f 92       	push	r0
+ 180:	0f b6       	in	r0, 0x3f	; 63
+ 182:	0f 92       	push	r0
+ 184:	11 24       	eor	r1, r1
+	  
+ 186:	0f 90       	pop	r0
+ 188:	0f be       	out	0x3f, r0	; 63
+ 18a:	0f 90       	pop	r0
+ 18c:	1f 90       	pop	r1
+ 18e:	18 95       	reti
+
+00000190 <main>:
+#include "gpio.h"
 #include "timer.h"
 
 int main(void)
 {
-	//GIT TEST
 	set_output_gpio(0xB, 7);
- 11c:	67 e0       	ldi	r22, 0x07	; 7
- 11e:	70 e0       	ldi	r23, 0x00	; 0
- 120:	8b e0       	ldi	r24, 0x0B	; 11
- 122:	92 df       	rcall	.-220    	; 0x48 <set_output_gpio>
-	init_timer0();
- 124:	01 d0       	rcall	.+2      	; 0x128 <init_timer0>
- 126:	ff cf       	rjmp	.-2      	; 0x126 <main+0xa>
+ 190:	67 e0       	ldi	r22, 0x07	; 7
+ 192:	70 e0       	ldi	r23, 0x00	; 0
+ 194:	8b e0       	ldi	r24, 0x0B	; 11
+ 196:	58 df       	rcall	.-336    	; 0x48 <set_output_gpio>
+ 198:	ff cf       	rjmp	.-2      	; 0x198 <main+0x8>
 
-00000128 <init_timer0>:
- 128:	80 b7       	in	r24, 0x30	; 48
- 12a:	8f 70       	andi	r24, 0x0F	; 15
- 12c:	80 bf       	out	0x30, r24	; 48
- 12e:	80 b7       	in	r24, 0x30	; 48
- 130:	82 60       	ori	r24, 0x02	; 2
- 132:	80 bf       	out	0x30, r24	; 48
- 134:	83 b7       	in	r24, 0x33	; 51
- 136:	81 60       	ori	r24, 0x01	; 1
- 138:	83 bf       	out	0x33, r24	; 51
- 13a:	83 b7       	in	r24, 0x33	; 51
- 13c:	84 60       	ori	r24, 0x04	; 4
- 13e:	83 bf       	out	0x33, r24	; 51
- 140:	8f ef       	ldi	r24, 0xFF	; 255
- 142:	86 bf       	out	0x36, r24	; 54
- 144:	89 b7       	in	r24, 0x39	; 57
- 146:	81 60       	ori	r24, 0x01	; 1
- 148:	89 bf       	out	0x39, r24	; 57
- 14a:	8f b7       	in	r24, 0x3f	; 63
- 14c:	80 68       	ori	r24, 0x80	; 128
- 14e:	8f bf       	out	0x3f, r24	; 63
- 150:	08 95       	ret
+0000019a <__vector_13>:
+ 
+ void reset_prescaler(void){
+	GTCCR |= (1 << PSR10);	
+ }
 
-00000152 <__vector_13>:
- 152:	1f 92       	push	r1
- 154:	0f 92       	push	r0
- 156:	0f b6       	in	r0, 0x3f	; 63
- 158:	0f 92       	push	r0
- 15a:	11 24       	eor	r1, r1
- 15c:	2f 93       	push	r18
- 15e:	3f 93       	push	r19
- 160:	4f 93       	push	r20
- 162:	5f 93       	push	r21
- 164:	6f 93       	push	r22
- 166:	7f 93       	push	r23
- 168:	8f 93       	push	r24
- 16a:	9f 93       	push	r25
- 16c:	af 93       	push	r26
- 16e:	bf 93       	push	r27
- 170:	ef 93       	push	r30
- 172:	ff 93       	push	r31
- 174:	67 e0       	ldi	r22, 0x07	; 7
- 176:	70 e0       	ldi	r23, 0x00	; 0
- 178:	8b e0       	ldi	r24, 0x0B	; 11
- 17a:	a6 df       	rcall	.-180    	; 0xc8 <read_gpio>
- 17c:	89 2b       	or	r24, r25
- 17e:	29 f0       	breq	.+10     	; 0x18a <__vector_13+0x38>
- 180:	67 e0       	ldi	r22, 0x07	; 7
- 182:	70 e0       	ldi	r23, 0x00	; 0
- 184:	8b e0       	ldi	r24, 0x0B	; 11
- 186:	80 df       	rcall	.-256    	; 0x88 <clear_output_gpio>
- 188:	04 c0       	rjmp	.+8      	; 0x192 <__vector_13+0x40>
- 18a:	67 e0       	ldi	r22, 0x07	; 7
- 18c:	70 e0       	ldi	r23, 0x00	; 0
- 18e:	8b e0       	ldi	r24, 0x0B	; 11
- 190:	5b df       	rcall	.-330    	; 0x48 <set_output_gpio>
- 192:	ff 91       	pop	r31
- 194:	ef 91       	pop	r30
- 196:	bf 91       	pop	r27
- 198:	af 91       	pop	r26
- 19a:	9f 91       	pop	r25
- 19c:	8f 91       	pop	r24
- 19e:	7f 91       	pop	r23
- 1a0:	6f 91       	pop	r22
- 1a2:	5f 91       	pop	r21
- 1a4:	4f 91       	pop	r20
- 1a6:	3f 91       	pop	r19
- 1a8:	2f 91       	pop	r18
- 1aa:	0f 90       	pop	r0
- 1ac:	0f be       	out	0x3f, r0	; 63
- 1ae:	0f 90       	pop	r0
- 1b0:	1f 90       	pop	r1
- 1b2:	18 95       	reti
+ ISR (TIMER0_COMPA_vect){
+ 19a:	1f 92       	push	r1
+ 19c:	0f 92       	push	r0
+ 19e:	0f b6       	in	r0, 0x3f	; 63
+ 1a0:	0f 92       	push	r0
+ 1a2:	11 24       	eor	r1, r1
+ 1a4:	2f 93       	push	r18
+ 1a6:	3f 93       	push	r19
+ 1a8:	4f 93       	push	r20
+ 1aa:	5f 93       	push	r21
+ 1ac:	6f 93       	push	r22
+ 1ae:	7f 93       	push	r23
+ 1b0:	8f 93       	push	r24
+ 1b2:	9f 93       	push	r25
+ 1b4:	af 93       	push	r26
+ 1b6:	bf 93       	push	r27
+ 1b8:	ef 93       	push	r30
+ 1ba:	ff 93       	push	r31
+	if(read_gpio(0xB, 7)){
+ 1bc:	67 e0       	ldi	r22, 0x07	; 7
+ 1be:	70 e0       	ldi	r23, 0x00	; 0
+ 1c0:	8b e0       	ldi	r24, 0x0B	; 11
+ 1c2:	82 df       	rcall	.-252    	; 0xc8 <read_gpio>
+ 1c4:	89 2b       	or	r24, r25
+ 1c6:	29 f0       	breq	.+10     	; 0x1d2 <__vector_13+0x38>
+		clear_output_gpio(0xB, 7);
+ 1c8:	67 e0       	ldi	r22, 0x07	; 7
+ 1ca:	70 e0       	ldi	r23, 0x00	; 0
+ 1cc:	8b e0       	ldi	r24, 0x0B	; 11
+ 1ce:	5c df       	rcall	.-328    	; 0x88 <clear_output_gpio>
+ 1d0:	04 c0       	rjmp	.+8      	; 0x1da <__vector_13+0x40>
+	}
+	else{
+		set_output_gpio(0xB, 7);
+ 1d2:	67 e0       	ldi	r22, 0x07	; 7
+ 1d4:	70 e0       	ldi	r23, 0x00	; 0
+ 1d6:	8b e0       	ldi	r24, 0x0B	; 11
+ 1d8:	37 df       	rcall	.-402    	; 0x48 <set_output_gpio>
+	}
+	
+ 1da:	ff 91       	pop	r31
+ 1dc:	ef 91       	pop	r30
+ 1de:	bf 91       	pop	r27
+ 1e0:	af 91       	pop	r26
+ 1e2:	9f 91       	pop	r25
+ 1e4:	8f 91       	pop	r24
+ 1e6:	7f 91       	pop	r23
+ 1e8:	6f 91       	pop	r22
+ 1ea:	5f 91       	pop	r21
+ 1ec:	4f 91       	pop	r20
+ 1ee:	3f 91       	pop	r19
+ 1f0:	2f 91       	pop	r18
+ 1f2:	0f 90       	pop	r0
+ 1f4:	0f be       	out	0x3f, r0	; 63
+ 1f6:	0f 90       	pop	r0
+ 1f8:	1f 90       	pop	r1
+ 1fa:	18 95       	reti
 
-000001b4 <_exit>:
- 1b4:	f8 94       	cli
+000001fc <_exit>:
+ 1fc:	f8 94       	cli
 
-000001b6 <__stop_program>:
- 1b6:	ff cf       	rjmp	.-2      	; 0x1b6 <__stop_program>
+000001fe <__stop_program>:
+ 1fe:	ff cf       	rjmp	.-2      	; 0x1fe <__stop_program>

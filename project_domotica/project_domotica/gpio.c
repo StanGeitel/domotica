@@ -60,7 +60,7 @@ volatile uint8_t old_pins = 0;
 	 volatile uint8_t changed_pins;
 	 
 	 changed_pins = PINB ^ old_pins;
-	 old_pins = PINB
+	 old_pins = PINB;
 	 
 	 if(changed_pins & (1 << PINB0)){
 		 //set coresponding led
