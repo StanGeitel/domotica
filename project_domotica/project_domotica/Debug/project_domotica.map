@@ -470,14 +470,14 @@ END GROUP
  .debug_frame   0x000000bc       0x24 main.o
  .debug_frame   0x000000e0       0x9c timer.o
 
-.debug_str      0x00000000      0x3bf
+.debug_str      0x00000000      0x40f
  *(.debug_str)
  .debug_str     0x00000000      0x17b C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATtiny_DFP/1.3.147/gcc/dev/attiny2313a/avr25/tiny-stack/crtattiny2313a.o
  .debug_str     0x0000017b      0x1e8 gpio.o
                                 0x21c (size before relaxing)
- .debug_str     0x00000363       0x1d main.o
+ .debug_str     0x00000363       0x6d main.o
                                 0x12f (size before relaxing)
- .debug_str     0x00000380       0x3f timer.o
+ .debug_str     0x000003d0       0x3f timer.o
                                 0x1e8 (size before relaxing)
 
 .debug_loc      0x00000000      0x1f4

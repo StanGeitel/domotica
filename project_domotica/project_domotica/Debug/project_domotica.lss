@@ -21,11 +21,11 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   8 .debug_frame  0000017c  00000000  00000000  000015a8  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    000003bf  00000000  00000000  00001724  2**0
+  9 .debug_str    0000040f  00000000  00000000  00001724  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    000001f4  00000000  00000000  00001ae3  2**0
+ 10 .debug_loc    000001f4  00000000  00000000  00001b33  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000088  00000000  00000000  00001cd7  2**0
+ 11 .debug_ranges 00000088  00000000  00000000  00001d27  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -79,12 +79,6 @@ Disassembly of section .text:
   46:	dc cf       	rjmp	.-72     	; 0x0 <__vectors>
 
 00000048 <set_output_gpio>:
- void init_external_interrupt0_gpio(void){
-	MCUCR |= (1 << ISC01);				//The rising edge of INT0 generates an interrupt request
-	MCUCR |= (1 << ISC00);
-	
-	GIMSK |= (1 << INT0);				//enable external interrupt 0 in general interrupt mask register
-	SREG |= (1 << SREG_I);				//enable interrupts I in global status register	
   48:	e8 2f       	mov	r30, r24
   4a:	f0 e0       	ldi	r31, 0x00	; 0
   4c:	3a 97       	sbiw	r30, 0x0a	; 10
@@ -189,15 +183,11 @@ Disassembly of section .text:
  106:	18 95       	reti
 
 00000108 <__vector_1>:
- }
-
- ISR(INT0_vect){						//interrupt service routine
  108:	1f 92       	push	r1
  10a:	0f 92       	push	r0
  10c:	0f b6       	in	r0, 0x3f	; 63
  10e:	0f 92       	push	r0
  110:	11 24       	eor	r1, r1
-	 
  112:	0f 90       	pop	r0
  114:	0f be       	out	0x3f, r0	; 63
  116:	0f 90       	pop	r0
@@ -205,11 +195,11 @@ Disassembly of section .text:
  11a:	18 95       	reti
 
 0000011c <main>:
-#include "gpio.h"
 #include "timer.h"
 
 int main(void)
 {
+	//GIT TEST
 	set_output_gpio(0xB, 7);
  11c:	67 e0       	ldi	r22, 0x07	; 7
  11e:	70 e0       	ldi	r23, 0x00	; 0
@@ -220,12 +210,6 @@ int main(void)
  126:	ff cf       	rjmp	.-2      	; 0x126 <main+0xa>
 
 00000128 <init_timer0>:
- void clear_int_flag_timer0(void){
-	TIFR |= (1 << OCF0A);			//clear interrupt flag on compare register0 A 
- }
- 
- void reset_prescaler(void){
-	GTCCR |= (1 << PSR10);	
  128:	80 b7       	in	r24, 0x30	; 48
  12a:	8f 70       	andi	r24, 0x0F	; 15
  12c:	80 bf       	out	0x30, r24	; 48
@@ -249,9 +233,6 @@ int main(void)
  150:	08 95       	ret
 
 00000152 <__vector_13>:
- }
-
- ISR (TIMER0_COMPA_vect){
  152:	1f 92       	push	r1
  154:	0f 92       	push	r0
  156:	0f b6       	in	r0, 0x3f	; 63
@@ -269,28 +250,21 @@ int main(void)
  16e:	bf 93       	push	r27
  170:	ef 93       	push	r30
  172:	ff 93       	push	r31
-	if(read_gpio(0xB, 7)){
  174:	67 e0       	ldi	r22, 0x07	; 7
  176:	70 e0       	ldi	r23, 0x00	; 0
  178:	8b e0       	ldi	r24, 0x0B	; 11
  17a:	a6 df       	rcall	.-180    	; 0xc8 <read_gpio>
  17c:	89 2b       	or	r24, r25
  17e:	29 f0       	breq	.+10     	; 0x18a <__vector_13+0x38>
-		clear_output_gpio(0xB, 7);
  180:	67 e0       	ldi	r22, 0x07	; 7
  182:	70 e0       	ldi	r23, 0x00	; 0
  184:	8b e0       	ldi	r24, 0x0B	; 11
  186:	80 df       	rcall	.-256    	; 0x88 <clear_output_gpio>
  188:	04 c0       	rjmp	.+8      	; 0x192 <__vector_13+0x40>
-	}
-	else{
-		set_output_gpio(0xB, 7);
  18a:	67 e0       	ldi	r22, 0x07	; 7
  18c:	70 e0       	ldi	r23, 0x00	; 0
  18e:	8b e0       	ldi	r24, 0x0B	; 11
  190:	5b df       	rcall	.-330    	; 0x48 <set_output_gpio>
-	}
-	
  192:	ff 91       	pop	r31
  194:	ef 91       	pop	r30
  196:	bf 91       	pop	r27
