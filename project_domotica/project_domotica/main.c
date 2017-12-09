@@ -10,6 +10,7 @@
 
 int main(void)
 {
+	//GIT TEST
 	set_output_gpio(0xB, 7);
 	init_timer0();
 //	clear_output_gpio(0xB, 7);
