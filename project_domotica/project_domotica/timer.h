@@ -10,9 +10,8 @@
 #define TIMER_H_
 
 void init_timer0(void);
-void reset_timer0(void);
-
-
+void clear_int_flag_timer0(void);
+void reset_prescaler(void);
 
 
 #endif /* TIMER_H_ */

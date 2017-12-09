@@ -4,11 +4,12 @@
  * Created: 7-12-2017 14:58:00
  *  Author: Stan Geitel
  */ 
- #include "knx.h"
- #include "gpio.h"
- #include "timer.h"
+#include <avr/io.h>
+#include "knx.h"
+#include "gpio.h"
+#include "timer.h"
 
- int timer_on = 0;
+int timer_on = 0;
 
 unsigned char controlfield;
 
