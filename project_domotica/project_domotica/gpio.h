@@ -18,7 +18,8 @@ void clear_output_gpio(unsigned char port, int pin);
 void enable_input_gpio(unsigned char port, int pin);
 void enable_pullup_gpio(unsigned char port, int pin);
 int read_gpio(unsigned char port, int pin);
-void init_interrupt_gpio(int pin);
+void init_pin_change_interrupt_gpio(int pcint);
 void init_external_interrupt0_gpio(void);
+void init_external_interrupt1_gpio(void);
 
 #endif /* GPIO_H_ */

@@ -8,6 +8,7 @@
 #include "knx.h"
 #include "gpio.h"
 #include "timer.h"
+#include "usart.h"
 
 int timer_on = 0;
 
@@ -22,7 +23,6 @@ void sendBit(int i){
 		timer_on = 1;
 		set_output_gpio('D', TXD);
 	}
-	
 }
 
 void send_uart_character(){

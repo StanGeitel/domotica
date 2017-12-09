@@ -15,6 +15,7 @@
 #define BIT_TIME 104
 #define TELE_LENGHT 9
 #define PAUSE 208
+#define CLKSPEED 1MHZ
 
 void sendBit(int i);
 void send_uart_character();
