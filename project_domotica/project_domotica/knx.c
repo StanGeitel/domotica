@@ -22,9 +22,7 @@ void sendBit(int i){
 		timer_on = 1;
 		set_output_gpio('D', TXD);
 	}
-
-
-
+	
 }
 
 void send_uart_character(){

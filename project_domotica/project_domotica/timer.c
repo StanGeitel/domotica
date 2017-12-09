@@ -11,13 +11,11 @@
  #include "knx.h"
  #include "gpio.h"
 
-int i = 0;
 
  void init_timer0(void){
 	TCCR0A &= ~(0xF << COM0B0);		//Set normal port operation, OCOA disconnected.
 	TCCR0A |= (1 << WGM01);			//Set timer on CTC so it resets when interrupt is created on timerA
-	TCCR0B |= (1 << CS00);
-	TCCR0B |= (1 << CS02);			//Set prescaler to 8
+	TCCR0B |= (1 << CS00);			//Set prescaler to 0
 	OCR0A = 104;					//Set match register on 104
 	TIMSK |= (1 << OCIE0A);			//enable interrupt on compare register0 A
 	SREG |= (1 << SREG_I);
@@ -32,14 +30,11 @@ int i = 0;
  }
 
  ISR (TIMER0_COMPA_vect){
-	i++;
-	if(i == 5){
-		if(read_gpio(0xB, 7)){
-			clear_output_gpio(0xB, 7);
-		}
-		else{
-			set_output_gpio(0xB, 7);
-		}
-		i = 0;
+	if(read_gpio(0xB, 7)){
+		clear_output_gpio(0xB, 7);
 	}
+	else{
+		set_output_gpio(0xB, 7);
+	}
+	
  }
