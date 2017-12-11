@@ -70,13 +70,24 @@ Discarded input sections
  .text          0x00000000        0x0 usart.o
  .data          0x00000000        0x0 usart.o
  .bss           0x00000000        0x0 usart.o
- .debug_info    0x00000000       0x56 usart.o
- .debug_abbrev  0x00000000       0x26 usart.o
+ .text.__vector_11
+                0x00000000       0x3a usart.o
+ .text.__vector_13
+                0x00000000       0x2c usart.o
+ .text.ReverseByte
+                0x00000000       0x20 usart.o
+ .text.USI_OVF_vect
+                0x00000000       0x58 usart.o
+ .debug_info    0x00000000      0x121 usart.o
+ .debug_abbrev  0x00000000       0xda usart.o
+ .debug_loc     0x00000000      0x1cd usart.o
  .debug_aranges
-                0x00000000       0x18 usart.o
- .debug_line    0x00000000       0x1a usart.o
- .debug_str     0x00000000      0x176 usart.o
+                0x00000000       0x38 usart.o
+ .debug_ranges  0x00000000       0x28 usart.o
+ .debug_line    0x00000000      0x15c usart.o
+ .debug_str     0x00000000      0x1bc usart.o
  .comment       0x00000000       0x31 usart.o
+ .debug_frame   0x00000000       0xbc usart.o
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25/tiny-stack\libgcc.a(_exit.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25/tiny-stack\libgcc.a(_exit.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25/tiny-stack\libgcc.a(_exit.o)
