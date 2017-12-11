@@ -15,19 +15,19 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   5 .debug_aranges 00000108  00000000  00000000  000002fc  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00000bc8  00000000  00000000  00000404  2**0
+  6 .debug_info   00000c00  00000000  00000000  00000404  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 0000079d  00000000  00000000  00000fcc  2**0
+  7 .debug_abbrev 000007a8  00000000  00000000  00001004  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   000005e4  00000000  00000000  00001769  2**0
+  8 .debug_line   000005e4  00000000  00000000  000017ac  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00000254  00000000  00000000  00001d50  2**2
+  9 .debug_frame  00000254  00000000  00000000  00001d90  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00000542  00000000  00000000  00001fa4  2**0
+ 10 .debug_str    000004f2  00000000  00000000  00001fe4  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    0000055e  00000000  00000000  000024e6  2**0
+ 11 .debug_loc    0000055e  00000000  00000000  000024d6  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 000000f0  00000000  00000000  00002a44  2**0
+ 12 .debug_ranges 000000f0  00000000  00000000  00002a34  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -200,6 +200,12 @@ Disassembly of section .text:
  110:	18 95       	reti
 
 00000112 <main>:
+#include "timer.h"
+#include "usart.h"
+
+int main(void)
+{
+	set_output_gpio(0xB, 7);
  112:	67 e0       	ldi	r22, 0x07	; 7
  114:	70 e0       	ldi	r23, 0x00	; 0
  116:	8b e0       	ldi	r24, 0x0B	; 11
