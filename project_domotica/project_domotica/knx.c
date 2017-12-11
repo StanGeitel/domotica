@@ -12,26 +12,34 @@
 
 int timer_on = 0;
 
-unsigned char controlfield;
+//unsigned char controlfield;
 
-void sendBit(int i){
-	if(timer_on == 1){
-		timer_on = 0;
-		clear_output_gpio('D', TXD);
-	}
-	else if(timer_on == 0){
-		timer_on = 1;
-		set_output_gpio('D', TXD);
-	}
+
+int parity_check(uint16_t x){
+	x ^= x >> 4;
+	x ^= x >> 2;
+	x ^= x >> 1;
+	return (~x) & 1;
 }
 
-void send_uart_character(){
-	set_output_gpio('D', TXD);
-	clear_output_gpio('D', TXD);
-	int i;
-	
-	for(i = 0; i < 8; i++){
-		
+
+unsigned char parity(uint16_t ino)
+{
+	unsigned char noofones = 0;
+
+	while(ino != 0)
+	{
+		noofones++;
+		ino &= (ino-1); // the loop will execute once for each bit of ino set
+	}
+
+	/* if noofones is odd, least significant bit will be 1 */
+
+	if(noofones % 2 == 1){
+		return 1;
+	}
+	else{
+		return 0;
 	}
 }
 

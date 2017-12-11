@@ -3,7 +3,7 @@ Archive member included to satisfy reference by file (symbol)
 d:/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25/tiny-stack\libgcc.a(_exit.o)
                               D:/7.0/Packs/atmel/ATtiny_DFP/1.3.147/gcc/dev/attiny2313a/avr25/tiny-stack/crtattiny2313a.o (exit)
 d:/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25/tiny-stack\libgcc.a(_copy_data.o)
-                              usart.o (__do_copy_data)
+                              main.o (__do_copy_data)
 d:/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25/tiny-stack\libgcc.a(_clear_bss.o)
                               gpio.o (__do_clear_bss)
 
@@ -19,6 +19,8 @@ Discarded input sections
  .text          0x00000000        0x0 gpio.o
  .data          0x00000000        0x0 gpio.o
  .bss           0x00000000        0x0 gpio.o
+ .text.set_output_gpio
+                0x00000000       0x40 gpio.o
  .text.clear_output_gpio
                 0x00000000       0x40 gpio.o
  .text.enable_input_gpio
@@ -85,24 +87,16 @@ Discarded input sections
  .text          0x00000000        0x0 usart.o
  .data          0x00000000        0x0 usart.o
  .bss           0x00000000        0x0 usart.o
- .text.init_uart
-                0x00000000       0x10 usart.o
  .text.send_uart
                 0x00000000        0x8 usart.o
  .text.receive_uart
                 0x00000000        0x8 usart.o
- .text.uart_getc
-                0x00000000       0x44 usart.o
  .text.uart_getc_f
                 0x00000000        0xc usart.o
  .text.uart_getc_wait
                 0x00000000        0xc usart.o
- .text.uart_putc
-                0x00000000       0x3a usart.o
  .text.uart_putc_f
                 0x00000000        0x8 usart.o
- .text.uart_puts
-                0x00000000       0x1c usart.o
  .text.uart_puts_P
                 0x00000000       0x24 usart.o
  .data.sent     0x00000000        0x1 usart.o
@@ -283,7 +277,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x1d8
+.text           0x00000000      0x298
  *(.vectors)
  .vectors       0x00000000       0x2a D:/7.0/Packs/atmel/ATtiny_DFP/1.3.147/gcc/dev/attiny2313a/avr25/tiny-stack/crtattiny2313a.o
                 0x00000000                __vector_default
@@ -360,31 +354,40 @@ END GROUP
                 0x0000005c                __vector_20
                 0x0000005e                . = ALIGN (0x2)
  *(.text.*)
- .text.set_output_gpio
-                0x0000005e       0x40 gpio.o
-                0x0000005e                set_output_gpio
  .text.__vector_11
-                0x0000009e       0x4c gpio.o
-                0x0000009e                __vector_11
+                0x0000005e       0x4c gpio.o
+                0x0000005e                __vector_11
  .text.__vector_1
-                0x000000ea       0x14 gpio.o
-                0x000000ea                __vector_1
+                0x000000aa       0x14 gpio.o
+                0x000000aa                __vector_1
  .text.__vector_2
-                0x000000fe       0x14 gpio.o
-                0x000000fe                __vector_2
- .text.main     0x00000112        0xa main.o
-                0x00000112                main
+                0x000000be       0x14 gpio.o
+                0x000000be                __vector_2
+ .text.main     0x000000d2       0x60 main.o
+                0x000000d2                main
+ .text.init_uart
+                0x00000132       0x10 usart.o
+                0x00000132                init_uart
+ .text.uart_getc
+                0x00000142       0x44 usart.o
+                0x00000142                uart_getc
+ .text.uart_putc
+                0x00000186       0x3a usart.o
+                0x00000186                uart_putc
+ .text.uart_puts
+                0x000001c0       0x1c usart.o
+                0x000001c0                uart_puts
  .text.__vector_8
-                0x0000011c       0x5e usart.o
-                0x0000011c                __vector_8
+                0x000001dc       0x5e usart.o
+                0x000001dc                __vector_8
  .text.__vector_7
-                0x0000017a       0x5a usart.o
-                0x0000017a                __vector_7
-                0x000001d4                . = ALIGN (0x2)
+                0x0000023a       0x5a usart.o
+                0x0000023a                __vector_7
+                0x00000294                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x000001d4        0x0 d:/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25/tiny-stack\libgcc.a(_exit.o)
-                0x000001d4                _exit
-                0x000001d4                exit
+ .fini9         0x00000294        0x0 d:/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25/tiny-stack\libgcc.a(_exit.o)
+                0x00000294                _exit
+                0x00000294                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -403,11 +406,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x000001d4        0x4 d:/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25/tiny-stack\libgcc.a(_exit.o)
+ .fini0         0x00000294        0x4 d:/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25/tiny-stack\libgcc.a(_exit.o)
  *(.fini0)
-                0x000001d8                _etext = .
+                0x00000298                _etext = .
 
-.data           0x00800060       0x20 load address 0x000001d8
+.data           0x00800060       0x26 load address 0x00000298
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -418,31 +421,33 @@ END GROUP
  *(.gnu.linkonce.d*)
  *(.rodata)
  *(.rodata*)
+ .rodata.str1.1
+                0x00800080        0x6 main.o
  *(.gnu.linkonce.r*)
-                0x00800080                . = ALIGN (0x2)
-                0x00800080                _edata = .
-                0x00800080                PROVIDE (__data_end, .)
+                0x00800086                . = ALIGN (0x2)
+                0x00800086                _edata = .
+                0x00800086                PROVIDE (__data_end, .)
 
-.bss            0x00800080        0x5
-                0x00800080                PROVIDE (__bss_start, .)
+.bss            0x00800086        0x5
+                0x00800086                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
- .bss.old_pins  0x00800080        0x1 gpio.o
-                0x00800080                old_pins
- .bss.tx_tail   0x00800081        0x1 usart.o
- .bss.tx_head   0x00800082        0x1 usart.o
- .bss.rx_tail   0x00800083        0x1 usart.o
- .bss.rx_head   0x00800084        0x1 usart.o
+ .bss.old_pins  0x00800086        0x1 gpio.o
+                0x00800086                old_pins
+ .bss.tx_tail   0x00800087        0x1 usart.o
+ .bss.tx_head   0x00800088        0x1 usart.o
+ .bss.rx_tail   0x00800089        0x1 usart.o
+ .bss.rx_head   0x0080008a        0x1 usart.o
  *(COMMON)
-                0x00800085                PROVIDE (__bss_end, .)
-                0x000001d8                __data_load_start = LOADADDR (.data)
-                0x000001f8                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x0080008b                PROVIDE (__bss_end, .)
+                0x00000298                __data_load_start = LOADADDR (.data)
+                0x000002be                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00800085        0x0
+.noinit         0x0080008b        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x00800085                _end = .
+                0x0080008b                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -521,26 +526,26 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000      0xc00
+.debug_info     0x00000000      0xdad
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x456 D:/7.0/Packs/atmel/ATtiny_DFP/1.3.147/gcc/dev/attiny2313a/avr25/tiny-stack/crtattiny2313a.o
  .debug_info    0x00000456      0x26a gpio.o
- .debug_info    0x000006c0       0xaf main.o
- .debug_info    0x0000076f      0x491 usart.o
+ .debug_info    0x000006c0      0x25c main.o
+ .debug_info    0x0000091c      0x491 usart.o
 
-.debug_abbrev   0x00000000      0x7a8
+.debug_abbrev   0x00000000      0x85f
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x41b D:/7.0/Packs/atmel/ATtiny_DFP/1.3.147/gcc/dev/attiny2313a/avr25/tiny-stack/crtattiny2313a.o
  .debug_abbrev  0x0000041b      0x10b gpio.o
- .debug_abbrev  0x00000526       0x74 main.o
- .debug_abbrev  0x0000059a      0x20e usart.o
+ .debug_abbrev  0x00000526      0x12b main.o
+ .debug_abbrev  0x00000651      0x20e usart.o
 
-.debug_line     0x00000000      0x5e4
+.debug_line     0x00000000      0x6ee
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x10c D:/7.0/Packs/atmel/ATtiny_DFP/1.3.147/gcc/dev/attiny2313a/avr25/tiny-stack/crtattiny2313a.o
  .debug_line    0x0000010c      0x226 gpio.o
- .debug_line    0x00000332       0x49 main.o
- .debug_line    0x0000037b      0x269 usart.o
+ .debug_line    0x00000332      0x153 main.o
+ .debug_line    0x00000485      0x269 usart.o
 
 .debug_frame    0x00000000      0x254
  *(.debug_frame)
@@ -548,20 +553,21 @@ END GROUP
  .debug_frame   0x00000100       0x24 main.o
  .debug_frame   0x00000124      0x130 usart.o
 
-.debug_str      0x00000000      0x4f2
+.debug_str      0x00000000      0x53d
  *(.debug_str)
  .debug_str     0x00000000      0x17b D:/7.0/Packs/atmel/ATtiny_DFP/1.3.147/gcc/dev/attiny2313a/avr25/tiny-stack/crtattiny2313a.o
  .debug_str     0x0000017b      0x238 gpio.o
                                 0x26c (size before relaxing)
- .debug_str     0x000003b3       0x11 main.o
-                                0x18f (size before relaxing)
- .debug_str     0x000003c4      0x12e usart.o
+ .debug_str     0x000003b3       0x8d main.o
+                                0x203 (size before relaxing)
+ .debug_str     0x00000440       0xfd usart.o
                                 0x2a4 (size before relaxing)
 
-.debug_loc      0x00000000      0x55e
+.debug_loc      0x00000000      0x6a7
  *(.debug_loc)
  .debug_loc     0x00000000      0x1e1 gpio.o
- .debug_loc     0x000001e1      0x37d usart.o
+ .debug_loc     0x000001e1      0x149 main.o
+ .debug_loc     0x0000032a      0x37d usart.o
 
 .debug_macinfo
  *(.debug_macinfo)

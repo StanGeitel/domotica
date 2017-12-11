@@ -17,8 +17,7 @@
 #define PAUSE 208
 #define CLKSPEED 1MHZ
 
-void sendBit(int i);
-void send_uart_character();
+int parity_check(uint8_t x)
 
 
 #endif /* KNX_H_ */

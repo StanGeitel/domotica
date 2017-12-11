@@ -13,7 +13,7 @@
  #include "usart.h"
  #include <util/delay.h>
 // http://www.technoblogy.com/show?RPY 
-
+//https://github.com/akafugu/helloworld/blob/master/attiny2313/uart.c
 
 #include <inttypes.h>
 #include <stdio.h>
@@ -59,7 +59,7 @@ void init_uart(void) {
   // enable receive and transmit
   UCSRB = (1 << RXEN) | (1 << TXEN) | (1 << RXCIE);
   // set frame format
-  UCSRC = (1 << USBS) | (3 << UCSZ0);	// asynchron 8n1
+  UCSRC = (1 << USBS) | (3 << UCSZ0) | (1 << UPM1);	// asynchron 8n1 and even bit parity
 }
 
 
@@ -218,9 +218,15 @@ ISR(USART_RX_vect) {
     // buffer overflow error!
   }
   else {
-    rx_buffer[rx_head] = UDR;
-    rx_head = tmp_head;
-  }
+	if(UCSRA &(1<<UPE)){
+		//parity check failed
+		uart_putc(0b00001100);//send NACK
+	{
+	else{
+		rx_buffer[rx_head] = UDR;
+		rx_head = tmp_head;    
+
+   }
 }
 
 /*void InitialiseUSI (void) {

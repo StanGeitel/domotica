@@ -15,6 +15,9 @@
 
 #define LED_BIT PD5
 
+#define BUFFER_SIZE 16
+ static uint8_t rx_buffer[BUFFER_SIZE] = "";
+
 int main(void)
 {
 	
@@ -41,7 +44,7 @@ int main(void)
 			uart_putc('A');
 		}
 		else {
-			uart_putc(c);
+			uart_puts("hallo");
 		}
 
 		PORTD |= (1 << LED_BIT);
@@ -52,4 +55,5 @@ int main(void)
 
 	return 0;
 }
+
 
