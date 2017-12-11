@@ -56,7 +56,7 @@ volatile uint8_t old_pins = 0;
 	SREG |= (1 << SREG_I);				//enable interrupts I in global status register
  }
  
- ISR(PCINT0_vect){						//Pin change interrupt0 service routine
+ ISR(PCINT0_vect){						//Pin change interrupt0 service routine			  
 	 volatile uint8_t changed_pins;
 	 
 	 changed_pins = PINB ^ old_pins;
@@ -88,13 +88,13 @@ volatile uint8_t old_pins = 0;
 	 }
  } 
  
- ISR(PCINT1_vect){						//Pin change interrupt1 service routine
-	
- }
+ //ISR(PCINT1_vect){						//Pin change interrupt1 service routine
+//	
+ //}
   
- ISR(PCINT2_vect){						//Pin change interrupt2 service routine 
-	
- }
+// ISR(PCINT2_vect){						//Pin change interrupt2 service routine 
+//	
+// }
  
  void init_external_interrupt0_gpio(void){
 	MCUCR |= (1 << ISC00);
