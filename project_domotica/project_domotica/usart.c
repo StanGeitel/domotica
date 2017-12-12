@@ -8,6 +8,7 @@
  #include <avr/io.h>
  #include <avr/common.h>
  #include <avr/interrupt.h>
+ #include <stdint.h>
  #include "timer.h"
  #include "gpio.h"
  #include "usart.h"
@@ -48,7 +49,6 @@ volatile static uint8_t tx_head = 0;
 volatile static uint8_t tx_tail = 0;
 volatile static uint8_t sent = TRUE;
 
-
 /*
  * init_uart
  */
@@ -59,7 +59,7 @@ void init_uart(void) {
   // enable receive and transmit
   UCSRB = (1 << RXEN) | (1 << TXEN) | (1 << RXCIE);
   // set frame format
-  UCSRC = (1 << USBS) | (3 << UCSZ0) | (1 << UPM1);	// asynchron 8n1 and even bit parity
+  UCSRC = (0 << USBS) | (3 << UCSZ0) | (1 << UPM1);	// asynchron 8n1 and even bit parity
 }
 
 
@@ -104,6 +104,7 @@ uint16_t uart_getc(void) {
   c = rx_buffer[rx_tail];
   rx_tail = tmp_tail;
   return c;
+
 }
 
 
@@ -217,16 +218,12 @@ ISR(USART_RX_vect) {
   if (tmp_head == rx_tail) {
     // buffer overflow error!
   }
-  else {
-	if(UCSRA &(1<<UPE)){
-		//parity check failed
-		uart_putc(0b00001100);//send NACK
-	{
-	else{
+  else{
+
 		rx_buffer[rx_head] = UDR;
 		rx_head = tmp_head;    
 
-   }
+  }
 }
 
 /*void InitialiseUSI (void) {

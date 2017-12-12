@@ -3,14 +3,9 @@ Archive member included to satisfy reference by file (symbol)
 d:/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25/tiny-stack\libgcc.a(_exit.o)
                               D:/7.0/Packs/atmel/ATtiny_DFP/1.3.147/gcc/dev/attiny2313a/avr25/tiny-stack/crtattiny2313a.o (exit)
 d:/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25/tiny-stack\libgcc.a(_copy_data.o)
-                              main.o (__do_copy_data)
+                              knx.o (__do_copy_data)
 d:/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25/tiny-stack\libgcc.a(_clear_bss.o)
                               gpio.o (__do_clear_bss)
-
-Allocating common symbols
-Common symbol       size              file
-
-controlfield        0x1               knx.o
 
 Discarded input sections
 
@@ -38,21 +33,40 @@ Discarded input sections
  .text          0x00000000        0x0 knx.o
  .data          0x00000000        0x0 knx.o
  .bss           0x00000000        0x0 knx.o
- .text.sendBit  0x00000000       0x3a knx.o
- .text.send_uart_character
-                0x00000000       0x12 knx.o
- .bss.timer_on  0x00000000        0x2 knx.o
- .debug_info    0x00000000      0x163 knx.o
- .debug_abbrev  0x00000000       0xc3 knx.o
- .debug_loc     0x00000000       0x26 knx.o
+ .text.wait_bit
+                0x00000000        0xa knx.o
+ .text.get_bit  0x00000000       0x10 knx.o
+ .text.reverse  0x00000000       0x24 knx.o
+ .text.generate_control_field
+                0x00000000        0xe knx.o
+ .text.generate_at_r_l
+                0x00000000        0xe knx.o
+ .text.generate_checksum
+                0x00000000       0x98 knx.o
+ .text.check_bus_empty
+                0x00000000        0x8 knx.o
+ .text.send_KNX_byte
+                0x00000000       0x14 knx.o
+ .text.generate_KNX
+                0x00000000        0x4 knx.o
+ .text.check_adres
+                0x00000000       0x1e knx.o
+ .text.send_acknowledgement
+                0x00000000       0x1a knx.o
+ .text.receive_KNX
+                0x00000000       0x80 knx.o
+ .data.data_buffer
+                0x00000000       0x17 knx.o
+ .debug_info    0x00000000      0x68b knx.o
+ .debug_abbrev  0x00000000      0x291 knx.o
+ .debug_loc     0x00000000      0x655 knx.o
  .debug_aranges
-                0x00000000       0x28 knx.o
- .debug_ranges  0x00000000       0x18 knx.o
- .debug_line    0x00000000       0x82 knx.o
- .debug_str     0x00000000      0x1cd knx.o
+                0x00000000       0x78 knx.o
+ .debug_ranges  0x00000000       0x68 knx.o
+ .debug_line    0x00000000      0x30c knx.o
+ .debug_str     0x00000000      0x31a knx.o
  .comment       0x00000000       0x31 knx.o
- .debug_frame   0x00000000       0x34 knx.o
- COMMON         0x00000000        0x1 knx.o
+ .debug_frame   0x00000000      0x120 knx.o
  .text          0x00000000        0x0 main.o
  .data          0x00000000        0x0 main.o
  .bss           0x00000000        0x0 main.o
@@ -277,7 +291,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x298
+.text           0x00000000      0x292
  *(.vectors)
  .vectors       0x00000000       0x2a D:/7.0/Packs/atmel/ATtiny_DFP/1.3.147/gcc/dev/attiny2313a/avr25/tiny-stack/crtattiny2313a.o
                 0x00000000                __vector_default
@@ -363,31 +377,31 @@ END GROUP
  .text.__vector_2
                 0x000000be       0x14 gpio.o
                 0x000000be                __vector_2
- .text.main     0x000000d2       0x60 main.o
+ .text.main     0x000000d2       0x5a main.o
                 0x000000d2                main
  .text.init_uart
-                0x00000132       0x10 usart.o
-                0x00000132                init_uart
+                0x0000012c       0x10 usart.o
+                0x0000012c                init_uart
  .text.uart_getc
-                0x00000142       0x44 usart.o
-                0x00000142                uart_getc
+                0x0000013c       0x44 usart.o
+                0x0000013c                uart_getc
  .text.uart_putc
-                0x00000186       0x3a usart.o
-                0x00000186                uart_putc
+                0x00000180       0x3a usart.o
+                0x00000180                uart_putc
  .text.uart_puts
-                0x000001c0       0x1c usart.o
-                0x000001c0                uart_puts
+                0x000001ba       0x1c usart.o
+                0x000001ba                uart_puts
  .text.__vector_8
-                0x000001dc       0x5e usart.o
-                0x000001dc                __vector_8
+                0x000001d6       0x5e usart.o
+                0x000001d6                __vector_8
  .text.__vector_7
-                0x0000023a       0x5a usart.o
-                0x0000023a                __vector_7
-                0x00000294                . = ALIGN (0x2)
+                0x00000234       0x5a usart.o
+                0x00000234                __vector_7
+                0x0000028e                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000294        0x0 d:/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25/tiny-stack\libgcc.a(_exit.o)
-                0x00000294                _exit
-                0x00000294                exit
+ .fini9         0x0000028e        0x0 d:/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25/tiny-stack\libgcc.a(_exit.o)
+                0x0000028e                _exit
+                0x0000028e                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -406,11 +420,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000294        0x4 d:/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25/tiny-stack\libgcc.a(_exit.o)
+ .fini0         0x0000028e        0x4 d:/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25/tiny-stack\libgcc.a(_exit.o)
  *(.fini0)
-                0x00000298                _etext = .
+                0x00000292                _etext = .
 
-.data           0x00800060       0x26 load address 0x00000298
+.data           0x00800060       0x26 load address 0x00000292
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -440,8 +454,8 @@ END GROUP
  .bss.rx_head   0x0080008a        0x1 usart.o
  *(COMMON)
                 0x0080008b                PROVIDE (__bss_end, .)
-                0x00000298                __data_load_start = LOADADDR (.data)
-                0x000002be                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00000292                __data_load_start = LOADADDR (.data)
+                0x000002b8                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x0080008b        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
@@ -526,19 +540,19 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000      0xdad
+.debug_info     0x00000000      0xe1c
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x456 D:/7.0/Packs/atmel/ATtiny_DFP/1.3.147/gcc/dev/attiny2313a/avr25/tiny-stack/crtattiny2313a.o
  .debug_info    0x00000456      0x26a gpio.o
- .debug_info    0x000006c0      0x25c main.o
- .debug_info    0x0000091c      0x491 usart.o
+ .debug_info    0x000006c0      0x2cb main.o
+ .debug_info    0x0000098b      0x491 usart.o
 
-.debug_abbrev   0x00000000      0x85f
+.debug_abbrev   0x00000000      0x8bc
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x41b D:/7.0/Packs/atmel/ATtiny_DFP/1.3.147/gcc/dev/attiny2313a/avr25/tiny-stack/crtattiny2313a.o
  .debug_abbrev  0x0000041b      0x10b gpio.o
- .debug_abbrev  0x00000526      0x12b main.o
- .debug_abbrev  0x00000651      0x20e usart.o
+ .debug_abbrev  0x00000526      0x188 main.o
+ .debug_abbrev  0x000006ae      0x20e usart.o
 
 .debug_line     0x00000000      0x6ee
  *(.debug_line .debug_line.* .debug_line_end)
@@ -553,14 +567,14 @@ END GROUP
  .debug_frame   0x00000100       0x24 main.o
  .debug_frame   0x00000124      0x130 usart.o
 
-.debug_str      0x00000000      0x53d
+.debug_str      0x00000000      0x54c
  *(.debug_str)
  .debug_str     0x00000000      0x17b D:/7.0/Packs/atmel/ATtiny_DFP/1.3.147/gcc/dev/attiny2313a/avr25/tiny-stack/crtattiny2313a.o
  .debug_str     0x0000017b      0x238 gpio.o
                                 0x26c (size before relaxing)
- .debug_str     0x000003b3       0x8d main.o
-                                0x203 (size before relaxing)
- .debug_str     0x00000440       0xfd usart.o
+ .debug_str     0x000003b3       0xaf main.o
+                                0x225 (size before relaxing)
+ .debug_str     0x00000462       0xea usart.o
                                 0x2a4 (size before relaxing)
 
 .debug_loc      0x00000000      0x6a7

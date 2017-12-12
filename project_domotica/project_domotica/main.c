@@ -12,6 +12,7 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <util/delay.h>
+#include <stdint.h>
 
 #define LED_BIT PD5
 
@@ -50,7 +51,7 @@ int main(void)
 		PORTD |= (1 << LED_BIT);
 		_delay_ms(200);
 		PORTD &= ~(1 << LED_BIT);
-		_delay_ms(800);
+		_delay_us(800);
 	}
 
 	return 0;

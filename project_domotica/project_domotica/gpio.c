@@ -7,6 +7,7 @@
 #include <avr/io.h>
 #include <avr/common.h>
 #include <avr/interrupt.h>
+#include <stdint.h>
 #include "gpio.h"
 
 volatile uint8_t old_pins = 0;
