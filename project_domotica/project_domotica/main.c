@@ -40,21 +40,7 @@ int main(void)
 
 	while (1) {
 		uart_putc(0b11101010);
-		//_delay_us(2000);
-		/*c = uart_getc();
-		if (c == UART_NO_DATA) {
-			uart_putc('A');
-			_delay_us(500);
-		}
-		else {
-			uart_puts("hallo");
-		}*/
-		/*
-		PORTD |= (1 << LED_BIT);
-		_delay_ms(200);
-		PORTD &= ~(1 << LED_BIT);
-		_delay_us(800);
-		*/	
+
 	}
 
 	return 0;

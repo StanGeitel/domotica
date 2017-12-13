@@ -22,9 +22,9 @@ uint8_t get_bit(uint8_t bits, uint8_t pos);//get bit from byte
 uint8_t reverse(uint8_t b);
 
 //KNX transceive
-void generate_KNX(uint8_t control_field, uint8_t at_r_l,  uint8_t data_array[], int size_data_array);
-uint8_t generate_control_field(int repeated, uint8_t priority);
-uint8_t generate_at_r_l(uint8_t at, uint8_t length);
+void generate_KNX(uint8_t priority, uint8_t length, uint8_t repeated, uint8_t data_array[], int size_data_array, uint8_t address);
+uint8_t generate_control_field(uint8_t priority, uint8_t repeated);
+uint8_t generate_at_r_l(uint8_t length);
 uint8_t generate_checksum(uint8_t data_array[], int size_data_array);
 int check_bus_empty(void);
 void send_KNX_byte(uint8_t c);

@@ -24,11 +24,10 @@
 #define system_priority 0x0 //0000
 #define alarm_priority 0x8  //1000
 #define high_priority 0x4	//0100
-#define low_priority 0xC	//1100
+#define normal_priority 0xC	//1100
 
 
 volatile static uint8_t data_buffer[23] = "xxxxxxxxxxxxxxxxxxxxxxx";
-
 
 
 
@@ -51,18 +50,29 @@ uint8_t reverse(uint8_t b) {
 					//transceive
 //-------------------------------------------------------------------------
 
-void generate_KNX(uint8_t control_field, uint8_t at_r_l,  uint8_t data_array[], int size_data_array){
+void generate_KNX(uint8_t priority, uint8_t length, uint8_t repeated, uint8_t data_array[], int size_data_array, uint8_t address){
 	if(check_bus_empty() == 1){
-		send_KNX_byte(control_field);
+		send_KNX_byte(generate_control_field(priority, repeated));
 		send_KNX_byte(area_line);
 		send_KNX_byte(bus_device);
 		send_KNX_byte(area_line);
-		send_KNX_byte(target_raspberry_pi);
-		send_KNX_byte(at_r_l);
+		send_KNX_byte(address);
+		send_KNX_byte(generate_at_r_l(length));
 
 		int i;
 		for(i = 0; i < size_data_array; i++){
 			send_KNX_byte(data_array[i]);
+		}
+		send_KNX_byte(generate_checksum(data_array, size_data_array));
+
+		for(i = 0; i < 11; i++)//wait 11  bits before recieving an acknowledge frame (11 + 2 = 13)
+		{
+			wait_bit();
+		}
+
+		uint8_t c = uart_getc();
+		if(c == 0x30){//NACK
+			generate_KNX(normal_priority, length, 0, data_array, size_data_array, address);//send again as repeated
 		}
 
 	}
@@ -71,7 +81,7 @@ void generate_KNX(uint8_t control_field, uint8_t at_r_l,  uint8_t data_array[], 
 
 }
 
-uint8_t generate_control_field(int repeated, uint8_t priority){
+uint8_t generate_control_field(uint8_t priority, uint8_t repeated){
 	uint8_t control_field = 0x90;
 	if(repeated){
 		control_field &= 0xDF;//set repeat to 0 which enables repeat
@@ -83,11 +93,11 @@ uint8_t generate_control_field(int repeated, uint8_t priority){
 	return control_field;
 }
 
-uint8_t generate_at_r_l(uint8_t at, uint8_t length){
+uint8_t generate_at_r_l(uint8_t length){
 	uint8_t at_r_l = 0x00;
-	if(at){
+	/*if(at){
 		at_r_l |= 0x80;//set at
-	}
+	}*/
 
 	//we are not using routing because KNX will not leave this KNX group
 
@@ -220,9 +230,26 @@ void send_acknowledgement(int parity_failed){
 										//turn on led
 //------------------------------------------------------------------------------------------
 
+void switch_led(uint8_t address, int state){
+	uint8_t data_array[2];
+	data_array[0] = 0x00;
+	if(state == 1){
+		data_array[1] = 0x81;
+	}
+	else if(state == 0){
+			data_array[1] = 0x80;
+	}
+	
+	int size_data_array = 2;
+	uint8_t length = 2;
+	uint8_t repeated = 1;//not repeated
+	generate_KNX(normal_priority, length, repeated, data_array, size_data_array, address);
+}
+
+/*
 void read_data(void){
 	if(check_adres() == 1){
 		uint8_t length = data_buffer[5] & 0x0F;
 		data_buffer[5]
 	}
-}
+}*/

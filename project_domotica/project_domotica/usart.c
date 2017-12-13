@@ -223,7 +223,7 @@ ISR(USART_RX_vect) {
 
 		rx_buffer[rx_head] = UDR;
 		rx_head = tmp_head;    
-		receive_KNX();
+		//receive_KNX();
   }
 }
 
