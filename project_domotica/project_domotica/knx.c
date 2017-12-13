@@ -153,15 +153,20 @@ void send_KNX_byte(uint8_t c){
 
 void receive_KNX(void){
 	uint8_t c;
-	int count;
-	int amount_messages = 7;//amount of messages without user data
-	int parity_failed = 0;
+	static int count;
+	static int amount_messages = 7;//amount of messages without user data
+	static int parity_failed = 0;
 
-	for(count = 0; count <= amount_messages; count++){
+	/*for(count = 0; count <= amount_messages; count++){
 		c = uart_getc();
 		if(UCSRA &(1<<UPE)){//parity check
 				//parity check failed
 				parity_failed = 1;
+		}*/
+		c = uart_getc();
+		if(UCSRA &(1<<UPE)){//parity check
+			//parity check failed
+			parity_failed = 1;
 		}
 		data_buffer[count] = c;
 		if(count == 5){
@@ -170,14 +175,17 @@ void receive_KNX(void){
 		}
 		wait_bit();//wait 2 bits
 		wait_bit();
+		count++;
+	//}
+	int i;
+	if(count == amount_messages){
+		for(i = 0; i < 11; i++)//wait 11  bits before sending an acknowledge frame (11 + 2 = 13)
+		{
+			wait_bit();
+		}
+		send_acknowledgement(parity_failed);
+		count = 0;
 	}
-	
-	for(count = 0; count < 11; count++)//wait 11  bits before sending an acknowledge frame (11 + 2 = 13)
-	{
-		wait_bit();
-	}
-	send_acknowledgement(parity_failed);
-	
 
 }
 
@@ -193,7 +201,6 @@ int check_adres(void){
 	else{
 		return 0;
 	}
-
 }
 
 
@@ -207,5 +214,15 @@ void send_acknowledgement(int parity_failed){
 	}
 	else{
 		uart_putc(0x33);//send ACK
+	}
+}
+
+										//turn on led
+//------------------------------------------------------------------------------------------
+
+void read_data(void){
+	if(check_adres() == 1){
+		uint8_t length = data_buffer[5] & 0x0F;
+		data_buffer[5]
 	}
 }

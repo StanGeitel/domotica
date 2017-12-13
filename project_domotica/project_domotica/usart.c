@@ -12,6 +12,7 @@
  #include "timer.h"
  #include "gpio.h"
  #include "usart.h"
+ #include "knx.h"
  #include <util/delay.h>
 // http://www.technoblogy.com/show?RPY 
 //https://github.com/akafugu/helloworld/blob/master/attiny2313/uart.c
@@ -222,7 +223,7 @@ ISR(USART_RX_vect) {
 
 		rx_buffer[rx_head] = UDR;
 		rx_head = tmp_head;    
-
+		receive_KNX();
   }
 }
 
