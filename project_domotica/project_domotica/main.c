@@ -25,7 +25,7 @@ int main(void)
 	uint8_t i = 0;
 	uint16_t c = 0;
 
-	DDRD |= (1 << LED_BIT);
+	/*DDRD |= (1 << LED_BIT);
 	
 	for (i = 0; i < 5; i++) {
 		PORTD |= (1 << LED_BIT);
@@ -33,25 +33,28 @@ int main(void)
 		PORTD &= ~(1 << LED_BIT);
 		_delay_ms(50);
 	}
-
+	*/
 	init_uart();
 
 	sei();
 
 	while (1) {
-
-		c = uart_getc();
+		uart_putc(0b11101010);
+		//_delay_us(2000);
+		/*c = uart_getc();
 		if (c == UART_NO_DATA) {
 			uart_putc('A');
+			_delay_us(500);
 		}
 		else {
 			uart_puts("hallo");
-		}
-
+		}*/
+		/*
 		PORTD |= (1 << LED_BIT);
 		_delay_ms(200);
 		PORTD &= ~(1 << LED_BIT);
 		_delay_us(800);
+		*/	
 	}
 
 	return 0;
