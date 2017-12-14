@@ -38,12 +38,11 @@
 #define UART_ITOP     (*(volatile unsigned int *) (uart + 34))
 #define UART_TDR      (*(volatile unsigned int *) (uart + 35))
 
-#define BLOCK_SIZE		(4*1024)
+#define BLOCK_SIZE		(4 * 1024)
 
 void map_peripherals();
 void funcsel_uart();
 void funcsel_gpio18();
-void set_gpio18();
-void clr_gpio18();
+void write_gpio18(int val);
 
 #endif

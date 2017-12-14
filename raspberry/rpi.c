@@ -37,6 +37,7 @@ void map_peripherals()
         exit(-1);
    }
    gpio = (volatile unsigned *)reg_map_gpio;   //If mmap was successfull gpio points to beginning of pheripheral registers
+   printf("gpio mmap successfull.\n");
 
    //map physical uart registers to virtual registers
    reg_map_uart = mmap(
@@ -52,23 +53,19 @@ void map_peripherals()
         printf("uart mmap error %d\n", (int)reg_map_uart);
         close(mem_fd);
         exit(-1);
-    }
+   }
 
    uart = (volatile unsigned *)reg_map_gpio;   //If mmap was successfull uart points to beginning of pheripheral registers
 
-   printf("Mmap succesfull.\n");
+   printf("uart mmap successfull.\n");
 }
 
 void funcsel_uart(){
-  printf("%d\n", GPIO_GPFSEL1);
-
   GPIO_GPFSEL1 &= ~(7 << 12);   //clear b12,13,14
   GPIO_GPFSEL1 |= (1 << 14);    //set b14 and so Alt0 TXD0 pin14
 
   GPIO_GPFSEL1 &= ~(7 << 15);   //clear b15,16,17
   GPIO_GPFSEL1 |= (1 << 17);    //set b17 and so Alt0 RXD0 pin15
-
-  printf("%d\n", GPIO_GPFSEL1);
 }
 
 void funcsel_gpio18(){
@@ -76,10 +73,10 @@ void funcsel_gpio18(){
   GPIO_GPFSEL1 |= (1 << 24);    //set b24 GPIO18 as output
 }
 
-void set_gpio18(){
-  GPIO_GPSET0 |= (1 << 18);
-}
-
-void clr_gpio18(){
-  GPIO_GPCLR0 |= (1 << 18);
+void write_gpio18(int val){
+  if(val){
+    GPIO_GPSET0 |= (1 << 18);
+  }else{
+    GPIO_GPCLR0 |= (1 << 18);
+  }
 }
