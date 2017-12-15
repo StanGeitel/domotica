@@ -13,6 +13,7 @@
 //divide the hexadecimal offset by 4 to get the decimal offset for the pointer
 
 #define BCM2837_PERI_BASE 0x3F000000
+#define BLOCK_SIZE		(4 * 1024)
 
 #define GPIO_BASE     (BCM2837_PERI_BASE + 0x200000)
 #define GPIO_GPFSEL1  (*(volatile unsigned int *) (gpio + 1))
@@ -33,12 +34,11 @@
 #define UART_MIS      (*(volatile unsigned int *) (uart + 16))
 #define UART_ICR      (*(volatile unsigned int *) (uart + 17))
 #define UART_DMACR    (*(volatile unsigned int *) (uart + 17))
-#define UART_ITCR     (*(volatile unsigned int *) (uart + 32))
-#define UART_ITIP     (*(volatile unsigned int *) (uart + 33))
-#define UART_ITOP     (*(volatile unsigned int *) (uart + 34))
-#define UART_TDR      (*(volatile unsigned int *) (uart + 35))
 
-#define BLOCK_SIZE		(4 * 1024)
+#define INT_BASE      (BCM2837_PERI_BASE + 0x00B000)
+#define INT_UART      57 //IRQ 57
+#define INT_PEND2     (*(volatile unsigned int *) (interrupt + )) //0x208
+#define INT_ENABLE2   (*(volatile unsigned int *) (interrupt + )) //0x214
 
 void map_peripherals();
 void funcsel_uart();

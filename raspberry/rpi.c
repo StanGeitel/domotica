@@ -7,6 +7,7 @@
 
 volatile unsigned int *gpio;
 volatile unsigned int *uart;
+volatile unsigned int *interrupt;
 
 // Exposes the physical adress defined in the passed structure using mmap on /dev/mem
 void map_peripherals()
@@ -14,6 +15,7 @@ void map_peripherals()
   int mem_fd;
   void *reg_map_gpio;
   void *reg_map_uart;
+  void *reg_map_int;
 
    // Open /dev/mem
    if ((mem_fd = open("/dev/mem", O_RDWR|O_SYNC) ) < 0) {
@@ -58,6 +60,26 @@ void map_peripherals()
    uart = (volatile unsigned *)reg_map_gpio;   //If mmap was successfull uart points to beginning of pheripheral registers
 
    printf("uart mmap successfull.\n");
+
+/*   //map physical interrupt registers to virtual registers
+   reg_map_int = mmap(
+      NULL,           //Starting adress for local mapping, NULL is don't-care
+      BLOCK_SIZE,     //Size of mapped memory block
+      PROT_READ|PROT_WRITE, //Read and write to mapped memory
+      MAP_SHARED,     //MAP_SHARED means this program is not the only one with access to the memory
+      mem_fd,         //File descriptor to physical memory virtual file '/dev/mem'
+      INT_BASE       //Address in physical map that we want this memory block to expose
+   );
+
+   if (reg_map_int == MAP_FAILED) {
+        printf("interrupt mmap error %d\n", (int)reg_map_int);
+        close(mem_fd);
+        exit(-1);
+   }
+
+    interrupt = (volatile unsigned *)reg_map_int;   //If mmap was successfull uart points to beginning of pheripheral registers
+
+   printf("int mmap successfull.\n");*/
 }
 
 void funcsel_uart(){
