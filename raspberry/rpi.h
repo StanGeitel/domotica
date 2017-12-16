@@ -20,27 +20,26 @@
 #define GPIO_GPSET0   (*(volatile unsigned int *) (gpio + 7))
 #define GPIO_GPCLR0   (*(volatile unsigned int *) (gpio + 10))
 
-#define UART_BASE     (BCM2837_PERI_BASE + 0x201000)
-#define UART_DR       (*(volatile unsigned int *) (uart + 0))
-#define UART_RSRECR   (*(volatile unsigned int *) (uart + 1))
-#define UART_FR       (*(volatile unsigned int *) (uart + 6))
-#define UART_IBRD     (*(volatile unsigned int *) (uart + 9))
-#define UART_FBRD     (*(volatile unsigned int *) (uart + 10))
-#define UART_LCRH     (*(volatile unsigned int *) (uart + 11))
-#define UART_CR       (*(volatile unsigned int *) (uart + 12))
-#define UART_IFLS     (*(volatile unsigned int *) (uart + 13))
-#define UART_IMSC     (*(volatile unsigned int *) (uart + 14))
-#define UART_RIS      (*(volatile unsigned int *) (uart + 15))
-#define UART_MIS      (*(volatile unsigned int *) (uart + 16))
-#define UART_ICR      (*(volatile unsigned int *) (uart + 17))
-#define UART_DMACR    (*(volatile unsigned int *) (uart + 17))
-
 #define INT_BASE      (BCM2837_PERI_BASE + 0x00B000)
-#define INT_UART      57 //IRQ 57
-#define INT_PEND2     (*(volatile unsigned int *) (interrupt + )) //0x208
-#define INT_ENABLE2   (*(volatile unsigned int *) (interrupt + )) //0x214
+#define INT_UART      25 //IRQ 57
+#define INT_PEND2     (*(volatile unsigned int *) (interrupt + 130)) //0x208
+#define INT_ENABLE2   (*(volatile unsigned int *) (interrupt + 133)) //0x214 write one to enable IRQ
+#define INT_DISABLE2  (*(volatile unsigned int *) (interrupt + 136)) //0x220 write one to disable IRQ
+
+#define TIMER_BASE    (BCM2837_PERI_BASE + 0x003000)
+#define TIMER_CS      (*(volatile unsigned int *) (timer + 0))
+#define TIMER_CLO     (*(volatile unsigned int *) (timer + 1))
+#define TIMER_CHI     (*(volatile unsigned int *) (timer + 2))
+#define TIMER_C0      (*(volatile unsigned int *) (timer + 3))
+#define TIMER_C1      (*(volatile unsigned int *) (timer + 4))
+#define TIMER_C2      (*(volatile unsigned int *) (timer + 5))
+#define TIMER_C3      (*(volatile unsigned int *) (timer + 6))
+
+#define BIT_LENGHT    104
+#define PAUSE_LENGHT  2*BIT_LENGHT
 
 void map_peripherals();
+volatile unsigned int * map_peripheral(unsigned int base_address);
 void funcsel_uart();
 void funcsel_gpio18();
 void write_gpio18(int val);

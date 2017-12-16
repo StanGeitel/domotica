@@ -4,82 +4,58 @@
 //https://www.studica.com/blog/program-embedded-systems-raspberry-pi
 
 #include "rpi.h"
+#include "uart.h"
 
 volatile unsigned int *gpio;
 volatile unsigned int *uart;
 volatile unsigned int *interrupt;
+volatile unsigned int *timer;
 
 // Exposes the physical adress defined in the passed structure using mmap on /dev/mem
 void map_peripherals()
 {
+  gpio = map_peripheral(GPIO_BASE);
+  printf("gpio mmap successful.\n");
+
+  uart = map_peripheral(UART_BASE);
+  printf("uart mmap successful.\n");
+
+  interrupt = map_peripheral(INT_BASE);
+  printf("interrupt mmap successful.\n");
+
+  timer = map_peripheral(TIMER_BASE);
+  printf("timer mmap successful.\n");
+
+}
+
+volatile unsigned int * map_peripheral(unsigned int base_address){
   int mem_fd;
-  void *reg_map_gpio;
-  void *reg_map_uart;
-  void *reg_map_int;
+  void *reg_map;
 
-   // Open /dev/mem
-   if ((mem_fd = open("/dev/mem", O_RDWR|O_SYNC) ) < 0) {
-      printf("Failed to open /dev/mem, try checking permissions.\n");
-      exit(-1);
-   }
+  // Open /dev/mem
+  if ((mem_fd = open("/dev/mem", O_RDWR|O_SYNC) ) < 0) {
+     printf("Failed to open /dev/mem, try checking permissions.\n");
+     exit(-1);
+  }
 
-   //map physical gpio registers to virtual registers
-   reg_map_gpio = mmap(
-      NULL,           //Starting adress for local mapping, NULL is don't-care
-      BLOCK_SIZE,     //Size of mapped memory block
-      PROT_READ|PROT_WRITE, //Read and write to mapped memory
-      MAP_SHARED,     //MAP_SHARED means this program is not the only one with access to the memory
-      mem_fd,         //File descriptor to physical memory virtual file '/dev/mem'
-      GPIO_BASE       //Address in physical map that we want this memory block to expose
-   );
+  //map physical interrupt registers to virtual registers
+  reg_map = mmap(
+     NULL,           //Starting adress for local mapping, NULL is don't-care
+     BLOCK_SIZE,     //Size of mapped memory block
+     PROT_READ|PROT_WRITE, //Read and write to mapped memory
+     MAP_SHARED,     //MAP_SHARED means this program is not the only one with access to the memory
+     mem_fd,         //File descriptor to physical memory virtual file '/dev/mem'
+     base_address    //Address in physical map that we want this memory block to expose
+  );
 
-   if (reg_map_gpio == MAP_FAILED) {
-        printf("gpio mmap error %d\n", (int)reg_map_gpio);
-        close(mem_fd);
-        exit(-1);
-   }
-   gpio = (volatile unsigned *)reg_map_gpio;   //If mmap was successfull gpio points to beginning of pheripheral registers
-   printf("gpio mmap successfull.\n");
+  if (reg_map == MAP_FAILED) {
+       printf(" mmap error %d\n", (int)reg_map);
+       close(mem_fd);
+       exit(-1);
+  }
 
-   //map physical uart registers to virtual registers
-   reg_map_uart = mmap(
-      NULL,           //Starting adress for local mapping, NULL is don't-care
-      BLOCK_SIZE,     //Size of mapped memory block
-      PROT_READ|PROT_WRITE, //Read and write to mapped memory
-      MAP_SHARED,     //MAP_SHARED means this program is not the only one with access to the memory
-      mem_fd,         //File descriptor to physical memory virtual file '/dev/mem'
-      UART_BASE       //Address in physical map that we want this memory block to expose
-   );
-
-   if (reg_map_uart == MAP_FAILED) {
-        printf("uart mmap error %d\n", (int)reg_map_uart);
-        close(mem_fd);
-        exit(-1);
-   }
-
-   uart = (volatile unsigned *)reg_map_gpio;   //If mmap was successfull uart points to beginning of pheripheral registers
-
-   printf("uart mmap successfull.\n");
-
-/*   //map physical interrupt registers to virtual registers
-   reg_map_int = mmap(
-      NULL,           //Starting adress for local mapping, NULL is don't-care
-      BLOCK_SIZE,     //Size of mapped memory block
-      PROT_READ|PROT_WRITE, //Read and write to mapped memory
-      MAP_SHARED,     //MAP_SHARED means this program is not the only one with access to the memory
-      mem_fd,         //File descriptor to physical memory virtual file '/dev/mem'
-      INT_BASE       //Address in physical map that we want this memory block to expose
-   );
-
-   if (reg_map_int == MAP_FAILED) {
-        printf("interrupt mmap error %d\n", (int)reg_map_int);
-        close(mem_fd);
-        exit(-1);
-   }
-
-    interrupt = (volatile unsigned *)reg_map_int;   //If mmap was successfull uart points to beginning of pheripheral registers
-
-   printf("int mmap successfull.\n");*/
+  close(mem_fd);
+  return((volatile unsigned *)reg_map);
 }
 
 void funcsel_uart(){

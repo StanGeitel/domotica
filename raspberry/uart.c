@@ -1,6 +1,9 @@
 #include "uart.h"
 #include "rpi.h"
 
+unsigned char data[8];
+int i = 0;
+
 void init_uart(){
   UART_IBRD &= ~(0xFFFF); //all 16 bits low
   UART_IBRD |= BAUDDIV;   //write BAUDDIV to register resulting in 9600 baudrate
@@ -13,8 +16,8 @@ void init_uart(){
   UART_IMSC |= (0xF1 << 6); //mask all interrupts
   UART_IMSC &= ~(3 << 4);   //except rx and tx
   UART_IMSC |= (1 << 1);
-
   UART_ICR |= (3 << 4);   //clear interrupts on rx and tx
+
 
   UART_CR &= ~(0xFFFF);   //set all 16 bits low
   UART_CR |= (1 << 9);    //enable rx
@@ -23,14 +26,24 @@ void init_uart(){
 
 }
 
-unsigned char read_uart(){
+void loop_uart(){
+  while(1){
+    if(UART_FR & (1 << 6)){
+      read_uart();
+    }
+  }
+}
+
+void read_uart(){
 //  while((UART_DR & (1 << 11)) || (UART_FR & (1 << 4)));
   if(UART_RSRECR & (1 << 3) || UART_RSRECR & (1 << 2) || UART_RSRECR & (1 << 1) || UART_RSRECR & (1 << 0)){
     send_nack();
     return(-1);
   }
   send_ack();
-  return(UART_DR & 0xFF);
+
+  data[i] = UART_DR & 0xFF;
+  i++;
 }
 
 void write_uart(unsigned char data){
