@@ -15,6 +15,7 @@
 
 void set_output_gpio(unsigned char port, int pin);
 void clear_output_gpio(unsigned char port, int pin);
+void toggle_output_gpio(unsigned char port, int pin);
 void enable_input_gpio(unsigned char port, int pin);
 void enable_pullup_gpio(unsigned char port, int pin);
 int read_gpio(unsigned char port, int pin);

@@ -28,6 +28,11 @@ volatile uint8_t old_pins = 0;
 	PORT(port) &= ~(1 << pin);
  }
 
+ void toggle_output_gpio(unsigned char port, int pin){
+	 DDR(port) |= (1 << pin);
+	 PORT(port) ^= (1 << pin);//toggle bit om register with exor
+ }
+
  void enable_input_gpio(unsigned char port, int pin){
 	DDR(port) &= ~(1 << pin);
  }
@@ -57,37 +62,7 @@ volatile uint8_t old_pins = 0;
 	SREG |= (1 << SREG_I);				//enable interrupts I in global status register
  }
  
- ISR(PCINT0_vect){						//Pin change interrupt0 service routine			  
-	 volatile uint8_t changed_pins;
-	 
-	 changed_pins = PINB ^ old_pins;
-	 old_pins = PINB;
-	 
-	 if(changed_pins & (1 << PINB0)){
-		 //set coresponding led
-	 }
-	 if(changed_pins & (1 << PINB1)){
-		 
-	 }
-	 if(changed_pins & (1 << PINB2)){
-		 
-	 }
-	 if(changed_pins & (1 << PINB3)){
-		 
-	 }
-	 if(changed_pins & (1 << PINB4)){
-		 
-	 }
-	 if(changed_pins & (1 << PINB5)){
-		 	 
-	 }
-	 if(changed_pins & (1 << PINB6)){
-		 
-	 }
-	 if(changed_pins& (1 << PINB7)){
-		 
-	 }
- } 
+
  
  //ISR(PCINT1_vect){						//Pin change interrupt1 service routine
 //	
