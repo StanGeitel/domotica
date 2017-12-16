@@ -9,7 +9,8 @@
 #ifndef SWITCH_H_
 #define SWITCH_H_
 
-
+void ButtonClicker(uint8_t index,uint8_t state);
+void buttons(void);
 
 
 

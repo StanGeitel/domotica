@@ -34,6 +34,8 @@ void receive_KNX(void);
 int check_adres(void);
 void send_acknowledgement(int parity_failed);
 
+void switch_led(uint8_t address, int state);
+void changeDimmer(uint8_t address, int state);
 
 
 #endif /* KNX_H_ */
