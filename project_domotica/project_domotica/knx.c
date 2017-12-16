@@ -246,6 +246,24 @@ void switch_led(uint8_t address, int state){
 	generate_KNX(normal_priority, length, repeated, data_array, size_data_array, address);
 }
 
+void changeDimmer(uint8_t address, int state){
+		
+		int size_data_array = 2;
+		uint8_t data_array[size_data_array];
+		data_array[0] = 0x00;
+		if(state == 1){
+			data_array[1] = 0x8B;//10001011 increases the dimmer with 25%
+		}
+		else if(state == 0){
+			data_array[1] = 0x83;//10000011 decreases the dimmer with 25%
+		}
+		
+		
+		uint8_t length = 2;
+		uint8_t repeated = 1;//not repeated
+		generate_KNX(normal_priority, length, repeated, data_array, size_data_array, address);
+}
+
 /*
 void read_data(void){
 	if(check_adres() == 1){

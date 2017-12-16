@@ -29,10 +29,10 @@ ISR(PCINT0_vect){						//Pin change interrupt0 service routine
 		toggle_output_gpio('A', 0);
 		int ret = (PIN(B) & 1 << 0);
 		if(ret == 1){
-			
+			switch_led(address, 1);
 		}
 		else if(ret == 0){
-
+			switch_led(address, 0);
 		}
 
 	}
@@ -47,8 +47,13 @@ ISR(PCINT0_vect){						//Pin change interrupt0 service routine
 	if(changed_pins & (1 << PINB3)){//toggle switch for Led1
 		address = 0x0A;//1.1.11 for Led1
 		toggle_output_gpio('D', 3);
-
-
+			int ret = (PIN(D) & 1 << 3);
+			if(ret == 1){
+				switch_led(address, 1);
+			}
+			else if(ret == 0){
+				switch_led(address, 0);
+			}
 	}
 	if(changed_pins & (1 << PINB4)){//increase button for Dimmer1
 		address = 0x0C;//1.1.12 for Dimmer1
