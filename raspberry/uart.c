@@ -1,8 +1,53 @@
 #include "uart.h"
 #include "rpi.h"
 
+int sfd;
 unsigned char data[8];
 int i = 0;
+
+void open_uart(){
+  sfd = open("/dev/serial0", O_RDWR | O_NOCTTY);
+  if(sfd == -1`){
+    printf("Error no is: %d.\n", errno);
+    printf("Error description is: %s.\n", sterror(errno));
+    exit(-1);
+  }
+  struct termios options;
+  tcgetattr(sfd, &options);
+
+  cfsetspeed(&options, B9600);
+  options.c_cflag &= ~CSIZE;
+  options.c_cflag |= CS8;
+  options.c_cflag |= PARENB;
+  options.c_cflag &= ~PARODD;
+  options.c_cflag &= ~CSTOPB;
+  options.c_cflag |= CLOCAL;
+  options.c_cflag |= CREAD;
+  options.c_lflag &= ~(ICANON | ECHO | ECHOE | ISIG);
+  options.c_oflag |= OPOST;
+
+  tcsetattr(sfd, TCSANOW, &options);
+
+}
+
+void rx_uart(){
+
+}
+
+void tx_uart(){
+  tcsendbreak(sfd, );
+
+}
+
+
+
+
+
+
+
+
+
+
 
 void init_uart(){
   UART_IBRD &= ~(0xFFFF); //all 16 bits low
@@ -33,7 +78,6 @@ void loop_uart(){
     }
   }
 }
-
 void read_uart(){
 //  while((UART_DR & (1 << 11)) || (UART_FR & (1 << 4)));
   if(UART_RSRECR & (1 << 3) || UART_RSRECR & (1 << 2) || UART_RSRECR & (1 << 1) || UART_RSRECR & (1 << 0)){
