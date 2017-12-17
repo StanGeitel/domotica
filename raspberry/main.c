@@ -3,11 +3,8 @@
 
 int main(int argc, char* argz[]){
   init_knx();
-  while(1){
-    rx_uart();
-    tx_uart(0xFF);
-  }
-
+//  start_thread();
+  run_knx();
 
   return 0;
 }
