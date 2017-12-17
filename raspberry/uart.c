@@ -2,9 +2,6 @@
 #include "rpi.h"
 #include <string.h>
 
-unsigned char rx_data[8];
-unsigned char tx_data[8] = {0, 1, 2, 3, 4, 5, 6, 7};
-
 int sfd;
 
 void open_uart(){
@@ -38,11 +35,9 @@ void close_uart(){
 
 uint8_t rx_uart(){
   uint8_t data = 0;
-  while()
-  read(sfd, &c, 1);
-  if(c > 0){
-    printf("data: %c\n", c);
-  }
+  while((data = read(sfd, &data, sizeof(data))) == 0);
+  printf("data: %c\n", c);
+  return(data);
 }
 
 void tx_uart(uint8_t data){
@@ -51,7 +46,7 @@ void tx_uart(uint8_t data){
 }
 
 void send_ack(){
-  
+
 }
 
 void send_nack(){
