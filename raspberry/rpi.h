@@ -7,11 +7,11 @@
 #include <unistd.h>
 #include <termios.h>
 #include <errno.h>
+#include <inttypes.h>
 #include <sys/mman.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/ioctl.h>
-#include <sys/poll.h>
 
 //hexadecimal is the adress, the decimal offset from the pointer is the registers, so every 4 bytes is +1
 //divide the hexadecimal offset by 4 to get the decimal offset for the pointer

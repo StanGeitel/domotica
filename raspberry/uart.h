@@ -21,14 +21,12 @@
 #define BAUDRATE  9600
 #define BAUDDIV   0xF42  //3906    600MHz/(16*9600)
 
-
 void open_uart();
 void close_uart();
 void rx_uart();
 void tx_uart();
 
 void init_uart();
-void loop_uart();
 void read_uart();
 void write_uart();
 void send_ack();
