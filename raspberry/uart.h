@@ -1,6 +1,8 @@
 #ifndef UART_H_
 #define UART_H_
 
+#include <inttypes.h>
+
 #define UART_BASE     (BCM2837_PERI_BASE + 0x201000)
 #define UART_DR       (*(volatile unsigned int *) (uart + 0))
 #define UART_RSRECR   (*(volatile unsigned int *) (uart + 1))
@@ -21,16 +23,15 @@
 #define BAUDRATE  9600
 #define BAUDDIV   0xF42  //3906    600MHz/(16*9600)
 
+volatile unsigned int *uart;
+
 void open_uart();
 void close_uart();
-void rx_uart();
-void tx_uart();
+uint8_t rx_uart();
+void tx_uart(uint8_t data);
 
 void init_uart();
 void read_uart();
 void write_uart();
-void send_ack();
-void send_nack();
-
 
 #endif
