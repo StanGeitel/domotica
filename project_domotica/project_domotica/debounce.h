@@ -6,6 +6,8 @@
 
 #include <avr/interrupt.h>
 
+//asynchrone is for multicore processors and synchrone for single core
+
 //Optimized for 20 millisecond period on a 1Mhz clock
 #define DBNC_TIMR0_PRESCALER 	_BV(CS02)
 #define DBNC_TIMR0_BASEVAL	 	178
