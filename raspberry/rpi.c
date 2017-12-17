@@ -6,11 +6,6 @@
 #include "rpi.h"
 #include "uart.h"
 
-volatile unsigned int *gpio;
-volatile unsigned int *uart;
-volatile unsigned int *interrupt;
-volatile unsigned int *timer;
-
 // Exposes the physical adress defined in the passed structure using mmap on /dev/mem
 void map_peripherals()
 {

@@ -10,10 +10,11 @@
 #include <sys/mman.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/ioctl.h>
+#include <sys/poll.h>
 
 //hexadecimal is the adress, the decimal offset from the pointer is the registers, so every 4 bytes is +1
 //divide the hexadecimal offset by 4 to get the decimal offset for the pointer
-
 #define BCM2837_PERI_BASE 0x3F000000
 #define BLOCK_SIZE		(4 * 1024)
 
@@ -39,6 +40,11 @@
 
 #define BIT_LENGHT    104
 #define PAUSE_LENGHT  2*BIT_LENGHT
+
+volatile unsigned int *gpio;
+volatile unsigned int *uart;
+volatile unsigned int *interrupt;
+volatile unsigned int *timer;
 
 void map_peripherals();
 volatile unsigned int * map_peripheral(unsigned int base_address);
