@@ -83,8 +83,7 @@ void send_uart(uint8_t c) {
  * Receives a single char without ISR
  */
 uint8_t receive_uart() {
-  while ( !(UCSRA & (1<<RXC)) ) 
-    ; 
+  while ( !(UCSRA & (1 << RXC))); 
   return UDR; 
 }
 

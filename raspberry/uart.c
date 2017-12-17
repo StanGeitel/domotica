@@ -1,6 +1,7 @@
 #include "uart.h"
 #include "rpi.h"
-
+#include <string.h>
+/*
 unsigned char rx_data[8];
 unsigned char tx_data[8] = {0, 1, 2, 3, 4, 5, 6, 7};
 
@@ -20,11 +21,12 @@ void poll_uart(){
             ssize_t rc = read(serial_fd, buff, sizeof(buff) );
             if (rc > 0)
             {
-                /* You've got rc characters. do something with buff */
+                 You've got rc characters. do something with buff
             }
         }
     }
   }
+
 
 void init_uart(){
 
@@ -35,11 +37,12 @@ void init_uart(){
   UART_LCRH |= (3 << 5);  //set word lenght to 8 bits
   UART_LCRH |= (1 << 2);  //select even parity
   UART_LCRH |= (1 << 1);  //enable parity
-/*  UART_IMSC |= (0xF1 << 6); //mask all interrupts
+
+  UART_IMSC |= (0xF1 << 6); //mask all interrupts
   UART_IMSC &= ~(3 << 4);   //except rx and tx
   UART_IMSC |= (1 << 1);
   UART_ICR |= (3 << 4);   //clear interrupts on rx and tx
-*/
+
   UART_CR &= ~(0xFFFF);   //set all 16 bits low
   UART_CR |= (1 << 9);    //enable rx
   UART_CR |= (1 << 8);    //enable tx
@@ -85,10 +88,10 @@ void send_nack(){
 
 }
 
+*/
 
-/*
+
 int sfd;
-
 
 void open_uart(){
   sfd = open("/dev/serial0", O_RDWR | O_NOCTTY);
@@ -100,21 +103,31 @@ void open_uart(){
   tcgetattr(sfd, &options);
 
   cfsetspeed(&options, B9600);
-  options.c_cflag &= ~CSIZE;
-  options.c_cflag |= CS8;
-  options.c_cflag |= PARENB;
-  options.c_cflag &= ~PARODD;
+  cfmakeraw(&options);
   options.c_cflag &= ~CSTOPB;
   options.c_cflag |= CLOCAL;
   options.c_cflag |= CREAD;
-  options.c_lflag &= ~(ICANON | ECHO | ECHOE | ISIG);
-  options.c_oflag |= OPOST;
-  options.c_cc[VTIME] = 0;
-  options.c_cc[VMIN] = 0;
-
+  options.c_cc[VTIME]=0;
+  options.c_cc[VMIN]=0;
   tcsetattr(sfd, TCSANOW, &options);
-}
 
+  char buf[] = "hello world";
+  char buf2[100];
+  char c;
+  int count = write(sfd, buf,strlen(buf)+1);
+
+  int i=0;
+  while(1){
+   count = read(sfd, &c, 1);
+   if(count!=0){
+     buf2[i]=c;
+     i++;
+     if(c==0)break;
+   }
+  }
+  printf("%s\n\r", buf2);close(sfd);
+}
+/*
 void close_uart(){
   close(sfd);
 }
