@@ -59,18 +59,6 @@ Discarded input sections
                 0x00000000       0x14 knx.o
  .text.check_adres
                 0x00000000       0x1e knx.o
- .text.send_acknowledgement
-                0x00000000       0x1a knx.o
- .text.receive_KNX
-                0x00000000       0xc6 knx.o
- .data.amount_messages.2085
-                0x00000000        0x2 knx.o
- .bss.count.2084
-                0x00000000        0x2 knx.o
- .bss.parity_failed.2086
-                0x00000000        0x2 knx.o
- .data.data_buffer
-                0x00000000       0x17 knx.o
  .text          0x00000000        0x0 main.o
  .data          0x00000000        0x0 main.o
  .bss           0x00000000        0x0 main.o
@@ -108,8 +96,6 @@ Discarded input sections
                 0x00000000        0xc usart.o
  .text.uart_getc_wait
                 0x00000000        0xc usart.o
- .text.uart_putc
-                0x00000000       0x3a usart.o
  .text.uart_putc_f
                 0x00000000        0x8 usart.o
  .text.uart_puts
@@ -295,7 +281,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x684
+.text           0x00000000      0x7bc
  *(.vectors)
  .vectors       0x00000000       0x2a D:/7.0/Packs/atmel/ATtiny_DFP/1.3.147/gcc/dev/attiny2313a/avr25/tiny-stack/crtattiny2313a.o
                 0x00000000                __vector_default
@@ -398,36 +384,45 @@ END GROUP
  .text.generate_KNX
                 0x0000033e        0x4 knx.o
                 0x0000033e                generate_KNX
+ .text.send_acknowledgement
+                0x00000342       0x1a knx.o
+                0x00000342                send_acknowledgement
+ .text.receive_KNX
+                0x0000035c       0xc6 knx.o
+                0x0000035c                receive_KNX
  .text.switch_led
-                0x00000342       0x4a knx.o
-                0x00000342                switch_led
+                0x00000422       0x4a knx.o
+                0x00000422                switch_led
  .text.changeDimmer
-                0x0000038c       0x4a knx.o
-                0x0000038c                changeDimmer
- .text.main     0x000003d6        0x8 main.o
-                0x000003d6                main
+                0x0000046c       0x4a knx.o
+                0x0000046c                changeDimmer
+ .text.main     0x000004b6        0x8 main.o
+                0x000004b6                main
  .text.ButtonClicker
-                0x000003de       0x9a switch.o
-                0x000003de                ButtonClicker
+                0x000004be       0x9a switch.o
+                0x000004be                ButtonClicker
  .text.__vector_11
-                0x00000478       0x92 switch.o
-                0x00000478                __vector_11
- .text.buttons  0x0000050a       0x7a switch.o
-                0x0000050a                buttons
+                0x00000558       0x92 switch.o
+                0x00000558                __vector_11
+ .text.buttons  0x000005ea       0x7a switch.o
+                0x000005ea                buttons
  .text.uart_getc
-                0x00000584       0x44 usart.o
-                0x00000584                uart_getc
+                0x00000664       0x44 usart.o
+                0x00000664                uart_getc
+ .text.uart_putc
+                0x000006a8       0x3a usart.o
+                0x000006a8                uart_putc
  .text.__vector_8
-                0x000005c8       0x5e usart.o
-                0x000005c8                __vector_8
+                0x000006e2       0x5e usart.o
+                0x000006e2                __vector_8
  .text.__vector_7
-                0x00000626       0x5a usart.o
-                0x00000626                __vector_7
-                0x00000680                . = ALIGN (0x2)
+                0x00000740       0x78 usart.o
+                0x00000740                __vector_7
+                0x000007b8                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000680        0x0 d:/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25/tiny-stack\libgcc.a(_exit.o)
-                0x00000680                _exit
-                0x00000680                exit
+ .fini9         0x000007b8        0x0 d:/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25/tiny-stack\libgcc.a(_exit.o)
+                0x000007b8                _exit
+                0x000007b8                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -446,48 +441,57 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000680        0x4 d:/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25/tiny-stack\libgcc.a(_exit.o)
+ .fini0         0x000007b8        0x4 d:/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25/tiny-stack\libgcc.a(_exit.o)
  *(.fini0)
-                0x00000684                _etext = .
+                0x000007bc                _etext = .
 
-.data           0x00800060       0x20 load address 0x00000684
+.data           0x00800060       0x3a load address 0x000007bc
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
+ .data.amount_messages.2085
+                0x00800060        0x2 knx.o
+ .data.data_buffer
+                0x00800062       0x17 knx.o
  .data.tx_buffer
-                0x00800060       0x10 usart.o
+                0x00800079       0x10 usart.o
  .data.rx_buffer
-                0x00800070       0x10 usart.o
+                0x00800089       0x10 usart.o
  *(.gnu.linkonce.d*)
  *(.rodata)
  *(.rodata*)
  *(.gnu.linkonce.r*)
-                0x00800080                . = ALIGN (0x2)
-                0x00800080                _edata = .
-                0x00800080                PROVIDE (__data_end, .)
+                0x0080009a                . = ALIGN (0x2)
+ *fill*         0x00800099        0x1 
+                0x0080009a                _edata = .
+                0x0080009a                PROVIDE (__data_end, .)
 
-.bss            0x00800080       0x2a
-                0x00800080                PROVIDE (__bss_start, .)
+.bss            0x0080009a       0x2e
+                0x0080009a                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
- .bss.tx_tail   0x00800080        0x1 usart.o
- .bss.tx_head   0x00800081        0x1 usart.o
- .bss.rx_tail   0x00800082        0x1 usart.o
- .bss.rx_head   0x00800083        0x1 usart.o
+ .bss.count.2084
+                0x0080009a        0x2 knx.o
+ .bss.parity_failed.2086
+                0x0080009c        0x2 knx.o
+ .bss.tx_tail   0x0080009e        0x1 usart.o
+ .bss.tx_head   0x0080009f        0x1 usart.o
+ .bss.rx_tail   0x008000a0        0x1 usart.o
+ .bss.rx_head   0x008000a1        0x1 usart.o
  *(COMMON)
- COMMON         0x00800084       0x25 debounce.o
-                0x00800084                db
- COMMON         0x008000a9        0x1 switch.o
-                0x008000a9                lastState
-                0x008000aa                PROVIDE (__bss_end, .)
-                0x00000684                __data_load_start = LOADADDR (.data)
-                0x000006a4                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x008000a2       0x25 debounce.o
+                0x008000a2                db
+ COMMON         0x008000c7        0x1 switch.o
+                0x008000c7                lastState
+                0x008000c8                PROVIDE (__bss_end, .)
+                0x000007bc                __data_load_start = LOADADDR (.data)
+                0x000007f6                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x008000aa        0x0
+.noinit         0x008000c8        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x008000aa                _end = .
+                0x008000c8                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -575,7 +579,7 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x1b87
+.debug_info     0x00000000     0x1b9d
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x456 D:/7.0/Packs/atmel/ATtiny_DFP/1.3.147/gcc/dev/attiny2313a/avr25/tiny-stack/crtattiny2313a.o
  .debug_info    0x00000456      0x26d debounce.o
@@ -583,9 +587,9 @@ END GROUP
  .debug_info    0x00000940      0x81c knx.o
  .debug_info    0x0000115c       0x9e main.o
  .debug_info    0x000011fa      0x4fc switch.o
- .debug_info    0x000016f6      0x491 usart.o
+ .debug_info    0x000016f6      0x4a7 usart.o
 
-.debug_abbrev   0x00000000      0xd26
+.debug_abbrev   0x00000000      0xd38
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x41b D:/7.0/Packs/atmel/ATtiny_DFP/1.3.147/gcc/dev/attiny2313a/avr25/tiny-stack/crtattiny2313a.o
  .debug_abbrev  0x0000041b      0x15c debounce.o
@@ -593,9 +597,9 @@ END GROUP
  .debug_abbrev  0x00000659      0x2e8 knx.o
  .debug_abbrev  0x00000941       0x65 main.o
  .debug_abbrev  0x000009a6      0x172 switch.o
- .debug_abbrev  0x00000b18      0x20e usart.o
+ .debug_abbrev  0x00000b18      0x220 usart.o
 
-.debug_line     0x00000000      0xd8d
+.debug_line     0x00000000      0xd9c
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x10c D:/7.0/Packs/atmel/ATtiny_DFP/1.3.147/gcc/dev/attiny2313a/avr25/tiny-stack/crtattiny2313a.o
  .debug_line    0x0000010c      0x1fe debounce.o
@@ -603,16 +607,16 @@ END GROUP
  .debug_line    0x000004fa      0x37a knx.o
  .debug_line    0x00000874       0x51 main.o
  .debug_line    0x000008c5      0x25f switch.o
- .debug_line    0x00000b24      0x269 usart.o
+ .debug_line    0x00000b24      0x278 usart.o
 
-.debug_frame    0x00000000      0x514
+.debug_frame    0x00000000      0x538
  *(.debug_frame)
  .debug_frame   0x00000000       0xec debounce.o
  .debug_frame   0x000000ec       0xdc gpio.o
  .debug_frame   0x000001c8      0x158 knx.o
  .debug_frame   0x00000320       0x24 main.o
  .debug_frame   0x00000344       0xa0 switch.o
- .debug_frame   0x000003e4      0x130 usart.o
+ .debug_frame   0x000003e4      0x154 usart.o
 
 .debug_str      0x00000000      0x7a4
  *(.debug_str)
@@ -628,15 +632,15 @@ END GROUP
  .debug_str     0x00000652       0x41 switch.o
                                 0x296 (size before relaxing)
  .debug_str     0x00000693      0x111 usart.o
-                                0x2a4 (size before relaxing)
+                                0x2b0 (size before relaxing)
 
-.debug_loc      0x00000000     0x11c1
+.debug_loc      0x00000000     0x121c
  *(.debug_loc)
  .debug_loc     0x00000000      0x322 debounce.o
  .debug_loc     0x00000322      0x186 gpio.o
  .debug_loc     0x000004a8      0x730 knx.o
  .debug_loc     0x00000bd8      0x26c switch.o
- .debug_loc     0x00000e44      0x37d usart.o
+ .debug_loc     0x00000e44      0x3d8 usart.o
 
 .debug_macinfo
  *(.debug_macinfo)

@@ -39,7 +39,7 @@
 // 28800: 7.8889
 // 38400: 5.6667
 
-#define MYUBBR ((F_CPU / (BAUD * 16L)) - 1)
+#define MYUBBR ((F_CPU / (BAUD * 16L)) - 1)//16L is for asynchrone mode
 #define BUFFER_SIZE 16
 
 volatile static uint8_t rx_buffer[BUFFER_SIZE] = "xxxxxxxxxxxxxxxx";
@@ -97,12 +97,12 @@ uint8_t receive_uart() {
 uint16_t uart_getc(void) {
   uint8_t c = 0;
   uint8_t tmp_tail = 0;
-  if (rx_head == rx_tail) {
+  if (rx_head == rx_tail) {//there is no data in the buffer
     return UART_NO_DATA;
   }
-  tmp_tail = (rx_tail + 1) % BUFFER_SIZE;
-  c = rx_buffer[rx_tail];
-  rx_tail = tmp_tail;
+  tmp_tail = (rx_tail + 1) % BUFFER_SIZE;//goes from 0 to 15 and then to 0
+  c = rx_buffer[rx_tail];//get the last byte from the buffer
+  rx_tail = tmp_tail;//rx_tail is increased by one
   return c;
 
 }
@@ -139,12 +139,12 @@ uint8_t uart_getc_wait(void) {
  * send buffer.
  */
 void uart_putc(uint8_t c) {
-  uint8_t tmp_head = (tx_head + 1) % BUFFER_SIZE;
+  uint8_t tmp_head = (tx_head + 1) % BUFFER_SIZE;//goes from 0 to 15 and then to 0
   // wait for space in buffer
-  while (tmp_head == tx_tail) {
+  while (tmp_head == tx_tail) {//if the head is the same as the tail there has to be waited on the ISR
     ;
   }
-  tx_buffer[tx_head] = c;
+  tx_buffer[tx_head] = c;//put c in the ringbuffer
   tx_head = tmp_head;
   // enable uart data interrupt (send data)
   UCSRB |= (1<<UDRIE);
@@ -195,9 +195,9 @@ void uart_puts_P(const char *s) {
  */
 ISR(USART_UDRE_vect) {
   uint8_t tmp_tail = 0;
-  if (tx_head != tx_tail) {
-    tmp_tail = (tx_tail + 1) % BUFFER_SIZE;
-    UDR = tx_buffer[tx_tail];
+  if (tx_head != tx_tail) {//check if there is any more data to send
+    tmp_tail = (tx_tail + 1) % BUFFER_SIZE;//goes from 0 to 15 and then to 0
+    UDR = tx_buffer[tx_tail];//put the last byte of the buffer into the uart register
     tx_tail = tmp_tail;
   }
   else {
@@ -214,15 +214,15 @@ ISR(USART_UDRE_vect) {
  */
 ISR(USART_RX_vect) {
   uint8_t tmp_head = 0;
-  tmp_head = (rx_head + 1) % BUFFER_SIZE;
-  if (tmp_head == rx_tail) {
+  tmp_head = (rx_head + 1) % BUFFER_SIZE;//goes from 0 to 15 and then to 0
+  if (tmp_head == rx_tail) {//the buffer is full because the head hit the tail
     // buffer overflow error!
   }
   else{
 
-		rx_buffer[rx_head] = UDR;
-		rx_head = tmp_head;    
-		//receive_KNX();
+		rx_buffer[rx_head] = UDR;//put data in the rx buffer
+		rx_head = tmp_head;  //give the new location of rx head (old rx_head + 1)  
+		receive_KNX();
   }
 }
 

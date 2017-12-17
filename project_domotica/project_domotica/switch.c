@@ -11,10 +11,10 @@
 #include <util/delay.h>
 #include "debounce.h"
 #include "knx.h"
+#include "switch.h"
 
 volatile uint8_t lastState;
 
-void ButtonClicker(uint8_t index,uint8_t state);
 
 //volatile uint8_t old_pins = 0;
 #define addressB0 0x0A;
