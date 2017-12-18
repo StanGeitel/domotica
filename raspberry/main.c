@@ -1,12 +1,10 @@
-#include "rpi.h"
+#include "knx.h"
 #include "uart.h"
 
 int main(int argc, char* argz[]){
-  map_peripherals();
-  funcsel_uart();
-  init_uart();
-  read_uart();
-
+  init_knx();
+//  start_thread();
+  run_knx();
 
   return 0;
 }

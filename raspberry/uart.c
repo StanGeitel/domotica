@@ -1,6 +1,13 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <termios.h>
+#include <errno.h>
 #include "uart.h"
-#include "rpi.h"
+
 #include <string.h>
+#include <sys/ioctl.h>
 
 int sfd;
 
@@ -26,7 +33,9 @@ void open_uart(){
   options.c_cc[VTIME] = 0;
   options.c_cc[VMIN] = 0;
   tcsetattr(sfd, TCSANOW, &options);
+  printf("serial0 opened\n");
 
+  tcflush(sfd, TCIOFLUSH);
 }
 
 void close_uart(){
@@ -34,23 +43,28 @@ void close_uart(){
 }
 
 uint8_t rx_uart(){
-  uint8_t data = 0;
-  while((data = read(sfd, &data, sizeof(data))) == 0);
-  printf("data: %c\n", c);
+  uint8_t data;
+  int bytes;
+  ioctl(sfd, FIONREAD, &bytes);
+  if(bytes > 0){
+    read(sfd, &data, 1);
+    printf("%d\n", data);
+  }
   return(data);
+/*  char data = 0;
+  while(1){
+    read(sfd, &data, 1);
+    if(data != 0) printf("data: %c\n", data);
+  }*/
 }
 
 void tx_uart(uint8_t data){
-  while((UART_FR & (1<<3)) || (UART_FR (1<<5)));
-  write(sfd, &data, sizeof(c));
-}
-
-void send_ack(){
-
-}
-
-void send_nack(){
-
+  write(sfd, &data, 1);
+/*  char data = 'D';
+//  while((UART_FR & (1<<3)) || (UART_FR & (1<<5)));
+  while(1){
+    write(sfd, &data, sizeof(data));
+  }*/
 }
 
 /*

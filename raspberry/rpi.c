@@ -2,9 +2,13 @@
 //http://www.pieter-jan.com/node/15
 //https://elinux.org/RPi_Serial_Connection set up pi to use UART
 //https://www.studica.com/blog/program-embedded-systems-raspberry-pi
-
-#include "rpi.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <sys/mman.h>
 #include "uart.h"
+#include "rpi.h"
 
 // Exposes the physical adress defined in the passed structure using mmap on /dev/mem
 void map_peripherals()

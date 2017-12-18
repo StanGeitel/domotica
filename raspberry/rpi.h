@@ -1,18 +1,6 @@
 #ifndef RPI_H_
 #define RPI_H_
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <termios.h>
-#include <errno.h>
-#include <inttypes.h>
-#include <sys/mman.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <sys/ioctl.h>
-
 //hexadecimal is the adress, the decimal offset from the pointer is the registers, so every 4 bytes is +1
 //divide the hexadecimal offset by 4 to get the decimal offset for the pointer
 #define BCM2837_PERI_BASE 0x3F000000
@@ -42,7 +30,6 @@
 #define PAUSE_LENGHT  2*BIT_LENGHT
 
 volatile unsigned int *gpio;
-volatile unsigned int *uart;
 volatile unsigned int *interrupt;
 volatile unsigned int *timer;
 
