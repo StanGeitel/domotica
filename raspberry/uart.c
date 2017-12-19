@@ -51,20 +51,12 @@ uint8_t rx_uart(){
     printf("%d\n", data);
   }
   return(data);
-/*  char data = 0;
-  while(1){
-    read(sfd, &data, 1);
-    if(data != 0) printf("data: %c\n", data);
-  }*/
+
 }
 
 void tx_uart(uint8_t data){
   write(sfd, &data, 1);
-/*  char data = 'D';
-//  while((UART_FR & (1<<3)) || (UART_FR & (1<<5)));
-  while(1){
-    write(sfd, &data, sizeof(data));
-  }*/
+
 }
 
 /*
