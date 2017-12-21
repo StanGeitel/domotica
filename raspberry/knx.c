@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <inttypes.h>
 #include <unistd.h>
 #include "knx.h"
@@ -40,7 +41,7 @@ void write_knx(uint8_t node_address, uint8_t user_data1, uint8_t user_data2){
   send_telegram();
 
   int i = 0;
-  while((tx_uart() != ACK) && (i != 3)){
+  while((rx_uart() != ACK) && (i != 3)){
     repeat();
     usleep(PAUSE);
     i++;
@@ -49,13 +50,13 @@ void write_knx(uint8_t node_address, uint8_t user_data1, uint8_t user_data2){
 
 uint8_t get_checksum(){
   uint8_t checksum = 0;
-  int bit_count;
+  int bitcount;
   for(int i = 0; i < 8; i++){
-    bit_count = 0;
+    bitcount = 0;
     for(int j = 0; j < 8; j++){
-      bit_count += get_bit(tx_tele[j], i);
+      bitcount += get_bit(tx_tele[j], i);
     }
-    checksum |= (~(bit_count % 2) << i);
+    checksum |= (~(bitcount % 2) << i);
   }
   return(checksum);
 }
@@ -112,13 +113,13 @@ int check_des(){
 
 int check_par(){
   uint8_t checksum = 0;
-  int bit_count;
+  int bitcount;
   for(int i = 0; i < 8; i++){
-    bit_count = 0;
+    bitcount = 0;
     for(int j = 0; j < 8; j++){
       bitcount += get_bit(tx_tele[j], i);
     }
-    checksum |= (~(bit_count % 2) << i);
+    checksum |= (~(bitcount % 2) << i);
   }
   if(rx_tele[CS] != checksum){
     printf("Checksum not correct.");

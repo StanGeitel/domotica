@@ -1,6 +1,8 @@
 #ifndef KNX_H_
 #define KNX_H_
 
+#include <inttypes.h>
+
 #define AREA_LINE     0b00010001
 
 #define PI_ADDRESS    1
@@ -12,10 +14,10 @@
 #define NACK    0b11000001
 
 #define BIT         104
-#define PAUSE       2*BIT_LENGHT
-#define REC_WAIT    13*BIT_LENGHT
-#define NACK_WAIT   13*BIT_LENGHT
-#define ARB_WAIT    53*BIT_LENGHT
+#define PAUSE       2*BIT
+#define REC_WAIT    13*BIT
+#define NACK_WAIT   13*BIT
+#define ARB_WAIT    53*BIT
 
 //telegram bytes
 #define CF    0
@@ -42,7 +44,7 @@ void run_knx();
 
 void write_knx(uint8_t node_address, uint8_t user_data1, uint8_t user_data2);
 uint8_t get_checksum();
-int get_bit(uint8_t byte, int pos)
+int get_bit(uint8_t byte, int pos);
 void send_telegram();
 void repeat();
 
