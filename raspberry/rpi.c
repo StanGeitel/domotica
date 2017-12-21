@@ -48,7 +48,7 @@ volatile unsigned int * map_peripheral(unsigned int base_address){
   );
 
   if (reg_map == MAP_FAILED) {
-       printf(" mmap error %d\n", (int)reg_map);
+       printf("mmap error %d\n", (int)reg_map);
        close(mem_fd);
        exit(-1);
   }

@@ -26,9 +26,6 @@
 #define TIMER_C2      (*(volatile unsigned int *) (timer + 5))
 #define TIMER_C3      (*(volatile unsigned int *) (timer + 6))
 
-#define BIT_LENGHT    104
-#define PAUSE_LENGHT  2*BIT_LENGHT
-
 volatile unsigned int *gpio;
 volatile unsigned int *interrupt;
 volatile unsigned int *timer;
