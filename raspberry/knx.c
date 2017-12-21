@@ -8,6 +8,7 @@
 //https://projects.drogon.net/raspberry-pi/wiringpi/functions/
 //https://www.youtube.com/watch?v=i4-jvPYdloc
 //https://en.wikipedia.org/wiki/POSIX_Threads
+//blahblah
 
 uint8_t rx_tele[TELE_LENGHT];
 uint8_t tx_tele[TELE_LENGHT];
