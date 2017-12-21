@@ -25,6 +25,7 @@
 	 for (i=0;i<DBNC_NUM_DEBOUNCERS;i++)
 	 {
 		 //Skip items that have been idle
+		 //so skip the for loop for 1 cycle
 		 if (db.dbUnits[i].counter == 0)
 		 continue;
 
@@ -58,7 +59,8 @@
 				 //Otherwise it's asynchronous,
 				 //call immediately
 				 else
-				 //Call Handler
+				 //Call Handler 
+				 //button clicker with the index value and the value of the bit
 				 (*db.dbUnits[i].handler)(i,temp);
 			 }
 		 }
@@ -76,9 +78,9 @@
  {
 	 int i;
 
-	 if (!db.signalReady) return;
+	 if (!db.signalReady) return;//if there is no valid signal close the function
 	 
-	 for (i=0;i<DBNC_NUM_DEBOUNCERS;i++)
+	 for (i=0;i<DBNC_NUM_DEBOUNCERS;i++)//check every item
 	 {
 		 //Check if this item is signaled
 		 if (db.dbUnits[i].bitmap & _BV(6)) {
@@ -98,15 +100,18 @@
 
  void registerDebouncer(volatile uint8_t *port,uint8_t bit,uint8_t index,uint8_t Asynchronous,debounceHandler handler)
  {
+	 //put  the settings of a button into the button register
+
 	 //Store port pointer
 	 //Store handler pointer
 	 //Reset counter to 0
 	 //Store bitmap of bit offset/asynchronous state
 	 //Set signaled to 0
 	 db.dbUnits[index].port 		= port;
-	 db.dbUnits[index].handler 	= handler;
+	 db.dbUnits[index].handler 	=  handler;
 	 db.dbUnits[index].counter  	= 0;
 
+	 //set the bit off the switch on the right position
 	 db.dbUnits[index].bitmap	= _BITSHIFTBY((Asynchronous != 0),7)|
 	 _BITSHIFTBY((((*port) & _BV(bit)) != 0),5)|
 	 bit;
@@ -115,11 +120,11 @@
  void signalChangedState(uint8_t index,uint8_t counterTop)
  {
 	 if (!counterTop)
-	 db.dbUnits[index].counter = DBNC_COUNTER_TOP;
+	 db.dbUnits[index].counter = DBNC_COUNTER_TOP;//set the counter value to 3
 	 else
 	 db.dbUnits[index].counter = counterTop;
 
-	 if (!TCCR0B)
+	 if (!TCCR0B)//if timer is not set, set the timer
 	 TCCR0B = DBNC_TIMR0_PRESCALER;
  }
 

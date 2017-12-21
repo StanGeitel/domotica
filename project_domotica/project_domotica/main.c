@@ -24,7 +24,7 @@ int main(void)
 {
 	
 	buttons();
-	/*
+	
 	uint8_t i = 0;
 	uint16_t c = 0;
 
@@ -34,9 +34,10 @@ int main(void)
 
 	while (1) {
 		uart_putc(0b11101010);
+		
 
 	}
-	*/
+	
 
 
 
