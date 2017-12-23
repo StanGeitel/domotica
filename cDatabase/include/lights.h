@@ -1,6 +1,6 @@
 #ifndef LIGTHS_H
 #define LIGTHS_H
-
+#include <mysql.h>
 
  void addLight(MYSQL *con, char* room);
  void removeLight(MYSQL *con, int id);

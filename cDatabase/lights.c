@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 //#include <my_global.h>
+//#include <mysql.h>
 #include <mysql.h>
 
 int amountLights;

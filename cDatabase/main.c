@@ -2,9 +2,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 //#include <my_global.h>
-#include <mysql.h>
+//#include <mysql.h>
 #include <lights.h>
 #include <dimLights.h>
+#include <mysql.h>
 
  void finish_with_error(MYSQL *con);
 
@@ -21,7 +22,7 @@ int main(int argc, char **argv)
     exit(1);
   }
 
-  if (mysql_real_connect(con, "127.0.0.1", "root", "", "domotica", 0, NULL, 0) == NULL){
+  if (mysql_real_connect(con, "127.0.0.1", "root", "domotica", "domotica", 0, NULL, 0) == NULL){
     fprintf(stderr, "%s\n", mysql_error(con));
     mysql_close(con);
     exit(1);

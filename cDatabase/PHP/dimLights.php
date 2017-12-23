@@ -49,15 +49,15 @@
 
 			if (isset($_POST['addLightSet'])){
 				$room = $_POST['addLightSet'];
-				
+				$address = $_POST['addLightAddress'];
 				
 				$row_cnt = $result->num_rows;
 				$row_cnt++;
 			
 				$querryString = "";
 			
-				$querryString = "INSERT INTO dimLights VALUES ( %d , '%s' ,0 )";
-				$querryString = sprintf($querryString, $row_cnt, $room);
+				$querryString = "INSERT INTO dimLights VALUES ( %d , '%s',INET_ATON(%d) ,0 )";
+				$querryString = sprintf($querryString, $row_cnt, $room, $address);
 				
 				//echo $querryString;
 				
@@ -277,6 +277,7 @@
 	<form action="dimLights.php" method="post">
 	<input type="hidden" name="addLight" value="run">
 	<input type="text" name="addLightSet" id="addLightSet" >
+	<input type="text" name="addLightAddress" id="addLightAddress" >
 	<input type="submit" value="Add light">
 	</form>
 	Fill in light id to remove light

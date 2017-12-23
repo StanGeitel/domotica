@@ -14,11 +14,12 @@
 				<Compiler>
 					<Add option="-std=c99" />
 					<Add option="-g" />
-					<Add directory="C:/libraries/mysql-connector-c-6.1.11-win32/mysql-connector-c-6.1.11-win32/include" />
+					<Add option="-lmysqlclient" />
+					<Add directory="/home/pi/Documents/library/mysql/include" />
 				</Compiler>
 				<Linker>
-					<Add library="C:/libraries/mysql-connector-c-6.1.11-win32/mysql-connector-c-6.1.11-win32/lib/libmysql.lib" />
-					<Add directory="C:/libraries/mysql-connector-c-6.1.11-win32/mysql-connector-c-6.1.11-win32/lib" />
+					<Add library="/home/pi/Downloads/mysql-connector-c-6.1.11-linux-glibc2.12-i686/lib/libmysqlclient.a" />
+					<Add directory="/home/pi/Documents/library/mysql/lib" />
 				</Linker>
 			</Target>
 			<Target title="Release">

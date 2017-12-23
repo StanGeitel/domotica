@@ -2,7 +2,9 @@
 #include <stdlib.h>
 //#include <my_global.h>
 #include <mysql.h>
-#include <lights.h>
+//#include <lights.h>
+#include <dimLights.h>
+
 
 
 static int amountDimmers;
@@ -20,7 +22,7 @@ void initSQL(){
     exit(1);
   }
 
-  if (mysql_real_connect(con, "127.0.0.1", "root", "", "domotica", 0, NULL, 0) == NULL){
+  if (mysql_real_connect(con, "127.0.0.1", "root", "domotica", "domotica", 0, NULL, 0) == NULL){
     fprintf(stderr, "%s\n", mysql_error(con));
     mysql_close(con);
     exit(1);
@@ -32,7 +34,7 @@ void initSQL(){
 //fill the dimmerStates array with the data in the database
 void initDimmer(MYSQL *con){
 
-        if (mysql_query(con, "SELECT * FROM dimLights")){
+        if (mysql_query(con, "SELECT * FROM dimlights")){
             finish_with_error(con);
         }
 
@@ -113,6 +115,13 @@ void checkForUpdates(MYSQL *con){
         if(dimmerStates[i] != newDimmerStates[i]){
             changeDimmerIntensity(con, id, newDimmerStates[i]);
             dimmerStates[i] = newDimmerStates[i];
+            if(dimmerStates[i] < newDimmerStates[i]){
+                printf("value has been increased");
+            }
+            else{
+                printf("value has been decreased");
+            }
+
         }
     }
 }
@@ -125,3 +134,5 @@ void printDimmerStates(){
     }
 
 }
+
+
