@@ -135,4 +135,96 @@ void printDimmerStates(){
 
 }
 
+#include <stdio.h>
 
+/* '0.0.0.0' is not a valid IP address, so this uses the value 0 to
+   indicate an invalid IP address. */
+
+#define INVALID 0
+
+/* Convert the character string in "ip" into an unsigned integer.
+
+   This assumes that an unsigned integer contains at least 32 bits. */
+
+unsigned int ip_to_int (const char * ip)
+{
+    /* The return value. */
+    unsigned v = 0;
+    /* The count of the number of bytes processed. */
+    int i;
+    /* A pointer to the next digit to process. */
+    const char * start;
+
+    start = ip;
+    for (i = 0; i < 4; i++) {
+        /* The digit being processed. */
+        char c;
+        /* The value of this byte. */
+        int n = 0;
+        while (1) {
+            c = * start;
+            start++;
+            if (c >= '0' && c <= '9') {
+                n *= 10;
+                n += c - '0';
+            }
+            /* We insist on stopping at "." if we are still parsing
+               the first, second, or third numbers. If we have reached
+               the end of the numbers, we will allow any character. */
+            else if ((i < 3 && c == '.') || i == 3) {
+                break;
+            }
+            else {
+                return INVALID;
+            }
+        }
+        if (n >= 256) {
+            return INVALID;
+        }
+        v *= 256;
+        v += n;
+    }
+    return v;
+}
+
+/* The following is a test of the above routine. */
+/*
+int main ()
+{
+    int i;
+    //"ips" contains a selection of internet address strings.
+    const char * ips[] = {
+        "127.0.0.1",
+        "110.3.244.53",
+        // The following tests whether we can detect an invalid
+          // address.
+        "Bonzo Dog Doo-Dah Band",
+        "182.118.20.178",
+        // The following tests whether it is OK to end the string with
+          // a non-NUL byte.
+        "74.125.16.64  ",
+        "1234.567.89.122345",
+    };
+    int n_ips;
+
+    // Set "n_ips" to the number of elements in "ips".
+
+    n_ips = sizeof (ips) / sizeof (const char *);
+
+    for (i = 0; i < n_ips; i++) {
+        unsigned integer;
+        const char * ip;
+
+        ip = ips[i];
+        integer = ip_to_int (ip);
+        if (integer == INVALID) {
+            printf ("'%s' is not a valid IP address.\n", ip);
+        }
+        else {
+            printf ("'%s' is 0x%08x.\n", ip, integer);
+        }
+    }
+    return 0;
+}
+
+*/

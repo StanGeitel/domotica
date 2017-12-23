@@ -17,7 +17,7 @@
 	</div>
 	
 		<?php
-			$mysqli = new mysqli("localhost", "root", "", "domotica");
+			$mysqli = new mysqli("localhost", "root", "domotica", "domotica");
 
 			/* check connection */
 			if (mysqli_connect_errno()) {
@@ -35,7 +35,7 @@
 		  function AddLight() {
 			
 			
-			$mysqli = new mysqli("localhost", "root", "", "domotica");
+			$mysqli = new mysqli("localhost", "root", "domotica", "domotica");
 
 			/* check connection */
 			if (mysqli_connect_errno()) {
@@ -43,7 +43,7 @@
 			exit();
 			}
 			
-			if ($result = $mysqli->query("SELECT * FROM dimLights")) {
+			if ($result = $mysqli->query("SELECT * FROM dimlights")) {
 			
 			
 
@@ -56,13 +56,13 @@
 			
 				$querryString = "";
 			
-				$querryString = "INSERT INTO dimLights VALUES ( %d , '%s',INET_ATON(%d) ,0 )";
+				$querryString = "INSERT INTO dimlights VALUES ( %d , '%s', '%s' ,0 )";
 				$querryString = sprintf($querryString, $row_cnt, $room, $address);
 				
 				//echo $querryString;
 				
 				if ($mysqli->query($querryString) === TRUE) {
-					echo "New record created successfully";
+					//echo "New record created successfully";
 				} else {
 					//echo "Error: " . $querryString . "<br>" . $mysqli->error;
 				}
@@ -84,7 +84,7 @@
 		<?php
 		
 		function removeLight() {
-			$mysqli = new mysqli("localhost", "root", "", "domotica");
+			$mysqli = new mysqli("localhost", "root", "domotica", "domotica");
 			$querryString = "";
 			/* check connection */
 			if (mysqli_connect_errno()) {
@@ -92,7 +92,7 @@
 			exit();
 			}
 			
-			if ($result = $mysqli->query("SELECT * FROM dimLights")) {
+			if ($result = $mysqli->query("SELECT * FROM dimlights")) {
 			
 			$row_cnt = $result->num_rows;
 			
@@ -102,18 +102,19 @@
 				$id = $_POST['removeLightSet'];
 				$row_cnt = $result->num_rows;
 				if($id == $row_cnt){
-					$querryString = "DELETE FROM dimLights WHERE id=%d";
+					$querryString = "DELETE FROM dimlights WHERE id=%d";
 					$querryString = sprintf($querryString, $id);
 					$mysqli->query($querryString) === TRUE;
-					echo "Light has ben removed successfully";
+					//echo "Light has ben removed successfully";
 				}
 				else if($id > $row_cnt){
 					echo "give in an id between 1 and $row_cnt";
+					echo "<br>";
 					
 				}
 				else if($id < $row_cnt && $id > 0){
 					echo "remove iets";
-					$querryString = "DELETE FROM dimLights WHERE id=%d";
+					$querryString = "DELETE FROM dimlights WHERE id=%d";
 					$querryString = sprintf($querryString, $id);
 					$mysqli->query($querryString) === TRUE;
 					
@@ -121,7 +122,7 @@
 					for($i = 0; $i <= $row_cnt;$i++){
 						
 						if($i > $id && $i <= $row_cnt){
-							$querryStringId = "UPDATE dimLights SET id=%d WHERE id=%d";
+							$querryStringId = "UPDATE dimlights SET id=%d WHERE id=%d";
 							$j = $i -1;
 							$querryStringId = sprintf($querryStringId, $j, $i);
 							
@@ -159,7 +160,7 @@
 	<?php
 
 		
-		$query = "SELECT * FROM dimLights";
+		$query = "SELECT * FROM dimlights";
 		if ($stmt = $mysqli->prepare($query)) {
 
 			/* execute query */
@@ -177,9 +178,9 @@
 				$status = sprintf($format, $i);
 				if(isset($_POST[$status])){
 					if($_POST[$status] == "increase") {
-						$querry =  "UPDATE dimlights SET intensity = intensity + 10    WHERE id = '$i'";
+						$querry =  "UPDATE dimlights SET intensity = intensity + 25    WHERE id = '$i'";
 					} else if ($_POST[$status] == "decrease") {
-						$querry =  "UPDATE dimlights SET intensity = intensity - 10    WHERE id = '$i'";
+						$querry =  "UPDATE dimlights SET intensity = intensity - 25    WHERE id = '$i'";
 					}
 					if ($mysqli->query($querry) === TRUE) {
 						
@@ -210,14 +211,17 @@
 
 			
 			for($i = 1; $i <= $numRows; $i++){
-				$query = "SELECT * FROM dimLights WHERE id = '$i'";
+				$query = "SELECT * FROM dimlights WHERE id = '$i'";
 				$result = mysqli_query($mysqli, $query);
 				$row = mysqli_fetch_assoc($result);
-				echo "room ";
+				echo "room: ";
 				echo $row['room'];
-				echo " intensity ";
+				echo "<br>";
+				echo " intensity: ";
 				echo $row['intensity'];
 				echo "<br>";
+				echo "address: ";
+				echo $row['address'];
 				
 
 				
@@ -273,11 +277,12 @@
 
 
 
-	Fill in room name to add light
+	Fill in room name and address to add light
 	<form action="dimLights.php" method="post">
-	<input type="hidden" name="addLight" value="run">
-	<input type="text" name="addLightSet" id="addLightSet" >
-	<input type="text" name="addLightAddress" id="addLightAddress" >
+	 <input type="hidden" name="addLight" value="run">
+	room &nbsp &nbsp &nbsp<input type="text" name="addLightSet" id="addLightSet" >
+	<br>
+	address &nbsp<input type="text" name="addLightAddress" id="addLightAddress" >
 	<input type="submit" value="Add light">
 	</form>
 	Fill in light id to remove light
