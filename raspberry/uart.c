@@ -42,21 +42,21 @@ void close_uart(){
   close(sfd);
 }
 
-uint8_t rx_uart(){
-  uint8_t data;
+int check_data(){
   int bytes;
   ioctl(sfd, FIONREAD, &bytes);
-  if(bytes > 0){
-    read(sfd, &data, 1);
-    printf("%d\n", data);
-  }
-  return(data);
+  return(bytes);
+}
 
+uint8_t rx_uart(){
+  uint8_t data;
+  while(!(check_data()));
+  read(sfd, &data, 1);
+  return(data);
 }
 
 void tx_uart(uint8_t data){
   write(sfd, &data, 1);
-
 }
 
 /*
