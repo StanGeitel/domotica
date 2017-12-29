@@ -7,6 +7,13 @@
 #include <dimLights.h>
 #include <mysql.h>
 
+#include "raspberry/knx.h"
+#include "raspberry/uart.h"
+
+
+
+
+
  void finish_with_error(MYSQL *con);
 
 
@@ -27,22 +34,24 @@ int main(int argc, char **argv)
     mysql_close(con);
     exit(1);
   }
-
-  initSQL();
+      init_knx();
   initDimmer(con);
-  //printDimmerStates();
+  printDimmerStates();
 
   //printf("%d", checkDimmerIntensity(con, 2));
 
   while(1){
-    checkForChangesSQL(con);
-    checkForUpdates(con);
-    printDimmerStates();
+  //printf("ip is %06x\n" , ip_to_int("1.1.1"));
+    //runDimmer();
+    //printf("dimmer address %06x\n", getAddress(con, 2));
+
+
     int c, d;
-      for ( c = 1 ; c <= 100000 ; c++ )
-       for ( d = 1 ; d <= 10000 ; d++ )
-       {}
-  }
+     for ( c = 1 ; c <= 100000 ; c++ ){}
+
+//  start_thread();
+    run_knx();
+    }
 //    newLightStates[1] = changeDimmerIntensity(con, 2 , 50, newDimmerStates);
   //  newLightStates[1] = changeDimmerIntensity(con, 2 , 25);
    // newLightStates[1] = checkDimmerIntensity(con, 2);

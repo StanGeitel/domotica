@@ -14,11 +14,11 @@
 				<Compiler>
 					<Add option="-std=c99" />
 					<Add option="-g" />
-					<Add option="-lmysqlclient" />
+					<Add option="`mysql_config --cflags`" />
 					<Add directory="/home/pi/Documents/library/mysql/include" />
 				</Compiler>
 				<Linker>
-					<Add library="/home/pi/Downloads/mysql-connector-c-6.1.11-linux-glibc2.12-i686/lib/libmysqlclient.a" />
+					<Add option="`mysql_config --libs`" />
 					<Add directory="/home/pi/Documents/library/mysql/lib" />
 				</Linker>
 			</Target>
@@ -51,6 +51,18 @@
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="raspberry/knx.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="raspberry/knx.h" />
+		<Unit filename="raspberry/rpi.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="raspberry/rpi.h" />
+		<Unit filename="raspberry/uart.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="raspberry/uart.h" />
 		<Unit filename="users.c">
 			<Option compilerVar="CC" />
 		</Unit>

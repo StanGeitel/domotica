@@ -4,12 +4,28 @@
 #include <mysql.h>
 //#include <lights.h>
 #include <dimLights.h>
+#include <inttypes.h>
 
+#define INVALID 0
+
+#define increase_dimmer 0b10001011
+#define decrease_dimmer 0b10000011
+
+#define my_area_line 0b00010001
+
+#define dimmer_level 25
 
 
 static int amountDimmers;
 static int dimmerStates[10];
 static int newDimmerStates[10];
+static int dimmerAddresses[10];
+
+void runDimmer(){
+  checkForChangesSQL(con);
+  checkForUpdates(con);
+  printDimmerStates();
+}
 
 //initialize sql
 void initSQL(){
@@ -33,7 +49,7 @@ void initSQL(){
 
 //fill the dimmerStates array with the data in the database
 void initDimmer(MYSQL *con){
-
+        initSQL();
         if (mysql_query(con, "SELECT * FROM dimlights")){
             finish_with_error(con);
         }
@@ -97,18 +113,11 @@ void checkForChangesSQL(MYSQL *con){
         }
 }
 
-//make it possible to change the intensity in the database
-void changeDimmerIntensity( MYSQL *con, int id ,int intensity){
-    char querryString[54];
-    sprintf(querryString, "UPDATE dimlights SET intensity = %d WHERE id = %d", intensity, id);
-    if (mysql_query(con, querryString)) {
-        finish_with_error(con);
-    }
-    dimmerStates[id - 1] = intensity;
-}
 
 //check the differences between the 2 arrays
+//send KNX messages with dimming information
 void checkForUpdates(MYSQL *con){
+    uint8_t result;
     int i, id;
     for(i = 0; i < amountDimmers; i++){
         id = i + 1;
@@ -116,15 +125,22 @@ void checkForUpdates(MYSQL *con){
             changeDimmerIntensity(con, id, newDimmerStates[i]);
             dimmerStates[i] = newDimmerStates[i];
             if(dimmerStates[i] < newDimmerStates[i]){
-                printf("value has been increased");
+                printf("value has been increased\n");
+                result = getAddress(con, i+1);
+                printf("last adres digits are %x\n", result);
+                write_knx(result, 0, increase_dimmer);
             }
             else{
-                printf("value has been decreased");
+                printf("value has been decreased\n");
+                result = getAddress(con, i+1);
+                printf("last adres digits are %x\n", result);
+                write_knx(result, 0, decrease_dimmer);
             }
 
         }
     }
 }
+
 
 void printDimmerStates(){
 
@@ -135,16 +151,129 @@ void printDimmerStates(){
 
 }
 
-#include <stdio.h>
+//make it possible to change the intensity in the database
+void changeDimmerIntensity( MYSQL *con, int id ,int intensity){
+    char querryString[54];
+    sprintf(querryString, "UPDATE dimlights SET intensity = %d WHERE id = %d", intensity, id);
+    if (mysql_query(con, querryString)) {
+        finish_with_error(con);
+    }
+    dimmerStates[id - 1] = intensity;
+}
+
+
+
+unsigned int getAddress(MYSQL *con, int id){
+        char* querryString[100];
+        sprintf(querryString, "SELECT address FROM dimlights WHERE id = %d", id);
+
+        if (mysql_query(con, querryString))
+        {
+            finish_with_error(con);
+        }
+        MYSQL_RES *result = mysql_store_result(con);
+        MYSQL_ROW row;
+        row = mysql_fetch_row(result);
+        printf("address string %s\n", row[0]);
+        const char * ip = row[0];
+        mysql_free_result(result);
+        unsigned int rslt = ip_to_int(ip);
+
+        return rslt;
+
+}
+
 
 /* '0.0.0.0' is not a valid IP address, so this uses the value 0 to
    indicate an invalid IP address. */
 
-#define INVALID 0
+
 
 /* Convert the character string in "ip" into an unsigned integer.
 
    This assumes that an unsigned integer contains at least 32 bits. */
+
+
+void fillDimmerArray(){
+    int i;
+    for(i = 0; i < amountDimmers; i++){
+        dimmerAddresses[i] = getAddress(i + 1);
+    }
+}
+
+void checkIfAddressExists(uint8_t area_line, uint8_t node_line){
+
+    if(area_line != my_area_line){
+        return 0;
+    }
+
+    int i;
+    for(i = 0; i < amountDimmers; i++){
+        uint8_t node = dimmerAddresses[i] & 0xFF;
+        if(node == node_line){
+            return 1;
+        }
+    }
+    return 0;
+
+}
+
+
+
+void changeDimmerIntensityDatabase(MYSQL *con, int direction, uint8_t node_line){
+    //void changeDimmerIntensity( MYSQL *con, int id ,int intensity)
+
+    //int address_line = 0b0001000100000000;
+    //address_line |= node_line;
+
+    char * address = int_to_ip(address_line);
+    char querryString[54];
+
+    int id = get_id_from_address(address);
+    int intensity = dimmerStates[id - 1];
+
+    if(direction == 1){
+        intensity += dimmer_level;
+        sprintf(querryString, "UPDATE dimlights SET intensity = %d WHERE address = %s", intensity, address);
+    }
+    else if(direction == 0){
+        intensity -= dimmer_level;
+        sprintf(querryString, "UPDATE dimlights SET intensity = %d WHERE address = %d", intensity, address);
+    }
+
+    if (mysql_query(con, querryString)) {
+        finish_with_error(con);
+    }
+
+
+
+
+}
+int get_id_from_address(char * address){
+        char* querryString[100];
+        sprintf(querryString, "SELECT id FROM dimlights WHERE address = %s", address);
+
+        if (mysql_query(con, querryString))
+        {
+            finish_with_error(con);
+        }
+        MYSQL_RES *result = mysql_store_result(con);
+        MYSQL_ROW row;
+        row = mysql_fetch_row(result);
+        printf("address string %s\n", row[0]);
+        int id = row[0];
+        mysql_free_result(result);
+        return id;
+}
+
+
+char * int_to_ip(uint8_t node){
+
+    char ip[10];
+
+    sprintf(ip, "1.1.%d", node);
+    return ip;
+}
 
 unsigned int ip_to_int (const char * ip)
 {
@@ -156,7 +285,7 @@ unsigned int ip_to_int (const char * ip)
     const char * start;
 
     start = ip;
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < 3; i++) {
         /* The digit being processed. */
         char c;
         /* The value of this byte. */
@@ -171,7 +300,7 @@ unsigned int ip_to_int (const char * ip)
             /* We insist on stopping at "." if we are still parsing
                the first, second, or third numbers. If we have reached
                the end of the numbers, we will allow any character. */
-            else if ((i < 3 && c == '.') || i == 3) {
+            else if ((i < 2 && c == '.') || i == 2) {
                 break;
             }
             else {
@@ -187,44 +316,5 @@ unsigned int ip_to_int (const char * ip)
     return v;
 }
 
-/* The following is a test of the above routine. */
-/*
-int main ()
-{
-    int i;
-    //"ips" contains a selection of internet address strings.
-    const char * ips[] = {
-        "127.0.0.1",
-        "110.3.244.53",
-        // The following tests whether we can detect an invalid
-          // address.
-        "Bonzo Dog Doo-Dah Band",
-        "182.118.20.178",
-        // The following tests whether it is OK to end the string with
-          // a non-NUL byte.
-        "74.125.16.64  ",
-        "1234.567.89.122345",
-    };
-    int n_ips;
 
-    // Set "n_ips" to the number of elements in "ips".
 
-    n_ips = sizeof (ips) / sizeof (const char *);
-
-    for (i = 0; i < n_ips; i++) {
-        unsigned integer;
-        const char * ip;
-
-        ip = ips[i];
-        integer = ip_to_int (ip);
-        if (integer == INVALID) {
-            printf ("'%s' is not a valid IP address.\n", ip);
-        }
-        else {
-            printf ("'%s' is 0x%08x.\n", ip, integer);
-        }
-    }
-    return 0;
-}
-
-*/

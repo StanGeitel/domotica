@@ -110,12 +110,12 @@
 
 1499932532 c:\libraries\mysql-connector-c-6.1.11-win32\mysql-connector-c-6.1.11-win32\include\mysql\psi\psi_base.h
 
-1513288117 source:e:\dropbox\dropbox\avans\jaar 2\domotica project\cdatabase\lights.c
+1514473224 source:e:\dropbox\dropbox\avans\jaar 2\domotica project\cdatabase\lights.c
 	<stdio.h>
 	<stdlib.h>
 	<mysql.h>
 
-1512306425 source:e:\dropbox\dropbox\avans\jaar 2\domotica project\cdatabase\users.c
+1514473223 source:e:\dropbox\dropbox\avans\jaar 2\domotica project\cdatabase\users.c
 	<stdio.h>
 	<stdlib.h>
 	<mysql.h>
@@ -144,17 +144,19 @@
 	<stdlib.h>
 	<mysql.h>
 
-1514031007 source:/home/pi/Documents/domotica/cDatabase/main.c
+1514197658 source:/home/pi/Documents/domotica/cDatabase/main.c
 	<stdio.h>
 	<stdlib.h>
 	<lights.h>
 	<dimLights.h>
 	<mysql.h>
+	"raspberry/knx.h"
+	"raspberry/uart.h"
 
 1513982573 /home/pi/Documents/domotica/cDatabase/include/lights.h
 	<mysql.h>
 
-1513982773 /home/pi/Documents/domotica/cDatabase/include/dimLights.h
+1514124708 /home/pi/Documents/domotica/cDatabase/include/dimLights.h
 
 1513982573 source:/home/pi/Documents/domotica/cDatabase/users.c
 	<stdio.h>
@@ -207,7 +209,7 @@
 
 1499928932 /home/pi/Documents/library/mysql/include/mysql/psi/psi_base.h
 
-1514030337 source:/home/pi/Documents/domotica/cDatabase/dimLights.c
+1514193837 source:/home/pi/Documents/domotica/cDatabase/dimLights.c
 	<stdio.h>
 	<stdlib.h>
 	<mysql.h>
@@ -236,4 +238,55 @@
 	"my_alloc.h"
 
 1493702019 /usr/include/mysql/my_alloc.h
+
+1514123934 source:/home/pi/Documents/domotica/cDatabase/raspberry/knx.c
+	<stdio.h>
+	<stdlib.h>
+	<inttypes.h>
+	<unistd.h>
+	"knx.h"
+	"rpi.h"
+	"uart.h"
+
+1514041540 /home/pi/Documents/domotica/cDatabase/raspberry/knx.h
+	<inttypes.h>
+
+1514041540 /home/pi/Documents/domotica/cDatabase/raspberry/rpi.h
+
+1514041540 /home/pi/Documents/domotica/cDatabase/raspberry/uart.h
+	<inttypes.h>
+
+1514041540 source:/home/pi/Documents/domotica/cDatabase/raspberry/rpi.c
+	<stdio.h>
+	<stdlib.h>
+	<fcntl.h>
+	<unistd.h>
+	<sys/mman.h>
+	"uart.h"
+	"rpi.h"
+
+1514041540 source:/home/pi/Documents/domotica/cDatabase/raspberry/uart.c
+	<stdio.h>
+	<stdlib.h>
+	<fcntl.h>
+	<unistd.h>
+	<termios.h>
+	<errno.h>
+	"uart.h"
+	<string.h>
+	<sys/ioctl.h>
+
+1514473224 source:e:\dropbox\dropbox\avans\jaar 2\domotica project\cdatabase\raspberry\uart.c
+	<stdio.h>
+	<stdlib.h>
+	<fcntl.h>
+	<unistd.h>
+	<termios.h>
+	<errno.h>
+	"uart.h"
+	<string.h>
+	<sys/ioctl.h>
+
+1514473225 e:\dropbox\dropbox\avans\jaar 2\domotica project\cdatabase\raspberry\uart.h
+	<inttypes.h>
 

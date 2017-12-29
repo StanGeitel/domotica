@@ -19,12 +19,12 @@ void init_knx(){
   funcsel_uart();
   open_uart();
 }
-
+//tijdelijk while loop gecommend voor test redenen
 void run_knx(){
-  while(1){
+  //while(1){
     sleep(1);
     read_knx();
-  }
+  //}
 }
 
 void write_knx(uint8_t node_address, uint8_t user_data1, uint8_t user_data2){

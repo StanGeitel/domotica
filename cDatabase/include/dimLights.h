@@ -10,6 +10,9 @@ void changeDimmerIntensity( MYSQL *con, int id ,int intensity);
 void checkForUpdates(MYSQL *con);
 void printDimmerStates();
 
+unsigned int ip_to_int (const char * ip);
+unsigned int getAddress(MYSQL *con, int id);
+
 
 
 #endif // DIMLIGHTS_H_INCLUDED
