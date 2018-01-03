@@ -41,7 +41,6 @@
 #endif
 
 void init_knx();
-void run_knx();
 void print_buffer(uint8_t *bp);
 void write_knx(uint8_t node_address, uint8_t user_data1, uint8_t user_data2);
 uint8_t get_checksum();

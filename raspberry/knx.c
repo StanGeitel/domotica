@@ -6,11 +6,6 @@
 #include "rpi.h"
 #include "uart.h"
 
-//https://projects.drogon.net/raspberry-pi/wiringpi/functions/
-//https://www.youtube.com/watch?v=i4-jvPYdloc
-//https://en.wikipedia.org/wiki/POSIX_Threads
-//blahblah
-
 uint8_t rx_tele[TELE_LENGHT];
 uint8_t tx_tele[TELE_LENGHT];
 
@@ -18,12 +13,6 @@ void init_knx(){
   map_peripherals();
   funcsel_uart();
   open_uart();
-}
-
-void run_knx(){
-  while(1){
-    read_knx();
-  }
 }
 
 void print_buffer(uint8_t *bp){
