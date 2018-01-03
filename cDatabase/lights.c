@@ -34,9 +34,9 @@ void initLights(MYSQL *con){
         int i;
         int id;
 
-        for(i = 0; i < amountDimmers; i++){
+        for(i = 0; i < amountLights; i++){
             id = i + 1;
-            int result = checkLightIntensity(con, id);
+            int result = checkLightState(con, id);
             lightStates[i] = result;
             newLightStates[i] = result;
 
@@ -70,7 +70,7 @@ void checkForChangesSQL(MYSQL *con){
 
         for(i = 0; i < amountLights; i++){
             id = i + 1;
-            result = checkLightIntensity(con, id);
+            result = checkLightState(con, id);
             if(lightStates[i] != result){
                 newLightStates[i] = result;
             }
@@ -86,7 +86,6 @@ void checkForUpdates(MYSQL *con){
     for(i = 0; i < amountLights; i++){
         id = i + 1;
         if(lightStates[i] != newLightStates[i]){
-            changeLightIntensity(con, id, newLightStates[i]);
             lightStates[i] = newLightStates[i];
             if(lightStates[i] == 0 ){
                 printf("led has been turned off\n");

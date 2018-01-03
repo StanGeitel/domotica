@@ -280,9 +280,9 @@
 	Fill in room name and address to add light
 	<form action="dimLights.php" method="post">
 	 <input type="hidden" name="addLight" value="run">
-	room &nbsp &nbsp &nbsp<input type="text" name="addLightSet" id="addLightSet" >
+	room &nbsp &nbsp &nbsp <input type="text" name="addLightSet" id="addLightSet" >
 	<br>
-	address &nbsp<input type="text" name="addLightAddress" id="addLightAddress" >
+	address &nbsp <input type="text" name="addLightAddress" id="addLightAddress" >
 	<input type="submit" value="Add light">
 	</form>
 	Fill in light id to remove light
