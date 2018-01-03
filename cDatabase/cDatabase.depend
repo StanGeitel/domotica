@@ -290,3 +290,27 @@
 1514473225 e:\dropbox\dropbox\avans\jaar 2\domotica project\cdatabase\raspberry\uart.h
 	<inttypes.h>
 
+1514473224 source:c:\users\kees\documents\github\domotica\cdatabase\lights.c
+	<stdio.h>
+	<stdlib.h>
+	<mysql.h>
+
+1514473224 source:c:\users\kees\documents\github\domotica\cdatabase\raspberry\uart.c
+	<stdio.h>
+	<stdlib.h>
+	<fcntl.h>
+	<unistd.h>
+	<termios.h>
+	<errno.h>
+	"uart.h"
+	<string.h>
+	<sys/ioctl.h>
+
+1514473225 c:\users\kees\documents\github\domotica\cdatabase\raspberry\uart.h
+	<inttypes.h>
+
+1514473223 source:c:\users\kees\documents\github\domotica\cdatabase\users.c
+	<stdio.h>
+	<stdlib.h>
+	<mysql.h>
+

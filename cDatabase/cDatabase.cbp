@@ -45,6 +45,10 @@
 		<Unit filename="include/dimLights.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
+		<Unit filename="include/lights.h" />
+		<Unit filename="lightFunctions.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="lights.c">
 			<Option compilerVar="CC" />
 		</Unit>

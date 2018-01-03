@@ -1,10 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-//#include <my_global.h>
 #include <mysql.h>
-//#include <lights.h>
 #include <dimLights.h>
 #include <inttypes.h>
+#include <lightFunctions.h>
 
 #define INVALID 0
 
@@ -151,7 +150,6 @@ void printDimmerStates(){
 
 }
 
-//make it possible to change the intensity in the database
 void changeDimmerIntensity( MYSQL *con, int id ,int intensity){
     char querryString[54];
     sprintf(querryString, "UPDATE dimlights SET intensity = %d WHERE id = %d", intensity, id);
@@ -184,16 +182,6 @@ unsigned int getAddress(MYSQL *con, int id){
 }
 
 
-/* '0.0.0.0' is not a valid IP address, so this uses the value 0 to
-   indicate an invalid IP address. */
-
-
-
-/* Convert the character string in "ip" into an unsigned integer.
-
-   This assumes that an unsigned integer contains at least 32 bits. */
-
-
 void fillDimmerArray(){
     int i;
     for(i = 0; i < amountDimmers; i++){
@@ -221,10 +209,6 @@ void checkIfAddressExists(uint8_t area_line, uint8_t node_line){
 
 
 void changeDimmerIntensityDatabase(MYSQL *con, int direction, uint8_t node_line){
-    //void changeDimmerIntensity( MYSQL *con, int id ,int intensity)
-
-    //int address_line = 0b0001000100000000;
-    //address_line |= node_line;
 
     char * address = int_to_ip(address_line);
     char querryString[54];
@@ -238,18 +222,15 @@ void changeDimmerIntensityDatabase(MYSQL *con, int direction, uint8_t node_line)
     }
     else if(direction == 0){
         intensity -= dimmer_level;
-        sprintf(querryString, "UPDATE dimlights SET intensity = %d WHERE address = %d", intensity, address);
+        sprintf(querryString, "UPDATE dimlights SET intensity = %d WHERE address = %s", intensity, address);
     }
 
     if (mysql_query(con, querryString)) {
         finish_with_error(con);
     }
-
-
-
-
 }
-int get_id_from_address(char * address){
+
+int get_id_from_address(MYSQL *con, char * address){
         char* querryString[100];
         sprintf(querryString, "SELECT id FROM dimlights WHERE address = %s", address);
 
@@ -267,54 +248,6 @@ int get_id_from_address(char * address){
 }
 
 
-char * int_to_ip(uint8_t node){
-
-    char ip[10];
-
-    sprintf(ip, "1.1.%d", node);
-    return ip;
-}
-
-unsigned int ip_to_int (const char * ip)
-{
-    /* The return value. */
-    unsigned v = 0;
-    /* The count of the number of bytes processed. */
-    int i;
-    /* A pointer to the next digit to process. */
-    const char * start;
-
-    start = ip;
-    for (i = 0; i < 3; i++) {
-        /* The digit being processed. */
-        char c;
-        /* The value of this byte. */
-        int n = 0;
-        while (1) {
-            c = * start;
-            start++;
-            if (c >= '0' && c <= '9') {
-                n *= 10;
-                n += c - '0';
-            }
-            /* We insist on stopping at "." if we are still parsing
-               the first, second, or third numbers. If we have reached
-               the end of the numbers, we will allow any character. */
-            else if ((i < 2 && c == '.') || i == 2) {
-                break;
-            }
-            else {
-                return INVALID;
-            }
-        }
-        if (n >= 256) {
-            return INVALID;
-        }
-        v *= 256;
-        v += n;
-    }
-    return v;
-}
 
 
 
