@@ -4,8 +4,21 @@
 <body>
 	<link rel="stylesheet" type="text/css" href="style.css">
 	
+	<link rel="stylesheet" type="text/css" href="styleIndex.css"/>
+
+	<div class="navbar">
+		<a href="index.html">Home</a>
+		<a href="lights.php">Lights</a>
+		<a href="dimLights.php">DimLights</a>
+	</div>
+	
+		<div class="main">
+		<p>Some text some text some text some text..</p>
+	</div>
+
+	
 		<?php
-			$mysqli = new mysqli("localhost", "root", "", "domotica");
+			$mysqli = new mysqli("localhost", "root", "domotica", "domotica");
 
 			/* check connection */
 			if (mysqli_connect_errno()) {
@@ -23,7 +36,7 @@
 		  function AddLight() {
 			
 			
-			$mysqli = new mysqli("localhost", "root", "", "domotica");
+			$mysqli = new mysqli("localhost", "root", "domotica", "domotica");
 
 			/* check connection */
 			if (mysqli_connect_errno()) {
@@ -35,8 +48,9 @@
 			
 			
 
-			if (isset($_POST['addSet'])){
-				$room = $_POST['addSet'];
+			if (isset($_POST['addLight'])){
+				$room = $_POST['addLight'];
+				$address = $_POST['addLightAddress'];
 				
 				
 				$row_cnt = $result->num_rows;
@@ -44,8 +58,8 @@
 			
 				$querryString = "";
 			
-				$querryString = "INSERT INTO lights VALUES ( %d , '%s' ,0 )";
-				$querryString = sprintf($querryString, $row_cnt, $room);
+				$querryString = "INSERT INTO lights VALUES ( %d , '%s', '%s' ,0 )";
+				$querryString = sprintf($querryString, $row_cnt, $room, $address);
 				
 				//echo $querryString;
 				
@@ -54,7 +68,8 @@
 				} else {
 					//echo "Error: " . $querryString . "<br>" . $mysqli->error;
 				}
-				unset($_POST['addSet']);
+				unset($_POST['addLight']);
+				unset($_POST['addLightAddress']);
 			}
 			
 			}
@@ -72,7 +87,7 @@
 		<?php
 		
 		function removeLight() {
-			$mysqli = new mysqli("localhost", "root", "", "domotica");
+			$mysqli = new mysqli("localhost", "root", "domotica", "domotica");
 			$querryString = "";
 			/* check connection */
 			if (mysqli_connect_errno()) {
@@ -170,6 +185,25 @@
 			
 			$numRows = $stmt->num_rows;
 			echo"<form  action='lights.php' method='POST'>";
+			
+			for($i = 1; $i <= $numRows; $i++){
+				$format = 'change%d';
+				$status = sprintf($format, $i);
+				if(isset($_POST[$status])){
+					if($_POST[$status] == "turnOn") {
+						$querry =  "UPDATE lights SET onOff = 1  WHERE id = '$i'";
+					} else if ($_POST[$status] == "turnOff") {
+						$querry =  "UPDATE lights SET onOff = 0  WHERE id = '$i'";
+					}
+					if ($mysqli->query($querry) === TRUE) {
+						
+					} else {
+					echo "Error updating record: " . $mysqli->error;
+					}
+					unset($_POST[$status]);
+				}
+			}
+			/*
 			for($i = 1; $i <= $numRows; $i++){
 				$query = "SELECT room FROM lights WHERE id = '$i'";
 				$result = mysqli_query($mysqli, $query);
@@ -194,13 +228,43 @@
 					echo"</label> <br/>\n";
 				}
 				
-			}	
+			}	*/
 		
-			
+				for($i = 1; $i <= $numRows; $i++){
+					$query = "SELECT * FROM lights WHERE id = '$i'";
+					$result = mysqli_query($mysqli, $query);
+					$row = mysqli_fetch_assoc($result);
+					echo "room: ";
+					echo $row['room'];
+					echo "<br>";
+					echo " onOff: ";
+					echo $row['onOff'];
+					echo "<br>";
+					echo "address: ";
+					echo $row['address'];
+					echo "<br>";
+				
 
-			echo "<input type='submit' name='verzenden' value='Verzend!!'>";	
-			echo "</form>";
-			
+				
+				$format = 'change%d';
+				$status = sprintf($format, $i);
+
+				
+				//echo "<form method='post' action='dimLight.php'>";
+				echo"<form  action='lights.php' method='post'>";
+				echo "<input type='submit' id='turnOn' name='$status' id='$status' value='turnOn' />";
+				echo "<input type='submit' id='turnOff' name='$status' id='$status' value='turnOff' />";
+				echo "</form>";
+				
+
+
+
+
+			}
+
+			//echo "<input type='submit' name='verzenden' value='Verzend!!'>";	
+			//echo "</form>";
+			/*
 			for($i = 1; $i <= $numRows; $i++){
 				$status = sprintf($format, $i);
 				if (isset($_POST["$status"])){
@@ -220,7 +284,7 @@
 				}
 				
 			}
-
+			*/
 			/* close statement */
 			$stmt->close();
 }
@@ -235,25 +299,23 @@
 	
 	</form>-->
 	
-	<link rel="stylesheet" type="text/css" href="styleIndex.css"/>
-
-	<div class="navbar">
-		<a href="index.html">Home</a>
-		<a href="lights.php">Lights</a>
-		<a href="dimLights.php">DimLights</a>
-	</div>
-	
-		<div class="main">
-		<p>Some text some text some text some text..</p>
-	</div>
 
 	
-	Fill in room name to add light
+	Fill in room name and address to add light<br>
+	<form action="lights.php" method="post">
+	<!--<input type="hidden" name="addLight" value="run">-->
+	room &nbsp &nbsp &nbsp <input type="text" name="addLight" id="addLight" >
+	<br>
+	address &nbsp <input type="text" name="addLightAddress" id="addLightAddress" >
+	<input type="submit" value="Add light">
+	</form>
+	
+	<!--Fill in room name to add light
 	<form action="lights.php" method="post">
 	<input type="hidden" name="addLight" value="run">
 	<input type="text" name="addSet" id="addSet" >
 	<input type="submit" value="Add light">
-	</form>
+	</form>-->
 	Fill in light id to remove light
 	<form action="lights.php" method="post">
 	<input type="hidden" name="removeLight" value="run">
