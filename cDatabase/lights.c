@@ -15,6 +15,12 @@ int amountLights;
 int lightStates[10];
 int newLightStates[10];
 
+void runLights(){
+  checkForChangesSQL(con);
+  checkForUpdates(con);
+  printLightStates();
+}
+
 void initLights(MYSQL *con){
         initSQL();
         if (mysql_query(con, "SELECT * FROM lights")){
@@ -159,7 +165,14 @@ int get_id_from_address(MYSQL *con, char * address){
         return id;
 }
 
+void printLightStates(){
 
+    int i;
+    for(i = 0; i < amountLights; i++){
+        printf("%d\n", lightStates[i]);
+    }
+
+}
 
 
 

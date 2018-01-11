@@ -77,6 +77,8 @@ void initDimmer(MYSQL *con){
 
 }
 
+//---------------------------------------------------------------------------------\\
+
 int checkDimmerIntensity(MYSQL *con, int id){
 
         char* querryString[100];
@@ -121,8 +123,7 @@ void checkForUpdates(MYSQL *con){
     for(i = 0; i < amountDimmers; i++){
         id = i + 1;
         if(dimmerStates[i] != newDimmerStates[i]){
-            changeDimmerIntensity(con, id, newDimmerStates[i]);
-            dimmerStates[i] = newDimmerStates[i];
+            //changeDimmerIntensity(con, id, newDimmerStates[i]);
             if(dimmerStates[i] < newDimmerStates[i]){
                 printf("value has been increased\n");
                 result = getAddress(con, i+1);
@@ -135,7 +136,7 @@ void checkForUpdates(MYSQL *con){
                 printf("last adres digits are %x\n", result);
                 write_knx(result, 0, decrease_dimmer);
             }
-
+            dimmerStates[i] = newDimmerStates[i];
         }
     }
 }
@@ -150,14 +151,6 @@ void printDimmerStates(){
 
 }
 
-void changeDimmerIntensity( MYSQL *con, int id ,int intensity){
-    char querryString[54];
-    sprintf(querryString, "UPDATE dimlights SET intensity = %d WHERE id = %d", intensity, id);
-    if (mysql_query(con, querryString)) {
-        finish_with_error(con);
-    }
-    dimmerStates[id - 1] = intensity;
-}
 
 
 
@@ -207,7 +200,7 @@ void checkIfAddressExists(uint8_t area_line, uint8_t node_line){
 }
 
 
-
+//when the pi recieves a dimmer update message this function will write the update to the database
 void changeDimmerIntensityDatabase(MYSQL *con, int direction, uint8_t node_line){
 
     char * address = int_to_ip(address_line);
@@ -230,6 +223,7 @@ void changeDimmerIntensityDatabase(MYSQL *con, int direction, uint8_t node_line)
     }
 }
 
+
 int get_id_from_address(MYSQL *con, char * address){
         char* querryString[100];
         sprintf(querryString, "SELECT id FROM dimlights WHERE address = %s", address);
@@ -248,6 +242,25 @@ int get_id_from_address(MYSQL *con, char * address){
 }
 
 
+
+
+
+
+
+
+
+
+
+
+/*
+void changeDimmerIntensity( MYSQL *con, int id ,int intensity){
+    char querryString[54];
+    sprintf(querryString, "UPDATE dimlights SET intensity = %d WHERE id = %d", intensity, id);
+    if (mysql_query(con, querryString)) {
+        finish_with_error(con);
+    }
+    dimmerStates[id - 1] = intensity;
+}*/
 
 
 
