@@ -1,7 +1,3 @@
-//https://elinux.org/RPi_GPIO_Code_Samples
-//http://www.pieter-jan.com/node/15
-//https://elinux.org/RPi_Serial_Connection set up pi to use UART
-//https://www.studica.com/blog/program-embedded-systems-raspberry-pi
 #include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>

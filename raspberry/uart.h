@@ -23,6 +23,8 @@
 #define BAUDRATE  9600
 #define BAUDDIV   0xF42  //3906    600MHz/(16*9600)
 
+#endif
+
 volatile unsigned int *uart;
 
 void open_uart();
@@ -34,5 +36,3 @@ void tx_uart(uint8_t data);
 void init_uart();
 void read_uart();
 void write_uart();
-
-#endif

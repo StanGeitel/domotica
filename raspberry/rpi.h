@@ -26,6 +26,8 @@
 #define TIMER_C2      (*(volatile unsigned int *) (timer + 5))
 #define TIMER_C3      (*(volatile unsigned int *) (timer + 6))
 
+#endif
+
 volatile unsigned int *gpio;
 volatile unsigned int *interrupt;
 volatile unsigned int *timer;
@@ -35,5 +37,3 @@ volatile unsigned int * map_peripheral(unsigned int base_address);
 void funcsel_uart();
 void funcsel_gpio18();
 void write_gpio18(int val);
-
-#endif
