@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-//#include <my_global.h>
 #include <mysql/mysql.h>
 #include "users.h"
 
@@ -81,8 +80,6 @@ void changeUsername(MYSQL *con, char* username, char* newUsername){
     if (mysql_query(con, querryString)) {
         finish_with_error(con);
     }
-
-
 
 }
 
