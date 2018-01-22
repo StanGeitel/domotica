@@ -273,20 +273,3 @@ unsigned int ip_to_int (const char * ip)
     }
     return v;
 }
-
-
-
-
-
-
-
-
-/*
-void changeDimmerIntensity( MYSQL *con, int id ,int intensity){
-    char querryString[54];
-    sprintf(querryString, "UPDATE dimlights SET intensity = %d WHERE id = %d", intensity, id);
-    if (mysql_query(con, querryString)) {
-        finish_with_error(con);
-    }
-    dimmerStates[id - 1] = intensity;
-}*/

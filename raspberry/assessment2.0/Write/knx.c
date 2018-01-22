@@ -48,12 +48,13 @@ void write_knx(uint8_t node_address, uint8_t user_data1, uint8_t user_data2){
   }
 
   send_telegram();
-
+  
   i = 0;
   if(rx_uart() != ACK){
     tx_tele[CF] = HP_CF_REP_VAL;
     tx_tele[CS] = get_checksum();
     print_buffer(tx_tele);
+    usleep(NACK_WAIT);
     do{
       repeat();
       usleep(PAUSE);
@@ -84,11 +85,12 @@ void send_telegram(){
     tx_uart(tx_tele[i]);
     usleep(PAUSE);
   }
+  usleep(REC_WAIT);
 }
 
 void repeat(){
-  usleep(NACK_WAIT);
   send_telegram();
+  usleep(NACK_WAIT);
 }
 
 
@@ -102,6 +104,7 @@ void read_knx(){
       usleep(PAUSE);
     }
     print_buffer(rx_tele);
+    usleep(REC_WAIT);
     if(check_des()){
       return;
     }
@@ -110,6 +113,7 @@ void read_knx(){
       return;
     }
     tx_uart(ACK);
+    print_buffer(rx_tele);
     exec();
   }
 }

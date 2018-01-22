@@ -32,3 +32,7 @@ void close_uart();
 int check_data();
 uint8_t rx_uart();
 void tx_uart(uint8_t data);
+
+void init_uart();
+void read_uart();
+void write_uart();
