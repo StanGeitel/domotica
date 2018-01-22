@@ -37,11 +37,10 @@ SUBDIRS :=
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
-../debounce.c \
+../buttons.c \
 ../gpio.c \
 ../knx.c \
 ../main.c \
-../switch.c \
 ../timer.c \
 ../usart.c
 
@@ -53,38 +52,34 @@ ASM_SRCS +=
 
 
 OBJS +=  \
-debounce.o \
+buttons.o \
 gpio.o \
 knx.o \
 main.o \
-switch.o \
 timer.o \
 usart.o
 
 OBJS_AS_ARGS +=  \
-debounce.o \
+buttons.o \
 gpio.o \
 knx.o \
 main.o \
-switch.o \
 timer.o \
 usart.o
 
 C_DEPS +=  \
-debounce.d \
+buttons.d \
 gpio.d \
 knx.d \
 main.d \
-switch.d \
 timer.d \
 usart.d
 
 C_DEPS_AS_ARGS +=  \
-debounce.d \
+buttons.d \
 gpio.d \
 knx.d \
 main.d \
-switch.d \
 timer.d \
 usart.d
 
@@ -102,8 +97,6 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
-
-
 
 
 

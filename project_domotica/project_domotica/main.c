@@ -8,7 +8,6 @@
 #include "gpio.h"
 #include "timer.h"
 #include "usart.h"
-#include "switch.h"
 #include <inttypes.h>
 #include <avr/io.h>
 #include <avr/interrupt.h>
@@ -22,8 +21,7 @@
 
 int main(void)
 {
-	
-	buttons();
+	init_external_interrupt0_gpio();
 	
 	uint8_t i = 0;
 	uint16_t c = 0;

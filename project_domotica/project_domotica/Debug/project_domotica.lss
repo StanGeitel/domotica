@@ -3,48 +3,48 @@ project_domotica.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         000007bc  00000000  00000000  00000094  2**1
+  0 .text         000002f4  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         0000003a  00800060  000007bc  00000850  2**0
+  1 .data         0000003a  00800060  000002f4  00000388  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .bss          0000002e  0080009a  0080009a  0000088a  2**0
+  2 .bss          00000008  0080009a  0080009a  000003c2  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  0000088a  2**0
+  3 .comment      00000030  00000000  00000000  000003c2  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000008bc  2**2
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000003f4  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 00000200  00000000  00000000  000008fc  2**0
+  5 .debug_aranges 00000158  00000000  00000000  00000434  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00001b9d  00000000  00000000  00000afc  2**0
+  6 .debug_info   00001360  00000000  00000000  0000058c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00000d38  00000000  00000000  00002699  2**0
+  7 .debug_abbrev 000009ef  00000000  00000000  000018ec  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00000d9c  00000000  00000000  000033d1  2**0
+  8 .debug_line   00000923  00000000  00000000  000022db  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00000538  00000000  00000000  00004170  2**2
+  9 .debug_frame  00000354  00000000  00000000  00002c00  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    000007a4  00000000  00000000  000046a8  2**0
+ 10 .debug_str    000005e0  00000000  00000000  00002f54  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    0000121c  00000000  00000000  00004e4c  2**0
+ 11 .debug_loc    00000c54  00000000  00000000  00003534  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 000001e8  00000000  00000000  00006068  2**0
+ 12 .debug_ranges 00000148  00000000  00000000  00004188  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
 
 00000000 <__vectors>:
    0:	14 c0       	rjmp	.+40     	; 0x2a <__ctors_end>
-   2:	89 c1       	rjmp	.+786    	; 0x316 <__vector_1>
-   4:	92 c1       	rjmp	.+804    	; 0x32a <__vector_2>
+   2:	3a c0       	rjmp	.+116    	; 0x78 <__vector_1>
+   4:	43 c0       	rjmp	.+134    	; 0x8c <__vector_2>
    6:	2a c0       	rjmp	.+84     	; 0x5c <__bad_interrupt>
    8:	29 c0       	rjmp	.+82     	; 0x5c <__bad_interrupt>
    a:	28 c0       	rjmp	.+80     	; 0x5c <__bad_interrupt>
-   c:	28 c0       	rjmp	.+80     	; 0x5e <__vector_6>
-   e:	98 c3       	rjmp	.+1840   	; 0x740 <__vector_7>
-  10:	68 c3       	rjmp	.+1744   	; 0x6e2 <__vector_8>
+   c:	27 c0       	rjmp	.+78     	; 0x5c <__bad_interrupt>
+   e:	34 c1       	rjmp	.+616    	; 0x278 <__vector_7>
+  10:	04 c1       	rjmp	.+520    	; 0x21a <__vector_8>
   12:	24 c0       	rjmp	.+72     	; 0x5c <__bad_interrupt>
   14:	23 c0       	rjmp	.+70     	; 0x5c <__bad_interrupt>
-  16:	a0 c2       	rjmp	.+1344   	; 0x558 <__vector_11>
+  16:	22 c0       	rjmp	.+68     	; 0x5c <__bad_interrupt>
   18:	21 c0       	rjmp	.+66     	; 0x5c <__bad_interrupt>
   1a:	20 c0       	rjmp	.+64     	; 0x5c <__bad_interrupt>
   1c:	1f c0       	rjmp	.+62     	; 0x5c <__bad_interrupt>
@@ -65,8 +65,8 @@ Disassembly of section .text:
   32:	10 e0       	ldi	r17, 0x00	; 0
   34:	a0 e6       	ldi	r26, 0x60	; 96
   36:	b0 e0       	ldi	r27, 0x00	; 0
-  38:	ec eb       	ldi	r30, 0xBC	; 188
-  3a:	f7 e0       	ldi	r31, 0x07	; 7
+  38:	e4 ef       	ldi	r30, 0xF4	; 244
+  3a:	f2 e0       	ldi	r31, 0x02	; 2
   3c:	02 c0       	rjmp	.+4      	; 0x42 <__SREG__+0x3>
   3e:	05 90       	lpm	r0, Z+
   40:	0d 92       	st	X+, r0
@@ -84,1429 +84,499 @@ Disassembly of section .text:
   50:	1d 92       	st	X+, r1
 
 00000052 <.do_clear_bss_start>:
-  52:	a8 3c       	cpi	r26, 0xC8	; 200
+  52:	a2 3a       	cpi	r26, 0xA2	; 162
   54:	b2 07       	cpc	r27, r18
   56:	e1 f7       	brne	.-8      	; 0x50 <.do_clear_bss_loop>
-  58:	2e d2       	rcall	.+1116   	; 0x4b6 <main>
-  5a:	ae c3       	rjmp	.+1884   	; 0x7b8 <_exit>
+  58:	93 d0       	rcall	.+294    	; 0x180 <main>
+  5a:	4a c1       	rjmp	.+660    	; 0x2f0 <_exit>
 
 0000005c <__bad_interrupt>:
   5c:	d1 cf       	rjmp	.-94     	; 0x0 <__vectors>
 
-0000005e <__vector_6>:
-
- volatile DBNC_GLOBAL db;
-
- //ISR for timer0 overflow interrupt
- ISR(TIMER0_OVF_vect)
- {
-  5e:	1f 92       	push	r1
-  60:	0f 92       	push	r0
-  62:	0f b6       	in	r0, 0x3f	; 63
-  64:	0f 92       	push	r0
-  66:	11 24       	eor	r1, r1
-  68:	cf 92       	push	r12
-  6a:	df 92       	push	r13
-  6c:	ef 92       	push	r14
-  6e:	ff 92       	push	r15
-  70:	0f 93       	push	r16
-  72:	1f 93       	push	r17
-  74:	2f 93       	push	r18
-  76:	3f 93       	push	r19
-  78:	4f 93       	push	r20
-  7a:	5f 93       	push	r21
-  7c:	6f 93       	push	r22
-  7e:	7f 93       	push	r23
-  80:	8f 93       	push	r24
-  82:	9f 93       	push	r25
-  84:	af 93       	push	r26
-  86:	bf 93       	push	r27
-  88:	cf 93       	push	r28
-  8a:	df 93       	push	r29
-  8c:	ef 93       	push	r30
-  8e:	ff 93       	push	r31
-  90:	c0 e0       	ldi	r28, 0x00	; 0
-  92:	d0 e0       	ldi	r29, 0x00	; 0
-	 uint8_t i;
-	 uint8_t temp;
-	 uint8_t workDone = 0;
-  94:	40 e0       	ldi	r20, 0x00	; 0
-	 {
-		 //Skip items that have been idle
-		 if (db.dbUnits[i].counter == 0)
-		 continue;
-
-		 workDone = 1;
-  96:	dd 24       	eor	r13, r13
-  98:	d3 94       	inc	r13
-			 //If current state != last state
-			 //store change
-			 if (temp != ((db.dbUnits[i].bitmap & _BV(5)) >> 5))
-			 {
-				 //Flip last state bit
-				 db.dbUnits[i].bitmap ^= _BV(5);
-  9a:	68 94       	set
-  9c:	cc 24       	eor	r12, r12
-  9e:	c5 f8       	bld	r12, 5
-				 //If this debouncer item is synchronous
-				 //Then signal it
-				 if (!(db.dbUnits[i].bitmap & _BV(7))) {
-
-					 //Signal this debouncer item
-					 db.dbUnits[i].bitmap |= _BV(6);
-  a0:	0f 2e       	mov	r0, r31
-  a2:	f2 ea       	ldi	r31, 0xA2	; 162
-  a4:	ef 2e       	mov	r14, r31
-  a6:	f0 e0       	ldi	r31, 0x00	; 0
-  a8:	ff 2e       	mov	r15, r31
-  aa:	f0 2d       	mov	r31, r0
-  ac:	8c 2f       	mov	r24, r28
-
-	 //Cycle through all debounced items
-	 for (i=0;i<DBNC_NUM_DEBOUNCERS;i++)
-	 {
-		 //Skip items that have been idle
-		 if (db.dbUnits[i].counter == 0)
-  ae:	9e 01       	movw	r18, r28
-  b0:	fe 01       	movw	r30, r28
-  b2:	ee 0f       	add	r30, r30
-  b4:	ff 1f       	adc	r31, r31
-  b6:	ec 0f       	add	r30, r28
-  b8:	fd 1f       	adc	r31, r29
-  ba:	ee 0f       	add	r30, r30
-  bc:	ff 1f       	adc	r31, r31
-  be:	ee 55       	subi	r30, 0x5E	; 94
-  c0:	ff 4f       	sbci	r31, 0xFF	; 255
-  c2:	94 81       	ldd	r25, Z+4	; 0x04
-  c4:	99 23       	and	r25, r25
-  c6:	09 f4       	brne	.+2      	; 0xca <__vector_6+0x6c>
-  c8:	66 c0       	rjmp	.+204    	; 0x196 <__stack+0xb7>
-		 continue;
-
-		 workDone = 1;
-
-		 //If debounce period has elapsed
-		 if (--db.dbUnits[i].counter == 0)
-  ca:	fe 01       	movw	r30, r28
-  cc:	ee 0f       	add	r30, r30
-  ce:	ff 1f       	adc	r31, r31
-  d0:	ec 0f       	add	r30, r28
-  d2:	fd 1f       	adc	r31, r29
-  d4:	ee 0f       	add	r30, r30
-  d6:	ff 1f       	adc	r31, r31
-  d8:	ee 55       	subi	r30, 0x5E	; 94
-  da:	ff 4f       	sbci	r31, 0xFF	; 255
-  dc:	94 81       	ldd	r25, Z+4	; 0x04
-  de:	91 50       	subi	r25, 0x01	; 1
-  e0:	94 83       	std	Z+4, r25	; 0x04
-  e2:	91 11       	cpse	r25, r1
-  e4:	55 c0       	rjmp	.+170    	; 0x190 <__stack+0xb1>
-		 {
-			 
-			 //Grab current logical bit state of the port (1 or 0)
-			 temp = (((*(db.dbUnits[i].port)) & _BV((db.dbUnits[i].bitmap & 0b111))) != 0);
-  e6:	f9 01       	movw	r30, r18
-  e8:	ee 0f       	add	r30, r30
-  ea:	ff 1f       	adc	r31, r31
-  ec:	e2 0f       	add	r30, r18
-  ee:	f3 1f       	adc	r31, r19
-  f0:	ee 0f       	add	r30, r30
-  f2:	ff 1f       	adc	r31, r31
-  f4:	ee 55       	subi	r30, 0x5E	; 94
-  f6:	ff 4f       	sbci	r31, 0xFF	; 255
-  f8:	a0 81       	ld	r26, Z
-  fa:	b1 81       	ldd	r27, Z+1	; 0x01
-  fc:	6c 91       	ld	r22, X
-  fe:	95 81       	ldd	r25, Z+5	; 0x05
- 100:	70 e0       	ldi	r23, 0x00	; 0
- 102:	97 70       	andi	r25, 0x07	; 7
- 104:	02 c0       	rjmp	.+4      	; 0x10a <__stack+0x2b>
- 106:	75 95       	asr	r23
- 108:	67 95       	ror	r22
- 10a:	9a 95       	dec	r25
- 10c:	e2 f7       	brpl	.-8      	; 0x106 <__stack+0x27>
- 10e:	61 70       	andi	r22, 0x01	; 1
-
-			 //If current state != last state
-			 //store change
-			 if (temp != ((db.dbUnits[i].bitmap & _BV(5)) >> 5))
- 110:	95 81       	ldd	r25, Z+5	; 0x05
- 112:	46 2f       	mov	r20, r22
- 114:	50 e0       	ldi	r21, 0x00	; 0
- 116:	95 fb       	bst	r25, 5
- 118:	00 27       	eor	r16, r16
- 11a:	00 f9       	bld	r16, 0
- 11c:	10 e0       	ldi	r17, 0x00	; 0
- 11e:	40 17       	cp	r20, r16
- 120:	51 07       	cpc	r21, r17
- 122:	c1 f1       	breq	.+112    	; 0x194 <__stack+0xb5>
-			 {
-				 //Flip last state bit
-				 db.dbUnits[i].bitmap ^= _BV(5);
- 124:	f9 01       	movw	r30, r18
- 126:	ee 0f       	add	r30, r30
- 128:	ff 1f       	adc	r31, r31
- 12a:	e2 0f       	add	r30, r18
- 12c:	f3 1f       	adc	r31, r19
- 12e:	ee 0f       	add	r30, r30
- 130:	ff 1f       	adc	r31, r31
- 132:	ee 55       	subi	r30, 0x5E	; 94
- 134:	ff 4f       	sbci	r31, 0xFF	; 255
- 136:	95 81       	ldd	r25, Z+5	; 0x05
- 138:	9c 25       	eor	r25, r12
- 13a:	95 83       	std	Z+5, r25	; 0x05
-
-				 //If this debouncer item is synchronous
-				 //Then signal it
-				 if (!(db.dbUnits[i].bitmap & _BV(7))) {
- 13c:	95 81       	ldd	r25, Z+5	; 0x05
- 13e:	99 23       	and	r25, r25
- 140:	c4 f0       	brlt	.+48     	; 0x172 <__stack+0x93>
-
-					 //Signal this debouncer item
-					 db.dbUnits[i].bitmap |= _BV(6);
- 142:	c9 01       	movw	r24, r18
- 144:	88 0f       	add	r24, r24
- 146:	99 1f       	adc	r25, r25
- 148:	fc 01       	movw	r30, r24
- 14a:	e2 0f       	add	r30, r18
- 14c:	f3 1f       	adc	r31, r19
- 14e:	ee 0f       	add	r30, r30
- 150:	ff 1f       	adc	r31, r31
- 152:	ee 55       	subi	r30, 0x5E	; 94
- 154:	ff 4f       	sbci	r31, 0xFF	; 255
- 156:	45 81       	ldd	r20, Z+5	; 0x05
- 158:	40 64       	ori	r20, 0x40	; 64
- 15a:	fc 01       	movw	r30, r24
- 15c:	e2 0f       	add	r30, r18
- 15e:	f3 1f       	adc	r31, r19
- 160:	ee 0f       	add	r30, r30
- 162:	ff 1f       	adc	r31, r31
- 164:	ee 55       	subi	r30, 0x5E	; 94
- 166:	ff 4f       	sbci	r31, 0xFF	; 255
- 168:	45 83       	std	Z+5, r20	; 0x05
-
-					 //Signaling options
-					 db.signalReady = 1;
- 16a:	f7 01       	movw	r30, r14
- 16c:	d4 a2       	std	Z+36, r13	; 0x24
-	 {
-		 //Skip items that have been idle
-		 if (db.dbUnits[i].counter == 0)
-		 continue;
-
-		 workDone = 1;
- 16e:	4d 2d       	mov	r20, r13
- 170:	12 c0       	rjmp	.+36     	; 0x196 <__stack+0xb7>
-
-				 //Otherwise it's asynchronous,
-				 //call immediately
-				 else
-				 //Call Handler
-				 (*db.dbUnits[i].handler)(i,temp);
- 172:	f9 01       	movw	r30, r18
- 174:	ee 0f       	add	r30, r30
- 176:	ff 1f       	adc	r31, r31
- 178:	e2 0f       	add	r30, r18
- 17a:	f3 1f       	adc	r31, r19
- 17c:	ee 0f       	add	r30, r30
- 17e:	ff 1f       	adc	r31, r31
- 180:	ee 55       	subi	r30, 0x5E	; 94
- 182:	ff 4f       	sbci	r31, 0xFF	; 255
- 184:	02 80       	ldd	r0, Z+2	; 0x02
- 186:	f3 81       	ldd	r31, Z+3	; 0x03
- 188:	e0 2d       	mov	r30, r0
- 18a:	09 95       	icall
-	 {
-		 //Skip items that have been idle
-		 if (db.dbUnits[i].counter == 0)
-		 continue;
-
-		 workDone = 1;
- 18c:	4d 2d       	mov	r20, r13
- 18e:	03 c0       	rjmp	.+6      	; 0x196 <__stack+0xb7>
- 190:	4d 2d       	mov	r20, r13
- 192:	01 c0       	rjmp	.+2      	; 0x196 <__stack+0xb7>
- 194:	4d 2d       	mov	r20, r13
- 196:	21 96       	adiw	r28, 0x01	; 1
-	 uint8_t i;
-	 uint8_t temp;
-	 uint8_t workDone = 0;
-
-	 //Cycle through all debounced items
-	 for (i=0;i<DBNC_NUM_DEBOUNCERS;i++)
- 198:	c6 30       	cpi	r28, 0x06	; 6
- 19a:	d1 05       	cpc	r29, r1
- 19c:	09 f0       	breq	.+2      	; 0x1a0 <__stack+0xc1>
- 19e:	86 cf       	rjmp	.-244    	; 0xac <__vector_6+0x4e>
-			 }
-		 }
-	 }
-
-	 //If all counters were already 0, disable the timer
-	 if (!workDone)
- 1a0:	41 11       	cpse	r20, r1
- 1a2:	01 c0       	rjmp	.+2      	; 0x1a6 <__stack+0xc7>
-	 TCCR0B = 0;
- 1a4:	13 be       	out	0x33, r1	; 51
-
-	 TCNT0  = DBNC_TIMR0_BASEVAL;
- 1a6:	82 eb       	ldi	r24, 0xB2	; 178
- 1a8:	82 bf       	out	0x32, r24	; 50
- }
- 1aa:	ff 91       	pop	r31
- 1ac:	ef 91       	pop	r30
- 1ae:	df 91       	pop	r29
- 1b0:	cf 91       	pop	r28
- 1b2:	bf 91       	pop	r27
- 1b4:	af 91       	pop	r26
- 1b6:	9f 91       	pop	r25
- 1b8:	8f 91       	pop	r24
- 1ba:	7f 91       	pop	r23
- 1bc:	6f 91       	pop	r22
- 1be:	5f 91       	pop	r21
- 1c0:	4f 91       	pop	r20
- 1c2:	3f 91       	pop	r19
- 1c4:	2f 91       	pop	r18
- 1c6:	1f 91       	pop	r17
- 1c8:	0f 91       	pop	r16
- 1ca:	ff 90       	pop	r15
- 1cc:	ef 90       	pop	r14
- 1ce:	df 90       	pop	r13
- 1d0:	cf 90       	pop	r12
- 1d2:	0f 90       	pop	r0
- 1d4:	0f be       	out	0x3f, r0	; 63
- 1d6:	0f 90       	pop	r0
- 1d8:	1f 90       	pop	r1
- 1da:	18 95       	reti
-
-000001dc <callSignaledHandlers>:
-
- //Call any signaled handlers (to be executed in main program loop)
- void callSignaledHandlers(void)
- {
- 1dc:	cf 93       	push	r28
- 1de:	df 93       	push	r29
-	 int i;
-
-	 if (!db.signalReady) return;
- 1e0:	80 91 c6 00 	lds	r24, 0x00C6	; 0x8000c6 <db+0x24>
- 1e4:	88 23       	and	r24, r24
- 1e6:	11 f1       	breq	.+68     	; 0x22c <callSignaledHandlers+0x50>
- 1e8:	c0 e0       	ldi	r28, 0x00	; 0
- 1ea:	d0 e0       	ldi	r29, 0x00	; 0
-	 
-	 for (i=0;i<DBNC_NUM_DEBOUNCERS;i++)
-	 {
-		 //Check if this item is signaled
-		 if (db.dbUnits[i].bitmap & _BV(6)) {
- 1ec:	fe 01       	movw	r30, r28
- 1ee:	ee 0f       	add	r30, r30
- 1f0:	ff 1f       	adc	r31, r31
- 1f2:	ec 0f       	add	r30, r28
- 1f4:	fd 1f       	adc	r31, r29
- 1f6:	ee 0f       	add	r30, r30
- 1f8:	ff 1f       	adc	r31, r31
- 1fa:	ee 55       	subi	r30, 0x5E	; 94
- 1fc:	ff 4f       	sbci	r31, 0xFF	; 255
- 1fe:	85 81       	ldd	r24, Z+5	; 0x05
- 200:	86 ff       	sbrs	r24, 6
- 202:	0e c0       	rjmp	.+28     	; 0x220 <callSignaledHandlers+0x44>
-
-			 //If so, reset its signal
-			 db.dbUnits[i].bitmap &= ~_BV(6);
- 204:	df 01       	movw	r26, r30
- 206:	85 81       	ldd	r24, Z+5	; 0x05
- 208:	8f 7b       	andi	r24, 0xBF	; 191
- 20a:	85 83       	std	Z+5, r24	; 0x05
-
-			 //Call item and pass on last known state
-			 (*db.dbUnits[i].handler)(i,(db.dbUnits[i].bitmap & _BV(5))>>5);
- 20c:	02 80       	ldd	r0, Z+2	; 0x02
- 20e:	f3 81       	ldd	r31, Z+3	; 0x03
- 210:	e0 2d       	mov	r30, r0
- 212:	15 96       	adiw	r26, 0x05	; 5
- 214:	6c 91       	ld	r22, X
- 216:	65 fb       	bst	r22, 5
- 218:	66 27       	eor	r22, r22
- 21a:	60 f9       	bld	r22, 0
- 21c:	8c 2f       	mov	r24, r28
- 21e:	09 95       	icall
- {
-	 int i;
-
-	 if (!db.signalReady) return;
-	 
-	 for (i=0;i<DBNC_NUM_DEBOUNCERS;i++)
- 220:	21 96       	adiw	r28, 0x01	; 1
- 222:	c6 30       	cpi	r28, 0x06	; 6
- 224:	d1 05       	cpc	r29, r1
- 226:	11 f7       	brne	.-60     	; 0x1ec <callSignaledHandlers+0x10>
-			 (*db.dbUnits[i].handler)(i,(db.dbUnits[i].bitmap & _BV(5))>>5);
-		 }
-	 }
-
-	 //Reset signal
-	 db.signalReady = 0;
- 228:	10 92 c6 00 	sts	0x00C6, r1	; 0x8000c6 <db+0x24>
-
- }
- 22c:	df 91       	pop	r29
- 22e:	cf 91       	pop	r28
- 230:	08 95       	ret
-
-00000232 <registerDebouncer>:
-
- void registerDebouncer(volatile uint8_t *port,uint8_t bit,uint8_t index,uint8_t Asynchronous,debounceHandler handler)
- {
- 232:	0f 93       	push	r16
- 234:	1f 93       	push	r17
-	 //Store port pointer
-	 //Store handler pointer
-	 //Reset counter to 0
-	 //Store bitmap of bit offset/asynchronous state
-	 //Set signaled to 0
-	 db.dbUnits[index].port 		= port;
- 236:	50 e0       	ldi	r21, 0x00	; 0
- 238:	fa 01       	movw	r30, r20
- 23a:	ee 0f       	add	r30, r30
- 23c:	ff 1f       	adc	r31, r31
- 23e:	e4 0f       	add	r30, r20
- 240:	f5 1f       	adc	r31, r21
- 242:	ee 0f       	add	r30, r30
- 244:	ff 1f       	adc	r31, r31
- 246:	ee 55       	subi	r30, 0x5E	; 94
- 248:	ff 4f       	sbci	r31, 0xFF	; 255
- 24a:	91 83       	std	Z+1, r25	; 0x01
- 24c:	80 83       	st	Z, r24
-	 db.dbUnits[index].handler 	= handler;
- 24e:	13 83       	std	Z+3, r17	; 0x03
- 250:	02 83       	std	Z+2, r16	; 0x02
-	 db.dbUnits[index].counter  	= 0;
- 252:	14 82       	std	Z+4, r1	; 0x04
-
-	 db.dbUnits[index].bitmap	= _BITSHIFTBY((Asynchronous != 0),7)|
- 254:	21 11       	cpse	r18, r1
- 256:	20 e8       	ldi	r18, 0x80	; 128
-	 _BITSHIFTBY((((*port) & _BV(bit)) != 0),5)|
- 258:	fc 01       	movw	r30, r24
- 25a:	80 81       	ld	r24, Z
-	 //Set signaled to 0
-	 db.dbUnits[index].port 		= port;
-	 db.dbUnits[index].handler 	= handler;
-	 db.dbUnits[index].counter  	= 0;
-
-	 db.dbUnits[index].bitmap	= _BITSHIFTBY((Asynchronous != 0),7)|
- 25c:	90 e0       	ldi	r25, 0x00	; 0
- 25e:	06 2e       	mov	r0, r22
- 260:	02 c0       	rjmp	.+4      	; 0x266 <registerDebouncer+0x34>
- 262:	95 95       	asr	r25
- 264:	87 95       	ror	r24
- 266:	0a 94       	dec	r0
- 268:	e2 f7       	brpl	.-8      	; 0x262 <registerDebouncer+0x30>
- 26a:	80 fd       	sbrc	r24, 0
- 26c:	02 c0       	rjmp	.+4      	; 0x272 <registerDebouncer+0x40>
- 26e:	80 e0       	ldi	r24, 0x00	; 0
- 270:	01 c0       	rjmp	.+2      	; 0x274 <registerDebouncer+0x42>
- 272:	80 e2       	ldi	r24, 0x20	; 32
- 274:	62 2b       	or	r22, r18
- 276:	68 2b       	or	r22, r24
- 278:	fa 01       	movw	r30, r20
- 27a:	ee 0f       	add	r30, r30
- 27c:	ff 1f       	adc	r31, r31
- 27e:	e4 0f       	add	r30, r20
- 280:	f5 1f       	adc	r31, r21
- 282:	ee 0f       	add	r30, r30
- 284:	ff 1f       	adc	r31, r31
- 286:	ee 55       	subi	r30, 0x5E	; 94
- 288:	ff 4f       	sbci	r31, 0xFF	; 255
- 28a:	65 83       	std	Z+5, r22	; 0x05
-	 _BITSHIFTBY((((*port) & _BV(bit)) != 0),5)|
-	 bit;
- }
- 28c:	1f 91       	pop	r17
- 28e:	0f 91       	pop	r16
- 290:	08 95       	ret
-
-00000292 <signalChangedState>:
-
- void signalChangedState(uint8_t index,uint8_t counterTop)
- {
-	 if (!counterTop)
- 292:	61 11       	cpse	r22, r1
- 294:	0e c0       	rjmp	.+28     	; 0x2b2 <signalChangedState+0x20>
-	 db.dbUnits[index].counter = DBNC_COUNTER_TOP;
- 296:	28 2f       	mov	r18, r24
- 298:	30 e0       	ldi	r19, 0x00	; 0
- 29a:	28 0f       	add	r18, r24
- 29c:	31 1d       	adc	r19, r1
- 29e:	28 0f       	add	r18, r24
- 2a0:	31 1d       	adc	r19, r1
- 2a2:	22 0f       	add	r18, r18
- 2a4:	33 1f       	adc	r19, r19
- 2a6:	f9 01       	movw	r30, r18
- 2a8:	ee 55       	subi	r30, 0x5E	; 94
- 2aa:	ff 4f       	sbci	r31, 0xFF	; 255
- 2ac:	83 e0       	ldi	r24, 0x03	; 3
- 2ae:	84 83       	std	Z+4, r24	; 0x04
- 2b0:	0c c0       	rjmp	.+24     	; 0x2ca <signalChangedState+0x38>
-	 else
-	 db.dbUnits[index].counter = counterTop;
- 2b2:	28 2f       	mov	r18, r24
- 2b4:	30 e0       	ldi	r19, 0x00	; 0
- 2b6:	28 0f       	add	r18, r24
- 2b8:	31 1d       	adc	r19, r1
- 2ba:	28 0f       	add	r18, r24
- 2bc:	31 1d       	adc	r19, r1
- 2be:	22 0f       	add	r18, r18
- 2c0:	33 1f       	adc	r19, r19
- 2c2:	f9 01       	movw	r30, r18
- 2c4:	ee 55       	subi	r30, 0x5E	; 94
- 2c6:	ff 4f       	sbci	r31, 0xFF	; 255
- 2c8:	64 83       	std	Z+4, r22	; 0x04
-
-	 if (!TCCR0B)
- 2ca:	83 b7       	in	r24, 0x33	; 51
- 2cc:	81 11       	cpse	r24, r1
- 2ce:	02 c0       	rjmp	.+4      	; 0x2d4 <signalChangedState+0x42>
-	 TCCR0B = DBNC_TIMR0_PRESCALER;
- 2d0:	84 e0       	ldi	r24, 0x04	; 4
- 2d2:	83 bf       	out	0x33, r24	; 51
- 2d4:	08 95       	ret
-
-000002d6 <initializeDebouncerTimer>:
- }
-
- void initializeDebouncerTimer()
- {
-	 //Note: doesn't start timer
-	 TCCR0A = 0x00;
- 2d6:	10 be       	out	0x30, r1	; 48
-	 TCCR0B = 0x00;
- 2d8:	13 be       	out	0x33, r1	; 51
-	 TCNT0  = DBNC_TIMR0_BASEVAL;
- 2da:	82 eb       	ldi	r24, 0xB2	; 178
- 2dc:	82 bf       	out	0x32, r24	; 50
-	 TIMSK = _BV(TOIE0);
- 2de:	82 e0       	ldi	r24, 0x02	; 2
- 2e0:	89 bf       	out	0x39, r24	; 57
- 2e2:	08 95       	ret
-
-000002e4 <toggle_output_gpio>:
+0000005e <init_external_interrupt0_gpio>:
  void init_external_interrupt1_gpio(void){
 	 MCUCR |= (1 << ISC10);				//The rising edge of INT1 generates an interrupt request
 	 MCUCR |= (1 << ISC11);
 	 
 	 GIMSK |= (1 << INT1);				//enable external interrupt 1 in general interrupt mask register
 	 SREG |= (1 << SREG_I);				//enable interrupts I in global status register
- 2e4:	e8 2f       	mov	r30, r24
- 2e6:	f0 e0       	ldi	r31, 0x00	; 0
- 2e8:	3a 97       	sbiw	r30, 0x0a	; 10
- 2ea:	cf 01       	movw	r24, r30
- 2ec:	88 0f       	add	r24, r24
- 2ee:	99 1f       	adc	r25, r25
- 2f0:	88 0f       	add	r24, r24
- 2f2:	99 1f       	adc	r25, r25
- 2f4:	e8 1b       	sub	r30, r24
- 2f6:	f9 0b       	sbc	r31, r25
- 2f8:	22 ad       	ldd	r18, Z+58	; 0x3a
- 2fa:	81 e0       	ldi	r24, 0x01	; 1
- 2fc:	90 e0       	ldi	r25, 0x00	; 0
- 2fe:	02 c0       	rjmp	.+4      	; 0x304 <toggle_output_gpio+0x20>
- 300:	88 0f       	add	r24, r24
- 302:	99 1f       	adc	r25, r25
- 304:	6a 95       	dec	r22
- 306:	e2 f7       	brpl	.-8      	; 0x300 <toggle_output_gpio+0x1c>
- 308:	92 2f       	mov	r25, r18
- 30a:	98 2b       	or	r25, r24
- 30c:	92 af       	std	Z+58, r25	; 0x3a
- 30e:	93 ad       	ldd	r25, Z+59	; 0x3b
- 310:	89 27       	eor	r24, r25
- 312:	83 af       	std	Z+59, r24	; 0x3b
- 314:	08 95       	ret
+  5e:	85 b7       	in	r24, 0x35	; 53
+  60:	81 60       	ori	r24, 0x01	; 1
+  62:	85 bf       	out	0x35, r24	; 53
+  64:	85 b7       	in	r24, 0x35	; 53
+  66:	82 60       	ori	r24, 0x02	; 2
+  68:	85 bf       	out	0x35, r24	; 53
+  6a:	8b b7       	in	r24, 0x3b	; 59
+  6c:	80 64       	ori	r24, 0x40	; 64
+  6e:	8b bf       	out	0x3b, r24	; 59
+  70:	8f b7       	in	r24, 0x3f	; 63
+  72:	80 68       	ori	r24, 0x80	; 128
+  74:	8f bf       	out	0x3f, r24	; 63
+  76:	08 95       	ret
 
-00000316 <__vector_1>:
- 316:	1f 92       	push	r1
- 318:	0f 92       	push	r0
- 31a:	0f b6       	in	r0, 0x3f	; 63
- 31c:	0f 92       	push	r0
- 31e:	11 24       	eor	r1, r1
- 320:	0f 90       	pop	r0
- 322:	0f be       	out	0x3f, r0	; 63
- 324:	0f 90       	pop	r0
- 326:	1f 90       	pop	r1
- 328:	18 95       	reti
+00000078 <__vector_1>:
+  78:	1f 92       	push	r1
+  7a:	0f 92       	push	r0
+  7c:	0f b6       	in	r0, 0x3f	; 63
+  7e:	0f 92       	push	r0
+  80:	11 24       	eor	r1, r1
+  82:	0f 90       	pop	r0
+  84:	0f be       	out	0x3f, r0	; 63
+  86:	0f 90       	pop	r0
+  88:	1f 90       	pop	r1
+  8a:	18 95       	reti
 
-0000032a <__vector_2>:
+0000008c <__vector_2>:
  }
  
  ISR(INT1_vect){						//External interrupt1 service routine
- 32a:	1f 92       	push	r1
- 32c:	0f 92       	push	r0
- 32e:	0f b6       	in	r0, 0x3f	; 63
- 330:	0f 92       	push	r0
- 332:	11 24       	eor	r1, r1
+  8c:	1f 92       	push	r1
+  8e:	0f 92       	push	r0
+  90:	0f b6       	in	r0, 0x3f	; 63
+  92:	0f 92       	push	r0
+  94:	11 24       	eor	r1, r1
 	  
- 334:	0f 90       	pop	r0
- 336:	0f be       	out	0x3f, r0	; 63
- 338:	0f 90       	pop	r0
- 33a:	1f 90       	pop	r1
- 33c:	18 95       	reti
+  96:	0f 90       	pop	r0
+  98:	0f be       	out	0x3f, r0	; 63
+  9a:	0f 90       	pop	r0
+  9c:	1f 90       	pop	r1
+  9e:	18 95       	reti
 
-0000033e <generate_KNX>:
-		}
-	}
-	else{
-		return 0;
+000000a0 <send_acknowledgement>:
 	}
 }
- 33e:	92 d1       	rcall	.+804    	; 0x664 <uart_getc>
- 340:	08 95       	ret
-
-00000342 <send_acknowledgement>:
 
 
 void send_acknowledgement(int parity_failed){
 	if(parity_failed == 1){
- 342:	01 97       	sbiw	r24, 0x01	; 1
- 344:	19 f4       	brne	.+6      	; 0x34c <send_acknowledgement+0xa>
+  a0:	01 97       	sbiw	r24, 0x01	; 1
+  a2:	19 f4       	brne	.+6      	; 0xaa <send_acknowledgement+0xa>
 		uart_putc(0x30);//send NACK
- 346:	80 e3       	ldi	r24, 0x30	; 48
- 348:	af d1       	rcall	.+862    	; 0x6a8 <uart_putc>
- 34a:	08 95       	ret
+  a4:	80 e3       	ldi	r24, 0x30	; 48
+  a6:	9c d0       	rcall	.+312    	; 0x1e0 <uart_putc>
+  a8:	08 95       	ret
 		parity_failed = 0;
 	}
 	else if(UCSRA & (1<<RXC)){
- 34c:	5f 9b       	sbis	0x0b, 7	; 11
- 34e:	03 c0       	rjmp	.+6      	; 0x356 <send_acknowledgement+0x14>
+  aa:	5f 9b       	sbis	0x0b, 7	; 11
+  ac:	03 c0       	rjmp	.+6      	; 0xb4 <send_acknowledgement+0x14>
 		uart_putc(0x03);//UART is busy
- 350:	83 e0       	ldi	r24, 0x03	; 3
- 352:	aa d1       	rcall	.+852    	; 0x6a8 <uart_putc>
- 354:	08 95       	ret
+  ae:	83 e0       	ldi	r24, 0x03	; 3
+  b0:	97 d0       	rcall	.+302    	; 0x1e0 <uart_putc>
+  b2:	08 95       	ret
 	}
 	else{
 		uart_putc(0x33);//send ACK
- 356:	83 e3       	ldi	r24, 0x33	; 51
- 358:	a7 d1       	rcall	.+846    	; 0x6a8 <uart_putc>
- 35a:	08 95       	ret
+  b4:	83 e3       	ldi	r24, 0x33	; 51
+  b6:	94 d0       	rcall	.+296    	; 0x1e0 <uart_putc>
+  b8:	08 95       	ret
 
-0000035c <receive_KNX>:
+000000ba <receive_KNX>:
+	static int count;
+	static int amount_messages = 7;//amount of messages without user data
+	static int parity_failed = 0;
+
+
 		c = uart_getc();
+  ba:	70 d0       	rcall	.+224    	; 0x19c <uart_getc>
 		if(UCSRA &(1<<UPE)){//parity check
-				//parity check failed
-				parity_failed = 1;
-		}*/
-		c = uart_getc();
- 35c:	83 d1       	rcall	.+774    	; 0x664 <uart_getc>
-		if(UCSRA &(1<<UPE)){//parity check
- 35e:	5a 9b       	sbis	0x0b, 2	; 11
- 360:	06 c0       	rjmp	.+12     	; 0x36e <receive_KNX+0x12>
+  bc:	5a 9b       	sbis	0x0b, 2	; 11
+  be:	06 c0       	rjmp	.+12     	; 0xcc <receive_KNX+0x12>
 			//parity check failed
 			parity_failed = 1;
- 362:	21 e0       	ldi	r18, 0x01	; 1
- 364:	30 e0       	ldi	r19, 0x00	; 0
- 366:	30 93 9d 00 	sts	0x009D, r19	; 0x80009d <parity_failed.2086+0x1>
- 36a:	20 93 9c 00 	sts	0x009C, r18	; 0x80009c <parity_failed.2086>
+  c0:	21 e0       	ldi	r18, 0x01	; 1
+  c2:	30 e0       	ldi	r19, 0x00	; 0
+  c4:	30 93 9d 00 	sts	0x009D, r19	; 0x80009d <parity_failed.2077+0x1>
+  c8:	20 93 9c 00 	sts	0x009C, r18	; 0x80009c <parity_failed.2077>
 		}
 		data_buffer[count] = c;
- 36e:	20 91 9a 00 	lds	r18, 0x009A	; 0x80009a <__data_end>
- 372:	30 91 9b 00 	lds	r19, 0x009B	; 0x80009b <__data_end+0x1>
- 376:	f9 01       	movw	r30, r18
- 378:	ee 59       	subi	r30, 0x9E	; 158
- 37a:	ff 4f       	sbci	r31, 0xFF	; 255
- 37c:	80 83       	st	Z, r24
+  cc:	20 91 9a 00 	lds	r18, 0x009A	; 0x80009a <__data_end>
+  d0:	30 91 9b 00 	lds	r19, 0x009B	; 0x80009b <__data_end+0x1>
+  d4:	f9 01       	movw	r30, r18
+  d6:	ee 59       	subi	r30, 0x9E	; 158
+  d8:	ff 4f       	sbci	r31, 0xFF	; 255
+  da:	80 83       	st	Z, r24
 		if(count == 5){
- 37e:	25 30       	cpi	r18, 0x05	; 5
- 380:	31 05       	cpc	r19, r1
- 382:	b1 f5       	brne	.+108    	; 0x3f0 <receive_KNX+0x94>
+  dc:	25 30       	cpi	r18, 0x05	; 5
+  de:	31 05       	cpc	r19, r1
+  e0:	b1 f5       	brne	.+108    	; 0x14e <__stack+0x6f>
 			uint8_t length = c & 0x0F;
 			amount_messages += length;//add userdata to the amount of messages
- 384:	8f 70       	andi	r24, 0x0F	; 15
- 386:	20 91 60 00 	lds	r18, 0x0060	; 0x800060 <__data_start>
- 38a:	30 91 61 00 	lds	r19, 0x0061	; 0x800061 <__data_start+0x1>
- 38e:	a9 01       	movw	r20, r18
- 390:	48 0f       	add	r20, r24
- 392:	51 1d       	adc	r21, r1
- 394:	50 93 61 00 	sts	0x0061, r21	; 0x800061 <__data_start+0x1>
- 398:	40 93 60 00 	sts	0x0060, r20	; 0x800060 <__data_start>
+  e2:	8f 70       	andi	r24, 0x0F	; 15
+  e4:	20 91 60 00 	lds	r18, 0x0060	; 0x800060 <__data_start>
+  e8:	30 91 61 00 	lds	r19, 0x0061	; 0x800061 <__data_start+0x1>
+  ec:	a9 01       	movw	r20, r18
+  ee:	48 0f       	add	r20, r24
+  f0:	51 1d       	adc	r21, r1
+  f2:	50 93 61 00 	sts	0x0061, r21	; 0x800061 <__data_start+0x1>
+  f6:	40 93 60 00 	sts	0x0060, r20	; 0x800060 <__data_start>
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
- 39c:	52 e2       	ldi	r21, 0x22	; 34
- 39e:	5a 95       	dec	r21
- 3a0:	f1 f7       	brne	.-4      	; 0x39e <receive_KNX+0x42>
- 3a2:	00 c0       	rjmp	.+0      	; 0x3a4 <receive_KNX+0x48>
- 3a4:	82 e2       	ldi	r24, 0x22	; 34
- 3a6:	8a 95       	dec	r24
- 3a8:	f1 f7       	brne	.-4      	; 0x3a6 <receive_KNX+0x4a>
- 3aa:	00 c0       	rjmp	.+0      	; 0x3ac <receive_KNX+0x50>
+  fa:	52 e2       	ldi	r21, 0x22	; 34
+  fc:	5a 95       	dec	r21
+  fe:	f1 f7       	brne	.-4      	; 0xfc <__stack+0x1d>
+ 100:	00 c0       	rjmp	.+0      	; 0x102 <__stack+0x23>
+ 102:	82 e2       	ldi	r24, 0x22	; 34
+ 104:	8a 95       	dec	r24
+ 106:	f1 f7       	brne	.-4      	; 0x104 <__stack+0x25>
+ 108:	00 c0       	rjmp	.+0      	; 0x10a <__stack+0x2b>
 		}
 		wait_bit();//wait 2 bits
 		wait_bit();
 		count++;
- 3ac:	80 91 9a 00 	lds	r24, 0x009A	; 0x80009a <__data_end>
- 3b0:	90 91 9b 00 	lds	r25, 0x009B	; 0x80009b <__data_end+0x1>
- 3b4:	01 96       	adiw	r24, 0x01	; 1
- 3b6:	90 93 9b 00 	sts	0x009B, r25	; 0x80009b <__data_end+0x1>
- 3ba:	80 93 9a 00 	sts	0x009A, r24	; 0x80009a <__data_end>
+ 10a:	80 91 9a 00 	lds	r24, 0x009A	; 0x80009a <__data_end>
+ 10e:	90 91 9b 00 	lds	r25, 0x009B	; 0x80009b <__data_end+0x1>
+ 112:	01 96       	adiw	r24, 0x01	; 1
+ 114:	90 93 9b 00 	sts	0x009B, r25	; 0x80009b <__data_end+0x1>
+ 118:	80 93 9a 00 	sts	0x009A, r24	; 0x80009a <__data_end>
 	//}
 	int i;
 	if(count == amount_messages){
- 3be:	20 91 60 00 	lds	r18, 0x0060	; 0x800060 <__data_start>
- 3c2:	30 91 61 00 	lds	r19, 0x0061	; 0x800061 <__data_start+0x1>
- 3c6:	82 17       	cp	r24, r18
- 3c8:	93 07       	cpc	r25, r19
- 3ca:	51 f5       	brne	.+84     	; 0x420 <__LOCK_REGION_LENGTH__+0x20>
+ 11c:	20 91 60 00 	lds	r18, 0x0060	; 0x800060 <__data_start>
+ 120:	30 91 61 00 	lds	r19, 0x0061	; 0x800061 <__data_start+0x1>
+ 124:	82 17       	cp	r24, r18
+ 126:	93 07       	cpc	r25, r19
+ 128:	51 f5       	brne	.+84     	; 0x17e <__stack+0x9f>
 }
 
 						//receive
 //------------------------------------------------------------------------------
 
 void receive_KNX(void){
- 3cc:	8b e0       	ldi	r24, 0x0B	; 11
- 3ce:	90 e0       	ldi	r25, 0x00	; 0
- 3d0:	22 e2       	ldi	r18, 0x22	; 34
- 3d2:	2a 95       	dec	r18
- 3d4:	f1 f7       	brne	.-4      	; 0x3d2 <receive_KNX+0x76>
- 3d6:	00 c0       	rjmp	.+0      	; 0x3d8 <receive_KNX+0x7c>
- 3d8:	01 97       	sbiw	r24, 0x01	; 1
+ 12a:	8b e0       	ldi	r24, 0x0B	; 11
+ 12c:	90 e0       	ldi	r25, 0x00	; 0
+ 12e:	22 e2       	ldi	r18, 0x22	; 34
+ 130:	2a 95       	dec	r18
+ 132:	f1 f7       	brne	.-4      	; 0x130 <__stack+0x51>
+ 134:	00 c0       	rjmp	.+0      	; 0x136 <__stack+0x57>
+ 136:	01 97       	sbiw	r24, 0x01	; 1
 		wait_bit();
 		count++;
 	//}
 	int i;
 	if(count == amount_messages){
 		for(i = 0; i < 11; i++)//wait 11  bits before sending an acknowledge frame (11 + 2 = 13)
- 3da:	d1 f7       	brne	.-12     	; 0x3d0 <receive_KNX+0x74>
+ 138:	d1 f7       	brne	.-12     	; 0x12e <__stack+0x4f>
 		{
 			wait_bit();
 		}
 		send_acknowledgement(parity_failed);
- 3dc:	80 91 9c 00 	lds	r24, 0x009C	; 0x80009c <parity_failed.2086>
- 3e0:	90 91 9d 00 	lds	r25, 0x009D	; 0x80009d <parity_failed.2086+0x1>
- 3e4:	ae df       	rcall	.-164    	; 0x342 <send_acknowledgement>
+ 13a:	80 91 9c 00 	lds	r24, 0x009C	; 0x80009c <parity_failed.2077>
+ 13e:	90 91 9d 00 	lds	r25, 0x009D	; 0x80009d <parity_failed.2077+0x1>
+ 142:	ae df       	rcall	.-164    	; 0xa0 <send_acknowledgement>
 		count = 0;
- 3e6:	10 92 9b 00 	sts	0x009B, r1	; 0x80009b <__data_end+0x1>
- 3ea:	10 92 9a 00 	sts	0x009A, r1	; 0x80009a <__data_end>
+ 144:	10 92 9b 00 	sts	0x009B, r1	; 0x80009b <__data_end+0x1>
+ 148:	10 92 9a 00 	sts	0x009A, r1	; 0x80009a <__data_end>
 	}
 
 }
- 3ee:	08 95       	ret
- 3f0:	42 e2       	ldi	r20, 0x22	; 34
- 3f2:	4a 95       	dec	r20
- 3f4:	f1 f7       	brne	.-4      	; 0x3f2 <receive_KNX+0x96>
- 3f6:	00 c0       	rjmp	.+0      	; 0x3f8 <receive_KNX+0x9c>
- 3f8:	52 e2       	ldi	r21, 0x22	; 34
- 3fa:	5a 95       	dec	r21
- 3fc:	f1 f7       	brne	.-4      	; 0x3fa <receive_KNX+0x9e>
- 3fe:	00 c0       	rjmp	.+0      	; 0x400 <__LOCK_REGION_LENGTH__>
+ 14c:	08 95       	ret
+ 14e:	42 e2       	ldi	r20, 0x22	; 34
+ 150:	4a 95       	dec	r20
+ 152:	f1 f7       	brne	.-4      	; 0x150 <__stack+0x71>
+ 154:	00 c0       	rjmp	.+0      	; 0x156 <__stack+0x77>
+ 156:	52 e2       	ldi	r21, 0x22	; 34
+ 158:	5a 95       	dec	r21
+ 15a:	f1 f7       	brne	.-4      	; 0x158 <__stack+0x79>
+ 15c:	00 c0       	rjmp	.+0      	; 0x15e <__stack+0x7f>
 			uint8_t length = c & 0x0F;
 			amount_messages += length;//add userdata to the amount of messages
 		}
 		wait_bit();//wait 2 bits
 		wait_bit();
 		count++;
- 400:	80 91 9a 00 	lds	r24, 0x009A	; 0x80009a <__data_end>
- 404:	90 91 9b 00 	lds	r25, 0x009B	; 0x80009b <__data_end+0x1>
- 408:	01 96       	adiw	r24, 0x01	; 1
- 40a:	90 93 9b 00 	sts	0x009B, r25	; 0x80009b <__data_end+0x1>
- 40e:	80 93 9a 00 	sts	0x009A, r24	; 0x80009a <__data_end>
+ 15e:	80 91 9a 00 	lds	r24, 0x009A	; 0x80009a <__data_end>
+ 162:	90 91 9b 00 	lds	r25, 0x009B	; 0x80009b <__data_end+0x1>
+ 166:	01 96       	adiw	r24, 0x01	; 1
+ 168:	90 93 9b 00 	sts	0x009B, r25	; 0x80009b <__data_end+0x1>
+ 16c:	80 93 9a 00 	sts	0x009A, r24	; 0x80009a <__data_end>
 	//}
 	int i;
 	if(count == amount_messages){
- 412:	20 91 60 00 	lds	r18, 0x0060	; 0x800060 <__data_start>
- 416:	30 91 61 00 	lds	r19, 0x0061	; 0x800061 <__data_start+0x1>
- 41a:	82 17       	cp	r24, r18
- 41c:	93 07       	cpc	r25, r19
- 41e:	b1 f2       	breq	.-84     	; 0x3cc <receive_KNX+0x70>
- 420:	08 95       	ret
+ 170:	20 91 60 00 	lds	r18, 0x0060	; 0x800060 <__data_start>
+ 174:	30 91 61 00 	lds	r19, 0x0061	; 0x800061 <__data_start+0x1>
+ 178:	82 17       	cp	r24, r18
+ 17a:	93 07       	cpc	r25, r19
+ 17c:	b1 f2       	breq	.-84     	; 0x12a <__stack+0x4b>
+ 17e:	08 95       	ret
 
-00000422 <switch_led>:
-}
-
-										//turn on led
-//------------------------------------------------------------------------------------------
-
-void switch_led(uint8_t address, int state){
- 422:	ef 92       	push	r14
- 424:	0f 93       	push	r16
- 426:	1f 93       	push	r17
- 428:	cf 93       	push	r28
- 42a:	df 93       	push	r29
- 42c:	00 d0       	rcall	.+0      	; 0x42e <switch_led+0xc>
- 42e:	cd b7       	in	r28, 0x3d	; 61
- 430:	dd 27       	eor	r29, r29
-	uint8_t data_array[2];
-	data_array[0] = 0x00;
- 432:	19 82       	std	Y+1, r1	; 0x01
-	if(state == 1){
- 434:	61 30       	cpi	r22, 0x01	; 1
- 436:	71 05       	cpc	r23, r1
- 438:	19 f4       	brne	.+6      	; 0x440 <switch_led+0x1e>
-		data_array[1] = 0x81;
- 43a:	91 e8       	ldi	r25, 0x81	; 129
- 43c:	9a 83       	std	Y+2, r25	; 0x02
- 43e:	04 c0       	rjmp	.+8      	; 0x448 <switch_led+0x26>
-	}
-	else if(state == 0){
- 440:	67 2b       	or	r22, r23
- 442:	11 f4       	brne	.+4      	; 0x448 <switch_led+0x26>
-			data_array[1] = 0x80;
- 444:	90 e8       	ldi	r25, 0x80	; 128
- 446:	9a 83       	std	Y+2, r25	; 0x02
-	}
-	
-	int size_data_array = 2;
-	uint8_t length = 2;
-	uint8_t repeated = 1;//not repeated
-	generate_KNX(normal_priority, length, repeated, data_array, size_data_array, address);
- 448:	e8 2e       	mov	r14, r24
- 44a:	02 e0       	ldi	r16, 0x02	; 2
- 44c:	10 e0       	ldi	r17, 0x00	; 0
- 44e:	9e 01       	movw	r18, r28
- 450:	2f 5f       	subi	r18, 0xFF	; 255
- 452:	3f 4f       	sbci	r19, 0xFF	; 255
- 454:	41 e0       	ldi	r20, 0x01	; 1
- 456:	62 e0       	ldi	r22, 0x02	; 2
- 458:	8c e0       	ldi	r24, 0x0C	; 12
- 45a:	71 df       	rcall	.-286    	; 0x33e <generate_KNX>
-}
- 45c:	ce 5f       	subi	r28, 0xFE	; 254
- 45e:	cd bf       	out	0x3d, r28	; 61
- 460:	df 91       	pop	r29
- 462:	cf 91       	pop	r28
- 464:	1f 91       	pop	r17
- 466:	0f 91       	pop	r16
- 468:	ef 90       	pop	r14
- 46a:	08 95       	ret
-
-0000046c <changeDimmer>:
-
-void changeDimmer(uint8_t address, int state){
- 46c:	ef 92       	push	r14
- 46e:	0f 93       	push	r16
- 470:	1f 93       	push	r17
- 472:	cf 93       	push	r28
- 474:	df 93       	push	r29
- 476:	00 d0       	rcall	.+0      	; 0x478 <changeDimmer+0xc>
- 478:	cd b7       	in	r28, 0x3d	; 61
- 47a:	dd 27       	eor	r29, r29
-		
-		int size_data_array = 2;
-		uint8_t data_array[size_data_array];
-		data_array[0] = 0x00;
- 47c:	19 82       	std	Y+1, r1	; 0x01
-		if(state == 1){
- 47e:	61 30       	cpi	r22, 0x01	; 1
- 480:	71 05       	cpc	r23, r1
- 482:	19 f4       	brne	.+6      	; 0x48a <changeDimmer+0x1e>
-			data_array[1] = 0x8B;//10001011 increases the dimmer with 25%
- 484:	9b e8       	ldi	r25, 0x8B	; 139
- 486:	9a 83       	std	Y+2, r25	; 0x02
- 488:	04 c0       	rjmp	.+8      	; 0x492 <changeDimmer+0x26>
-		}
-		else if(state == 0){
- 48a:	67 2b       	or	r22, r23
- 48c:	11 f4       	brne	.+4      	; 0x492 <changeDimmer+0x26>
-			data_array[1] = 0x83;//10000011 decreases the dimmer with 25%
- 48e:	93 e8       	ldi	r25, 0x83	; 131
- 490:	9a 83       	std	Y+2, r25	; 0x02
-		}
-		
-		
-		uint8_t length = 2;
-		uint8_t repeated = 1;//not repeated
-		generate_KNX(normal_priority, length, repeated, data_array, size_data_array, address);
- 492:	e8 2e       	mov	r14, r24
- 494:	02 e0       	ldi	r16, 0x02	; 2
- 496:	10 e0       	ldi	r17, 0x00	; 0
- 498:	9e 01       	movw	r18, r28
- 49a:	2f 5f       	subi	r18, 0xFF	; 255
- 49c:	3f 4f       	sbci	r19, 0xFF	; 255
- 49e:	41 e0       	ldi	r20, 0x01	; 1
- 4a0:	62 e0       	ldi	r22, 0x02	; 2
- 4a2:	8c e0       	ldi	r24, 0x0C	; 12
- 4a4:	4c df       	rcall	.-360    	; 0x33e <generate_KNX>
-}
- 4a6:	ce 5f       	subi	r28, 0xFE	; 254
- 4a8:	cd bf       	out	0x3d, r28	; 61
- 4aa:	df 91       	pop	r29
- 4ac:	cf 91       	pop	r28
- 4ae:	1f 91       	pop	r17
- 4b0:	0f 91       	pop	r16
- 4b2:	ef 90       	pop	r14
- 4b4:	08 95       	ret
-
-000004b6 <main>:
+00000180 <main>:
+#define BUFFER_SIZE 16
 //static uint8_t rx_buffer[BUFFER_SIZE] = "";
 
 int main(void)
 {
+	init_external_interrupt0_gpio();
+ 180:	6e df       	rcall	.-292    	; 0x5e <init_external_interrupt0_gpio>
 	
-	buttons();
- 4b6:	99 d0       	rcall	.+306    	; 0x5ea <buttons>
-	*/
+	uint8_t i = 0;
+	uint16_t c = 0;
 
+	init_uart();
+ 182:	04 d0       	rcall	.+8      	; 0x18c <init_uart>
 
-
-	return 0;
-}
- 4b8:	80 e0       	ldi	r24, 0x00	; 0
- 4ba:	90 e0       	ldi	r25, 0x00	; 0
- 4bc:	08 95       	ret
-
-000004be <ButtonClicker>:
-
-	
-}
-
-void ButtonClicker(uint8_t index,uint8_t state)
-{
- 4be:	0f 93       	push	r16
- 4c0:	1f 93       	push	r17
- 4c2:	cf 93       	push	r28
-	uint8_t address;
-	if (state == 0)
- 4c4:	61 11       	cpse	r22, r1
- 4c6:	44 c0       	rjmp	.+136    	; 0x550 <ButtonClicker+0x92>
- 4c8:	c8 2f       	mov	r28, r24
-	{
-		
-		if(index == 0){
- 4ca:	81 11       	cpse	r24, r1
- 4cc:	17 c0       	rjmp	.+46     	; 0x4fc <ButtonClicker+0x3e>
-			//PORTA ^= _BV(index);
-			address = 0x0A;//1.1.10 for Led0
-			toggle_output_gpio(0xA, 0);
- 4ce:	60 e0       	ldi	r22, 0x00	; 0
- 4d0:	70 e0       	ldi	r23, 0x00	; 0
- 4d2:	8a e0       	ldi	r24, 0x0A	; 10
- 4d4:	07 df       	rcall	.-498    	; 0x2e4 <toggle_output_gpio>
-			int ret = (PIN('B') & 1 << 0);
- 4d6:	80 91 91 ff 	lds	r24, 0xFF91	; 0x80ff91 <__bss_end+0xfec9>
-				if(ret == 1){
- 4da:	08 2f       	mov	r16, r24
- 4dc:	01 70       	andi	r16, 0x01	; 1
- 4de:	10 e0       	ldi	r17, 0x00	; 0
- 4e0:	80 ff       	sbrs	r24, 0
- 4e2:	05 c0       	rjmp	.+10     	; 0x4ee <ButtonClicker+0x30>
-					switch_led(address, 1);//send the signal to the KNX
- 4e4:	61 e0       	ldi	r22, 0x01	; 1
- 4e6:	70 e0       	ldi	r23, 0x00	; 0
- 4e8:	8a e0       	ldi	r24, 0x0A	; 10
- 4ea:	9b df       	rcall	.-202    	; 0x422 <switch_led>
- 4ec:	15 c0       	rjmp	.+42     	; 0x518 <ButtonClicker+0x5a>
-				}
-				else if(ret == 0){
- 4ee:	01 2b       	or	r16, r17
- 4f0:	99 f4       	brne	.+38     	; 0x518 <ButtonClicker+0x5a>
-					switch_led(address, 0);
- 4f2:	60 e0       	ldi	r22, 0x00	; 0
- 4f4:	70 e0       	ldi	r23, 0x00	; 0
- 4f6:	8a e0       	ldi	r24, 0x0A	; 10
- 4f8:	94 df       	rcall	.-216    	; 0x422 <switch_led>
- 4fa:	0e c0       	rjmp	.+28     	; 0x518 <ButtonClicker+0x5a>
-				}
-		}
-		if(index == 1){//decrease button Dimmer1
- 4fc:	81 30       	cpi	r24, 0x01	; 1
- 4fe:	29 f4       	brne	.+10     	; 0x50a <ButtonClicker+0x4c>
-			address = 0x0C;//1.1.12 for Dimmer1
-			changeDimmer(address, 0);
- 500:	60 e0       	ldi	r22, 0x00	; 0
- 502:	70 e0       	ldi	r23, 0x00	; 0
- 504:	8c e0       	ldi	r24, 0x0C	; 12
- 506:	b2 df       	rcall	.-156    	; 0x46c <changeDimmer>
- 508:	16 c0       	rjmp	.+44     	; 0x536 <ButtonClicker+0x78>
-		}
-		if(index == 2){	//decrease button Dimmer2
- 50a:	82 30       	cpi	r24, 0x02	; 2
- 50c:	29 f4       	brne	.+10     	; 0x518 <ButtonClicker+0x5a>
-			address = 0x0D;//1.1.13 for Dimmer2
-			changeDimmer(address, 0);
- 50e:	60 e0       	ldi	r22, 0x00	; 0
- 510:	70 e0       	ldi	r23, 0x00	; 0
- 512:	8d e0       	ldi	r24, 0x0D	; 13
- 514:	ab df       	rcall	.-170    	; 0x46c <changeDimmer>
- 516:	16 c0       	rjmp	.+44     	; 0x544 <ButtonClicker+0x86>
-
-		}
-		if(index == 3){//toggle switch for Led1
- 518:	c3 30       	cpi	r28, 0x03	; 3
- 51a:	69 f4       	brne	.+26     	; 0x536 <ButtonClicker+0x78>
-			address = 0x0A;//1.1.11 for Led1
-			
-			toggle_output_gpio(0xD, 3);
- 51c:	63 e0       	ldi	r22, 0x03	; 3
- 51e:	70 e0       	ldi	r23, 0x00	; 0
- 520:	8d e0       	ldi	r24, 0x0D	; 13
- 522:	e0 de       	rcall	.-576    	; 0x2e4 <toggle_output_gpio>
-			int ret = (PIN('D') & 1 << 3);
- 524:	80 91 8b ff 	lds	r24, 0xFF8B	; 0x80ff8b <__bss_end+0xfec3>
-			if(ret == 1){
-				switch_led(address, 1);
-			}
-			else if(ret == 0){
- 528:	83 fd       	sbrc	r24, 3
- 52a:	12 c0       	rjmp	.+36     	; 0x550 <ButtonClicker+0x92>
-				switch_led(address, 0);
- 52c:	60 e0       	ldi	r22, 0x00	; 0
- 52e:	70 e0       	ldi	r23, 0x00	; 0
- 530:	8a e0       	ldi	r24, 0x0A	; 10
- 532:	77 df       	rcall	.-274    	; 0x422 <switch_led>
- 534:	0d c0       	rjmp	.+26     	; 0x550 <ButtonClicker+0x92>
-			}
-
-		}
-		if(index == 4){//increase button for Dimmer1
- 536:	c4 30       	cpi	r28, 0x04	; 4
- 538:	29 f4       	brne	.+10     	; 0x544 <ButtonClicker+0x86>
-			address = 0x0C;//1.1.12 for Dimmer1
-			changeDimmer(address, 1);
- 53a:	61 e0       	ldi	r22, 0x01	; 1
- 53c:	70 e0       	ldi	r23, 0x00	; 0
- 53e:	8c e0       	ldi	r24, 0x0C	; 12
- 540:	95 df       	rcall	.-214    	; 0x46c <changeDimmer>
- 542:	06 c0       	rjmp	.+12     	; 0x550 <ButtonClicker+0x92>
-
-		}
-		if(index == 5){//increase button for Dimmer2
- 544:	c5 30       	cpi	r28, 0x05	; 5
- 546:	21 f4       	brne	.+8      	; 0x550 <ButtonClicker+0x92>
-			address = 0x0D;//1.1.13 for Dimmer2
-			changeDimmer(address, 1);
- 548:	61 e0       	ldi	r22, 0x01	; 1
- 54a:	70 e0       	ldi	r23, 0x00	; 0
- 54c:	8d e0       	ldi	r24, 0x0D	; 13
- 54e:	8e df       	rcall	.-228    	; 0x46c <changeDimmer>
-
-		}
-
-
-	}
-}
- 550:	cf 91       	pop	r28
- 552:	1f 91       	pop	r17
- 554:	0f 91       	pop	r16
- 556:	08 95       	ret
-
-00000558 <__vector_11>:
-	It compares these values to the last known state and signals a change
-	on any pins that have changed state.
-
-*/
-ISR(PCINT0_vect)
-{
- 558:	1f 92       	push	r1
- 55a:	0f 92       	push	r0
- 55c:	0f b6       	in	r0, 0x3f	; 63
- 55e:	0f 92       	push	r0
- 560:	11 24       	eor	r1, r1
- 562:	2f 93       	push	r18
- 564:	3f 93       	push	r19
- 566:	4f 93       	push	r20
- 568:	5f 93       	push	r21
- 56a:	6f 93       	push	r22
- 56c:	7f 93       	push	r23
- 56e:	8f 93       	push	r24
- 570:	9f 93       	push	r25
- 572:	af 93       	push	r26
- 574:	bf 93       	push	r27
- 576:	cf 93       	push	r28
- 578:	ef 93       	push	r30
- 57a:	ff 93       	push	r31
-	uint8_t temp = lastState^PINB;
- 57c:	c6 b3       	in	r28, 0x16	; 22
- 57e:	80 91 c7 00 	lds	r24, 0x00C7	; 0x8000c7 <lastState>
- 582:	c8 27       	eor	r28, r24
-	lastState = PINB;
- 584:	86 b3       	in	r24, 0x16	; 22
- 586:	80 93 c7 00 	sts	0x00C7, r24	; 0x8000c7 <lastState>
-
-	if ((temp & _BV(0)))
- 58a:	c0 ff       	sbrs	r28, 0
- 58c:	03 c0       	rjmp	.+6      	; 0x594 <__vector_11+0x3c>
-		signalChangedState(0,2);
- 58e:	62 e0       	ldi	r22, 0x02	; 2
- 590:	80 e0       	ldi	r24, 0x00	; 0
- 592:	7f de       	rcall	.-770    	; 0x292 <signalChangedState>
-	if ((temp & _BV(1)))
- 594:	c1 ff       	sbrs	r28, 1
- 596:	03 c0       	rjmp	.+6      	; 0x59e <__vector_11+0x46>
-		signalChangedState(1,3);
- 598:	63 e0       	ldi	r22, 0x03	; 3
- 59a:	81 e0       	ldi	r24, 0x01	; 1
- 59c:	7a de       	rcall	.-780    	; 0x292 <signalChangedState>
-	if ((temp & _BV(2)))
- 59e:	c2 ff       	sbrs	r28, 2
- 5a0:	03 c0       	rjmp	.+6      	; 0x5a8 <__vector_11+0x50>
-		signalChangedState(2,4);
- 5a2:	64 e0       	ldi	r22, 0x04	; 4
- 5a4:	82 e0       	ldi	r24, 0x02	; 2
- 5a6:	75 de       	rcall	.-790    	; 0x292 <signalChangedState>
-	if ((temp & _BV(3)))
- 5a8:	c3 ff       	sbrs	r28, 3
- 5aa:	03 c0       	rjmp	.+6      	; 0x5b2 <__vector_11+0x5a>
-		signalChangedState(3,5);
- 5ac:	65 e0       	ldi	r22, 0x05	; 5
- 5ae:	83 e0       	ldi	r24, 0x03	; 3
- 5b0:	70 de       	rcall	.-800    	; 0x292 <signalChangedState>
-	if ((temp & _BV(4)))
- 5b2:	c4 ff       	sbrs	r28, 4
- 5b4:	03 c0       	rjmp	.+6      	; 0x5bc <__vector_11+0x64>
-		signalChangedState(4,20);
- 5b6:	64 e1       	ldi	r22, 0x14	; 20
- 5b8:	84 e0       	ldi	r24, 0x04	; 4
- 5ba:	6b de       	rcall	.-810    	; 0x292 <signalChangedState>
-	if ((temp & _BV(5)))
- 5bc:	c5 ff       	sbrs	r28, 5
- 5be:	03 c0       	rjmp	.+6      	; 0x5c6 <__vector_11+0x6e>
-		signalChangedState(5,50);
- 5c0:	62 e3       	ldi	r22, 0x32	; 50
- 5c2:	85 e0       	ldi	r24, 0x05	; 5
- 5c4:	66 de       	rcall	.-820    	; 0x292 <signalChangedState>
-	/*if ((temp & _BV(6)))
-		signalChangedState(6,200);
-	if ((temp & _BV(7)))
-		signalChangedState(7,200);
-	*/
-} 
- 5c6:	ff 91       	pop	r31
- 5c8:	ef 91       	pop	r30
- 5ca:	cf 91       	pop	r28
- 5cc:	bf 91       	pop	r27
- 5ce:	af 91       	pop	r26
- 5d0:	9f 91       	pop	r25
- 5d2:	8f 91       	pop	r24
- 5d4:	7f 91       	pop	r23
- 5d6:	6f 91       	pop	r22
- 5d8:	5f 91       	pop	r21
- 5da:	4f 91       	pop	r20
- 5dc:	3f 91       	pop	r19
- 5de:	2f 91       	pop	r18
- 5e0:	0f 90       	pop	r0
- 5e2:	0f be       	out	0x3f, r0	; 63
- 5e4:	0f 90       	pop	r0
- 5e6:	1f 90       	pop	r1
- 5e8:	18 95       	reti
-
-000005ea <buttons>:
-
-
-void buttons(void)
-{
-	//Initialize PORTB as all inputs, no internal pull-ups
-	DDRB  = 0x00;
- 5ea:	17 ba       	out	0x17, r1	; 23
-	PORTB = 0x00;
- 5ec:	18 ba       	out	0x18, r1	; 24
-
-	//Initialize PORTD as all outputs, all HIGH (LEDs off)
-	DDRD  = 0xFF;
- 5ee:	cf ef       	ldi	r28, 0xFF	; 255
- 5f0:	c1 bb       	out	0x11, r28	; 17
-	PORTD = 0xFF;
- 5f2:	c2 bb       	out	0x12, r28	; 18
-
-	DDRA = 0xFF;
- 5f4:	ca bb       	out	0x1a, r28	; 26
-	PORTA = 0xFF;
- 5f6:	cb bb       	out	0x1b, r28	; 27
-
-	//Initial timer setup (does not start timer)
-	initializeDebouncerTimer();
- 5f8:	6e de       	rcall	.-804    	; 0x2d6 <initializeDebouncerTimer>
-
-	lastState = PINB;
- 5fa:	86 b3       	in	r24, 0x16	; 22
- 5fc:	80 93 c7 00 	sts	0x00C7, r24	; 0x8000c7 <lastState>
-
-	//void registerDebouncer(volatile uint8_t *port,uint8_t bit,uint8_t index,uint8_t Asynchronous,debounceHandler handler);
-
-	//Fills in details regarding 
-	registerDebouncer(&PINB,PB0,0,1,&ButtonClicker);
- 600:	0f e5       	ldi	r16, 0x5F	; 95
- 602:	12 e0       	ldi	r17, 0x02	; 2
- 604:	21 e0       	ldi	r18, 0x01	; 1
- 606:	40 e0       	ldi	r20, 0x00	; 0
- 608:	60 e0       	ldi	r22, 0x00	; 0
- 60a:	86 e3       	ldi	r24, 0x36	; 54
- 60c:	90 e0       	ldi	r25, 0x00	; 0
- 60e:	11 de       	rcall	.-990    	; 0x232 <registerDebouncer>
-	registerDebouncer(&PINB,PB1,1,1,&ButtonClicker);
- 610:	21 e0       	ldi	r18, 0x01	; 1
- 612:	41 e0       	ldi	r20, 0x01	; 1
- 614:	61 e0       	ldi	r22, 0x01	; 1
- 616:	86 e3       	ldi	r24, 0x36	; 54
- 618:	90 e0       	ldi	r25, 0x00	; 0
- 61a:	0b de       	rcall	.-1002   	; 0x232 <registerDebouncer>
-	registerDebouncer(&PINB,PB2,2,1,&ButtonClicker);
- 61c:	21 e0       	ldi	r18, 0x01	; 1
- 61e:	42 e0       	ldi	r20, 0x02	; 2
- 620:	62 e0       	ldi	r22, 0x02	; 2
- 622:	86 e3       	ldi	r24, 0x36	; 54
- 624:	90 e0       	ldi	r25, 0x00	; 0
- 626:	05 de       	rcall	.-1014   	; 0x232 <registerDebouncer>
-	registerDebouncer(&PINB,PB3,3,1,&ButtonClicker);
- 628:	21 e0       	ldi	r18, 0x01	; 1
- 62a:	43 e0       	ldi	r20, 0x03	; 3
- 62c:	63 e0       	ldi	r22, 0x03	; 3
- 62e:	86 e3       	ldi	r24, 0x36	; 54
- 630:	90 e0       	ldi	r25, 0x00	; 0
- 632:	ff dd       	rcall	.-1026   	; 0x232 <registerDebouncer>
-	registerDebouncer(&PINB,PB4,4,0,&ButtonClicker);
- 634:	20 e0       	ldi	r18, 0x00	; 0
- 636:	44 e0       	ldi	r20, 0x04	; 4
- 638:	64 e0       	ldi	r22, 0x04	; 4
- 63a:	86 e3       	ldi	r24, 0x36	; 54
- 63c:	90 e0       	ldi	r25, 0x00	; 0
- 63e:	f9 dd       	rcall	.-1038   	; 0x232 <registerDebouncer>
-	registerDebouncer(&PINB,PB5,5,0,&ButtonClicker);
- 640:	20 e0       	ldi	r18, 0x00	; 0
- 642:	45 e0       	ldi	r20, 0x05	; 5
- 644:	65 e0       	ldi	r22, 0x05	; 5
- 646:	86 e3       	ldi	r24, 0x36	; 54
- 648:	90 e0       	ldi	r25, 0x00	; 0
- 64a:	f3 dd       	rcall	.-1050   	; 0x232 <registerDebouncer>
-	//registerDebouncer(&PINB,PB6,6,0,&ButtonClicker);
-	//registerDebouncer(&PINB,PB7,7,0,&ButtonClicker);
-
-	//Enable pin-change interrupt & mask
-	GIMSK  = _BV(PCIE0);
- 64c:	80 e2       	ldi	r24, 0x20	; 32
- 64e:	8b bf       	out	0x3b, r24	; 59
-	PCMSK0 = 0xFF;
- 650:	c0 bd       	out	0x20, r28	; 32
-
-	//Enable interrupts
 	sei();
- 652:	78 94       	sei
+ 184:	78 94       	sei
 
-	while(1)
-	{
-		//This will loop through any signaled debouncer items and
-		//call their handlers (doesn't apply to asynchronous)
-		callSignaledHandlers();
- 654:	c3 dd       	rcall	.-1146   	; 0x1dc <callSignaledHandlers>
-	#else
-		//round up by default
-		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
-	#endif
+	while (1) {
+		uart_putc(0b11101010);
+ 186:	8a ee       	ldi	r24, 0xEA	; 234
+ 188:	2b d0       	rcall	.+86     	; 0x1e0 <uart_putc>
+ 18a:	fd cf       	rjmp	.-6      	; 0x186 <main+0x6>
 
-	__builtin_avr_delay_cycles(__ticks_dc);
- 656:	81 ee       	ldi	r24, 0xE1	; 225
- 658:	94 e0       	ldi	r25, 0x04	; 4
- 65a:	01 97       	sbiw	r24, 0x01	; 1
- 65c:	f1 f7       	brne	.-4      	; 0x65a <buttons+0x70>
- 65e:	00 c0       	rjmp	.+0      	; 0x660 <buttons+0x76>
- 660:	00 00       	nop
- 662:	f8 cf       	rjmp	.-16     	; 0x654 <buttons+0x6a>
+0000018c <init_uart>:
+volatile static uint8_t sent = TRUE;
 
-00000664 <uart_getc>:
- */
-void uart_puts_P(const char *s) {
-  while (pgm_read_byte(s) != 0x00) {
-    uart_putc(pgm_read_byte(s++));
-  }
-}
- 664:	90 91 a1 00 	lds	r25, 0x00A1	; 0x8000a1 <rx_head>
- 668:	80 91 a0 00 	lds	r24, 0x00A0	; 0x8000a0 <rx_tail>
- 66c:	98 17       	cp	r25, r24
- 66e:	c9 f0       	breq	.+50     	; 0x6a2 <uart_getc+0x3e>
- 670:	20 91 a0 00 	lds	r18, 0x00A0	; 0x8000a0 <rx_tail>
- 674:	30 e0       	ldi	r19, 0x00	; 0
- 676:	2f 5f       	subi	r18, 0xFF	; 255
- 678:	3f 4f       	sbci	r19, 0xFF	; 255
- 67a:	2f 70       	andi	r18, 0x0F	; 15
- 67c:	30 78       	andi	r19, 0x80	; 128
- 67e:	33 23       	and	r19, r19
- 680:	34 f4       	brge	.+12     	; 0x68e <uart_getc+0x2a>
- 682:	21 50       	subi	r18, 0x01	; 1
- 684:	31 09       	sbc	r19, r1
- 686:	20 6f       	ori	r18, 0xF0	; 240
- 688:	3f 6f       	ori	r19, 0xFF	; 255
- 68a:	2f 5f       	subi	r18, 0xFF	; 255
- 68c:	3f 4f       	sbci	r19, 0xFF	; 255
- 68e:	e0 91 a0 00 	lds	r30, 0x00A0	; 0x8000a0 <rx_tail>
- 692:	f0 e0       	ldi	r31, 0x00	; 0
- 694:	e7 57       	subi	r30, 0x77	; 119
- 696:	ff 4f       	sbci	r31, 0xFF	; 255
- 698:	80 81       	ld	r24, Z
- 69a:	20 93 a0 00 	sts	0x00A0, r18	; 0x8000a0 <rx_tail>
- 69e:	90 e0       	ldi	r25, 0x00	; 0
- 6a0:	08 95       	ret
- 6a2:	80 e0       	ldi	r24, 0x00	; 0
- 6a4:	91 e0       	ldi	r25, 0x01	; 1
- 6a6:	08 95       	ret
+//initialize uart
+void init_uart(void) {
+  // set baud rate
+  UBRRH = (uint8_t)(MYUBBR >> 8); 
+ 18c:	12 b8       	out	0x02, r1	; 2
+  UBRRL = (uint8_t)(MYUBBR);
+ 18e:	85 e0       	ldi	r24, 0x05	; 5
+ 190:	89 b9       	out	0x09, r24	; 9
+  // enable receive and transmit
+  UCSRB = (1 << RXEN) | (1 << TXEN) | (1 << RXCIE);
+ 192:	88 e9       	ldi	r24, 0x98	; 152
+ 194:	8a b9       	out	0x0a, r24	; 10
+  // set frame format
+  UCSRC = (0 << USBS) | (3 << UCSZ0) | (1 << UPM1);	// asynchron 8n1 and even bit parity
+ 196:	86 e2       	ldi	r24, 0x26	; 38
+ 198:	83 b9       	out	0x03, r24	; 3
+ 19a:	08 95       	ret
 
-000006a8 <uart_putc>:
- 6a8:	20 91 9f 00 	lds	r18, 0x009F	; 0x80009f <tx_head>
- 6ac:	30 e0       	ldi	r19, 0x00	; 0
- 6ae:	2f 5f       	subi	r18, 0xFF	; 255
- 6b0:	3f 4f       	sbci	r19, 0xFF	; 255
- 6b2:	2f 70       	andi	r18, 0x0F	; 15
- 6b4:	30 78       	andi	r19, 0x80	; 128
- 6b6:	33 23       	and	r19, r19
- 6b8:	34 f4       	brge	.+12     	; 0x6c6 <uart_putc+0x1e>
- 6ba:	21 50       	subi	r18, 0x01	; 1
- 6bc:	31 09       	sbc	r19, r1
- 6be:	20 6f       	ori	r18, 0xF0	; 240
- 6c0:	3f 6f       	ori	r19, 0xFF	; 255
- 6c2:	2f 5f       	subi	r18, 0xFF	; 255
- 6c4:	3f 4f       	sbci	r19, 0xFF	; 255
- 6c6:	90 91 9e 00 	lds	r25, 0x009E	; 0x80009e <tx_tail>
- 6ca:	29 17       	cp	r18, r25
- 6cc:	e1 f3       	breq	.-8      	; 0x6c6 <uart_putc+0x1e>
- 6ce:	e0 91 9f 00 	lds	r30, 0x009F	; 0x80009f <tx_head>
- 6d2:	f0 e0       	ldi	r31, 0x00	; 0
- 6d4:	e7 58       	subi	r30, 0x87	; 135
- 6d6:	ff 4f       	sbci	r31, 0xFF	; 255
- 6d8:	80 83       	st	Z, r24
- 6da:	20 93 9f 00 	sts	0x009F, r18	; 0x80009f <tx_head>
- 6de:	55 9a       	sbi	0x0a, 5	; 10
- 6e0:	08 95       	ret
+0000019c <uart_getc>:
 
-000006e2 <__vector_8>:
-/*
- * ISR User Data Regiser Empty
- * Send a char out of buffer via UART. If sending is complete, the 
- * interrupt gets disabled.
- */
-ISR(USART_UDRE_vect) {
- 6e2:	1f 92       	push	r1
- 6e4:	0f 92       	push	r0
- 6e6:	0f b6       	in	r0, 0x3f	; 63
- 6e8:	0f 92       	push	r0
- 6ea:	11 24       	eor	r1, r1
- 6ec:	8f 93       	push	r24
- 6ee:	9f 93       	push	r25
- 6f0:	ef 93       	push	r30
- 6f2:	ff 93       	push	r31
+//get a char from the buffer
+uint16_t uart_getc(void) {
+  uint8_t c = 0;
   uint8_t tmp_tail = 0;
-  if (tx_head != tx_tail) {
- 6f4:	90 91 9f 00 	lds	r25, 0x009F	; 0x80009f <tx_head>
- 6f8:	80 91 9e 00 	lds	r24, 0x009E	; 0x80009e <tx_tail>
- 6fc:	98 17       	cp	r25, r24
- 6fe:	b1 f0       	breq	.+44     	; 0x72c <__vector_8+0x4a>
-    tmp_tail = (tx_tail + 1) % BUFFER_SIZE;
- 700:	80 91 9e 00 	lds	r24, 0x009E	; 0x80009e <tx_tail>
- 704:	90 e0       	ldi	r25, 0x00	; 0
- 706:	01 96       	adiw	r24, 0x01	; 1
- 708:	8f 70       	andi	r24, 0x0F	; 15
- 70a:	90 78       	andi	r25, 0x80	; 128
- 70c:	99 23       	and	r25, r25
- 70e:	24 f4       	brge	.+8      	; 0x718 <__vector_8+0x36>
- 710:	01 97       	sbiw	r24, 0x01	; 1
- 712:	80 6f       	ori	r24, 0xF0	; 240
- 714:	9f 6f       	ori	r25, 0xFF	; 255
- 716:	01 96       	adiw	r24, 0x01	; 1
-    UDR = tx_buffer[tx_tail];
- 718:	e0 91 9e 00 	lds	r30, 0x009E	; 0x80009e <tx_tail>
- 71c:	f0 e0       	ldi	r31, 0x00	; 0
- 71e:	e7 58       	subi	r30, 0x87	; 135
- 720:	ff 4f       	sbci	r31, 0xFF	; 255
- 722:	90 81       	ld	r25, Z
- 724:	9c b9       	out	0x0c, r25	; 12
+  if (rx_head == rx_tail) {//there is no data in the buffer
+ 19c:	90 91 a1 00 	lds	r25, 0x00A1	; 0x8000a1 <rx_head>
+ 1a0:	80 91 a0 00 	lds	r24, 0x00A0	; 0x8000a0 <rx_tail>
+ 1a4:	98 17       	cp	r25, r24
+ 1a6:	c9 f0       	breq	.+50     	; 0x1da <uart_getc+0x3e>
+    return UART_NO_DATA;
+  }
+  tmp_tail = (rx_tail + 1) % BUFFER_SIZE;//goes from 0 to 15 and then to 0
+ 1a8:	20 91 a0 00 	lds	r18, 0x00A0	; 0x8000a0 <rx_tail>
+ 1ac:	30 e0       	ldi	r19, 0x00	; 0
+ 1ae:	2f 5f       	subi	r18, 0xFF	; 255
+ 1b0:	3f 4f       	sbci	r19, 0xFF	; 255
+ 1b2:	2f 70       	andi	r18, 0x0F	; 15
+ 1b4:	30 78       	andi	r19, 0x80	; 128
+ 1b6:	33 23       	and	r19, r19
+ 1b8:	34 f4       	brge	.+12     	; 0x1c6 <uart_getc+0x2a>
+ 1ba:	21 50       	subi	r18, 0x01	; 1
+ 1bc:	31 09       	sbc	r19, r1
+ 1be:	20 6f       	ori	r18, 0xF0	; 240
+ 1c0:	3f 6f       	ori	r19, 0xFF	; 255
+ 1c2:	2f 5f       	subi	r18, 0xFF	; 255
+ 1c4:	3f 4f       	sbci	r19, 0xFF	; 255
+  c = rx_buffer[rx_tail];//get the last byte from the buffer
+ 1c6:	e0 91 a0 00 	lds	r30, 0x00A0	; 0x8000a0 <rx_tail>
+ 1ca:	f0 e0       	ldi	r31, 0x00	; 0
+ 1cc:	e7 57       	subi	r30, 0x77	; 119
+ 1ce:	ff 4f       	sbci	r31, 0xFF	; 255
+ 1d0:	80 81       	ld	r24, Z
+  rx_tail = tmp_tail;//rx_tail is increased by one
+ 1d2:	20 93 a0 00 	sts	0x00A0, r18	; 0x8000a0 <rx_tail>
+  return c;
+ 1d6:	90 e0       	ldi	r25, 0x00	; 0
+ 1d8:	08 95       	ret
+//get a char from the buffer
+uint16_t uart_getc(void) {
+  uint8_t c = 0;
+  uint8_t tmp_tail = 0;
+  if (rx_head == rx_tail) {//there is no data in the buffer
+    return UART_NO_DATA;
+ 1da:	80 e0       	ldi	r24, 0x00	; 0
+ 1dc:	91 e0       	ldi	r25, 0x01	; 1
+  tmp_tail = (rx_tail + 1) % BUFFER_SIZE;//goes from 0 to 15 and then to 0
+  c = rx_buffer[rx_tail];//get the last byte from the buffer
+  rx_tail = tmp_tail;//rx_tail is increased by one
+  return c;
+
+}
+ 1de:	08 95       	ret
+
+000001e0 <uart_putc>:
+
+ //put a single char in the ringbuffer
+void uart_putc(uint8_t c) {
+  uint8_t tmp_head = (tx_head + 1) % BUFFER_SIZE;//goes from 0 to 15 and then to 0
+ 1e0:	20 91 9f 00 	lds	r18, 0x009F	; 0x80009f <tx_head>
+ 1e4:	30 e0       	ldi	r19, 0x00	; 0
+ 1e6:	2f 5f       	subi	r18, 0xFF	; 255
+ 1e8:	3f 4f       	sbci	r19, 0xFF	; 255
+ 1ea:	2f 70       	andi	r18, 0x0F	; 15
+ 1ec:	30 78       	andi	r19, 0x80	; 128
+ 1ee:	33 23       	and	r19, r19
+ 1f0:	34 f4       	brge	.+12     	; 0x1fe <uart_putc+0x1e>
+ 1f2:	21 50       	subi	r18, 0x01	; 1
+ 1f4:	31 09       	sbc	r19, r1
+ 1f6:	20 6f       	ori	r18, 0xF0	; 240
+ 1f8:	3f 6f       	ori	r19, 0xFF	; 255
+ 1fa:	2f 5f       	subi	r18, 0xFF	; 255
+ 1fc:	3f 4f       	sbci	r19, 0xFF	; 255
+  // wait for space in buffer
+  while (tmp_head == tx_tail) {//if the head is the same as the tail there has to be waited on the ISR
+ 1fe:	90 91 9e 00 	lds	r25, 0x009E	; 0x80009e <tx_tail>
+ 202:	29 17       	cp	r18, r25
+ 204:	e1 f3       	breq	.-8      	; 0x1fe <uart_putc+0x1e>
+    ;
+  }
+  tx_buffer[tx_head] = c;//put c in the ringbuffer
+ 206:	e0 91 9f 00 	lds	r30, 0x009F	; 0x80009f <tx_head>
+ 20a:	f0 e0       	ldi	r31, 0x00	; 0
+ 20c:	e7 58       	subi	r30, 0x87	; 135
+ 20e:	ff 4f       	sbci	r31, 0xFF	; 255
+ 210:	80 83       	st	Z, r24
+  tx_head = tmp_head;
+ 212:	20 93 9f 00 	sts	0x009F, r18	; 0x80009f <tx_head>
+  // enable uart data interrupt (send data)
+  UCSRB |= (1<<UDRIE);
+ 216:	55 9a       	sbi	0x0a, 5	; 10
+ 218:	08 95       	ret
+
+0000021a <__vector_8>:
+}
+
+//send a char out of the buffer
+ISR(USART_UDRE_vect) {
+ 21a:	1f 92       	push	r1
+ 21c:	0f 92       	push	r0
+ 21e:	0f b6       	in	r0, 0x3f	; 63
+ 220:	0f 92       	push	r0
+ 222:	11 24       	eor	r1, r1
+ 224:	8f 93       	push	r24
+ 226:	9f 93       	push	r25
+ 228:	ef 93       	push	r30
+ 22a:	ff 93       	push	r31
+  uint8_t tmp_tail = 0;
+  if (tx_head != tx_tail) {//check if there is any more data to send
+ 22c:	90 91 9f 00 	lds	r25, 0x009F	; 0x80009f <tx_head>
+ 230:	80 91 9e 00 	lds	r24, 0x009E	; 0x80009e <tx_tail>
+ 234:	98 17       	cp	r25, r24
+ 236:	b1 f0       	breq	.+44     	; 0x264 <__vector_8+0x4a>
+    tmp_tail = (tx_tail + 1) % BUFFER_SIZE;//goes from 0 to 15 and then to 0
+ 238:	80 91 9e 00 	lds	r24, 0x009E	; 0x80009e <tx_tail>
+ 23c:	90 e0       	ldi	r25, 0x00	; 0
+ 23e:	01 96       	adiw	r24, 0x01	; 1
+ 240:	8f 70       	andi	r24, 0x0F	; 15
+ 242:	90 78       	andi	r25, 0x80	; 128
+ 244:	99 23       	and	r25, r25
+ 246:	24 f4       	brge	.+8      	; 0x250 <__vector_8+0x36>
+ 248:	01 97       	sbiw	r24, 0x01	; 1
+ 24a:	80 6f       	ori	r24, 0xF0	; 240
+ 24c:	9f 6f       	ori	r25, 0xFF	; 255
+ 24e:	01 96       	adiw	r24, 0x01	; 1
+    UDR = tx_buffer[tx_tail];//put the last byte of the buffer into the uart register
+ 250:	e0 91 9e 00 	lds	r30, 0x009E	; 0x80009e <tx_tail>
+ 254:	f0 e0       	ldi	r31, 0x00	; 0
+ 256:	e7 58       	subi	r30, 0x87	; 135
+ 258:	ff 4f       	sbci	r31, 0xFF	; 255
+ 25a:	90 81       	ld	r25, Z
+ 25c:	9c b9       	out	0x0c, r25	; 12
     tx_tail = tmp_tail;
- 726:	80 93 9e 00 	sts	0x009E, r24	; 0x80009e <tx_tail>
- 72a:	01 c0       	rjmp	.+2      	; 0x72e <__vector_8+0x4c>
+ 25e:	80 93 9e 00 	sts	0x009E, r24	; 0x80009e <tx_tail>
+ 262:	01 c0       	rjmp	.+2      	; 0x266 <__vector_8+0x4c>
   }
   else {
     // disable this interrupt if nothing more to send
     UCSRB &= ~(1 << UDRIE);
- 72c:	55 98       	cbi	0x0a, 5	; 10
+ 264:	55 98       	cbi	0x0a, 5	; 10
   }
 }
- 72e:	ff 91       	pop	r31
- 730:	ef 91       	pop	r30
- 732:	9f 91       	pop	r25
- 734:	8f 91       	pop	r24
- 736:	0f 90       	pop	r0
- 738:	0f be       	out	0x3f, r0	; 63
- 73a:	0f 90       	pop	r0
- 73c:	1f 90       	pop	r1
- 73e:	18 95       	reti
+ 266:	ff 91       	pop	r31
+ 268:	ef 91       	pop	r30
+ 26a:	9f 91       	pop	r25
+ 26c:	8f 91       	pop	r24
+ 26e:	0f 90       	pop	r0
+ 270:	0f be       	out	0x3f, r0	; 63
+ 272:	0f 90       	pop	r0
+ 274:	1f 90       	pop	r1
+ 276:	18 95       	reti
 
-00000740 <__vector_7>:
+00000278 <__vector_7>:
 
-/*
- * ISR RX complete
- * Receives a char from UART and stores it in ring buffer.
- */
+//Receive a char from UART and stores it in ring buffer
 ISR(USART_RX_vect) {
- 740:	1f 92       	push	r1
- 742:	0f 92       	push	r0
- 744:	0f b6       	in	r0, 0x3f	; 63
- 746:	0f 92       	push	r0
- 748:	11 24       	eor	r1, r1
- 74a:	2f 93       	push	r18
- 74c:	3f 93       	push	r19
- 74e:	4f 93       	push	r20
- 750:	5f 93       	push	r21
- 752:	6f 93       	push	r22
- 754:	7f 93       	push	r23
- 756:	8f 93       	push	r24
- 758:	9f 93       	push	r25
- 75a:	af 93       	push	r26
- 75c:	bf 93       	push	r27
- 75e:	ef 93       	push	r30
- 760:	ff 93       	push	r31
+ 278:	1f 92       	push	r1
+ 27a:	0f 92       	push	r0
+ 27c:	0f b6       	in	r0, 0x3f	; 63
+ 27e:	0f 92       	push	r0
+ 280:	11 24       	eor	r1, r1
+ 282:	2f 93       	push	r18
+ 284:	3f 93       	push	r19
+ 286:	4f 93       	push	r20
+ 288:	5f 93       	push	r21
+ 28a:	6f 93       	push	r22
+ 28c:	7f 93       	push	r23
+ 28e:	8f 93       	push	r24
+ 290:	9f 93       	push	r25
+ 292:	af 93       	push	r26
+ 294:	bf 93       	push	r27
+ 296:	ef 93       	push	r30
+ 298:	ff 93       	push	r31
   uint8_t tmp_head = 0;
-  tmp_head = (rx_head + 1) % BUFFER_SIZE;
- 762:	80 91 a1 00 	lds	r24, 0x00A1	; 0x8000a1 <rx_head>
- 766:	90 e0       	ldi	r25, 0x00	; 0
- 768:	01 96       	adiw	r24, 0x01	; 1
- 76a:	8f 70       	andi	r24, 0x0F	; 15
- 76c:	90 78       	andi	r25, 0x80	; 128
- 76e:	99 23       	and	r25, r25
- 770:	24 f4       	brge	.+8      	; 0x77a <__vector_7+0x3a>
- 772:	01 97       	sbiw	r24, 0x01	; 1
- 774:	80 6f       	ori	r24, 0xF0	; 240
- 776:	9f 6f       	ori	r25, 0xFF	; 255
- 778:	01 96       	adiw	r24, 0x01	; 1
-  if (tmp_head == rx_tail) {
- 77a:	20 91 a0 00 	lds	r18, 0x00A0	; 0x8000a0 <rx_tail>
- 77e:	28 17       	cp	r18, r24
- 780:	51 f0       	breq	.+20     	; 0x796 <__vector_7+0x56>
+  tmp_head = (rx_head + 1) % BUFFER_SIZE;//goes from 0 to 15 and then to 0
+ 29a:	80 91 a1 00 	lds	r24, 0x00A1	; 0x8000a1 <rx_head>
+ 29e:	90 e0       	ldi	r25, 0x00	; 0
+ 2a0:	01 96       	adiw	r24, 0x01	; 1
+ 2a2:	8f 70       	andi	r24, 0x0F	; 15
+ 2a4:	90 78       	andi	r25, 0x80	; 128
+ 2a6:	99 23       	and	r25, r25
+ 2a8:	24 f4       	brge	.+8      	; 0x2b2 <__vector_7+0x3a>
+ 2aa:	01 97       	sbiw	r24, 0x01	; 1
+ 2ac:	80 6f       	ori	r24, 0xF0	; 240
+ 2ae:	9f 6f       	ori	r25, 0xFF	; 255
+ 2b0:	01 96       	adiw	r24, 0x01	; 1
+  if (tmp_head == rx_tail) {//the buffer is full because the head hit the tail
+ 2b2:	20 91 a0 00 	lds	r18, 0x00A0	; 0x8000a0 <rx_tail>
+ 2b6:	28 17       	cp	r18, r24
+ 2b8:	51 f0       	breq	.+20     	; 0x2ce <__vector_7+0x56>
     // buffer overflow error!
   }
   else{
 
-		rx_buffer[rx_head] = UDR;
- 782:	e0 91 a1 00 	lds	r30, 0x00A1	; 0x8000a1 <rx_head>
- 786:	f0 e0       	ldi	r31, 0x00	; 0
- 788:	9c b1       	in	r25, 0x0c	; 12
- 78a:	e7 57       	subi	r30, 0x77	; 119
- 78c:	ff 4f       	sbci	r31, 0xFF	; 255
- 78e:	90 83       	st	Z, r25
-		rx_head = tmp_head;    
- 790:	80 93 a1 00 	sts	0x00A1, r24	; 0x8000a1 <rx_head>
+		rx_buffer[rx_head] = UDR;//put data in the rx buffer
+ 2ba:	e0 91 a1 00 	lds	r30, 0x00A1	; 0x8000a1 <rx_head>
+ 2be:	f0 e0       	ldi	r31, 0x00	; 0
+ 2c0:	9c b1       	in	r25, 0x0c	; 12
+ 2c2:	e7 57       	subi	r30, 0x77	; 119
+ 2c4:	ff 4f       	sbci	r31, 0xFF	; 255
+ 2c6:	90 83       	st	Z, r25
+		rx_head = tmp_head;  //give the new location of rx head (old rx_head + 1)  
+ 2c8:	80 93 a1 00 	sts	0x00A1, r24	; 0x8000a1 <rx_head>
 		receive_KNX();
- 794:	e3 dd       	rcall	.-1082   	; 0x35c <receive_KNX>
+ 2cc:	f6 de       	rcall	.-532    	; 0xba <receive_KNX>
   }
 }
- 796:	ff 91       	pop	r31
- 798:	ef 91       	pop	r30
- 79a:	bf 91       	pop	r27
- 79c:	af 91       	pop	r26
- 79e:	9f 91       	pop	r25
- 7a0:	8f 91       	pop	r24
- 7a2:	7f 91       	pop	r23
- 7a4:	6f 91       	pop	r22
- 7a6:	5f 91       	pop	r21
- 7a8:	4f 91       	pop	r20
- 7aa:	3f 91       	pop	r19
- 7ac:	2f 91       	pop	r18
- 7ae:	0f 90       	pop	r0
- 7b0:	0f be       	out	0x3f, r0	; 63
- 7b2:	0f 90       	pop	r0
- 7b4:	1f 90       	pop	r1
- 7b6:	18 95       	reti
+ 2ce:	ff 91       	pop	r31
+ 2d0:	ef 91       	pop	r30
+ 2d2:	bf 91       	pop	r27
+ 2d4:	af 91       	pop	r26
+ 2d6:	9f 91       	pop	r25
+ 2d8:	8f 91       	pop	r24
+ 2da:	7f 91       	pop	r23
+ 2dc:	6f 91       	pop	r22
+ 2de:	5f 91       	pop	r21
+ 2e0:	4f 91       	pop	r20
+ 2e2:	3f 91       	pop	r19
+ 2e4:	2f 91       	pop	r18
+ 2e6:	0f 90       	pop	r0
+ 2e8:	0f be       	out	0x3f, r0	; 63
+ 2ea:	0f 90       	pop	r0
+ 2ec:	1f 90       	pop	r1
+ 2ee:	18 95       	reti
 
-000007b8 <_exit>:
- 7b8:	f8 94       	cli
+000002f0 <_exit>:
+ 2f0:	f8 94       	cli
 
-000007ba <__stop_program>:
- 7ba:	ff cf       	rjmp	.-2      	; 0x7ba <__stop_program>
+000002f2 <__stop_program>:
+ 2f2:	ff cf       	rjmp	.-2      	; 0x2f2 <__stop_program>

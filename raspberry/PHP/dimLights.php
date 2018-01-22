@@ -1,4 +1,9 @@
-
+<?php
+session_start();
+if(!isset($_SESSION['SESS_ADMINLOGGEDIN'])){
+	header("location: login.php");
+}
+?>
 <html>
 
 <body>
@@ -7,7 +12,7 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 
 	<div class="navbar">
-		<a href="index.html">Home</a>
+		<a href="index.php">Home</a>
 		<a href="lights.php">Lights</a>
 		<a href="dimLights.php">DimLights</a>
 	</div>
@@ -191,16 +196,25 @@
 				}
 				
 				
-				$query = "SELECT * FROM dimLights WHERE id = '$i'";
+				$query = "SELECT * FROM dimlights WHERE id = '$i'";
 				$result = mysqli_query($mysqli, $query);
 				$row = mysqli_fetch_assoc($result);
 				
-				if($row['intensity'] > 100){
-					$query =  "UPDATE dimlights SET intensity = 100    WHERE id = '$i'";
+				
+				$query =  "UPDATE dimlights SET intensity = 100    WHERE id = $i AND intensity > 100";
+				if ($mysqli->query($query) === TRUE) {
+						
+				} else {
+					//echo "Error updating record: " . $mysqli->error;
 				}
-				else if($row['intensity'] < 0){
-					$query =  "UPDATE dimlights SET intensity = 0    WHERE id = '$i'";
-				}
+				
+
+					if ($mysqli->query($query) === TRUE) {
+						
+					} else {
+						//echo "Error updating record: " . $mysqli->error;
+					}
+				$query =  "UPDATE dimlights SET intensity = 0    WHERE id = $i AND intensity < 0";	
 				if ($mysqli->query($query) === TRUE) {
 						
 				} else {

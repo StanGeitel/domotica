@@ -170,16 +170,13 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="debounce.c">
+    <Compile Include="buttons.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="gpio.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="gpio.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="debounce.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="knx.c">
@@ -189,12 +186,6 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="main.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="switch.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="switch.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="timer.c">

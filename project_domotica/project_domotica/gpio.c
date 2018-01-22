@@ -60,7 +60,12 @@ volatile uint8_t old_pins = 0;
 		GIMSK |= (1 << PCIE2);			//enable pin change interrupt 2 in general interrupt mask register	
 	}
 	SREG |= (1 << SREG_I);				//enable interrupts I in global status register
+	int i;
+	for(i = 0; i < 6; i++){
+	 enable_input_gpio('B', i);
+	}
  }
+ 
  
 
  

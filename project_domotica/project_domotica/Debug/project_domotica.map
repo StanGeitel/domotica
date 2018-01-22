@@ -5,21 +5,26 @@ d:/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25/tiny-sta
 d:/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25/tiny-stack\libgcc.a(_copy_data.o)
                               knx.o (__do_copy_data)
 d:/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25/tiny-stack\libgcc.a(_clear_bss.o)
-                              debounce.o (__do_clear_bss)
-
-Allocating common symbols
-Common symbol       size              file
-
-db                  0x25              debounce.o
-lastState           0x1               switch.o
+                              gpio.o (__do_clear_bss)
 
 Discarded input sections
 
  .data          0x00000000        0x0 D:/7.0/Packs/atmel/ATtiny_DFP/1.3.147/gcc/dev/attiny2313a/avr25/tiny-stack/crtattiny2313a.o
  .bss           0x00000000        0x0 D:/7.0/Packs/atmel/ATtiny_DFP/1.3.147/gcc/dev/attiny2313a/avr25/tiny-stack/crtattiny2313a.o
- .text          0x00000000        0x0 debounce.o
- .data          0x00000000        0x0 debounce.o
- .bss           0x00000000        0x0 debounce.o
+ .text          0x00000000        0x0 buttons.o
+ .data          0x00000000        0x0 buttons.o
+ .bss           0x00000000        0x0 buttons.o
+ .text.ISR      0x00000000       0xbc buttons.o
+ .debug_info    0x00000000      0x29f buttons.o
+ .debug_abbrev  0x00000000       0xe6 buttons.o
+ .debug_loc     0x00000000      0x11c buttons.o
+ .debug_aranges
+                0x00000000       0x20 buttons.o
+ .debug_ranges  0x00000000       0x10 buttons.o
+ .debug_line    0x00000000      0x12a buttons.o
+ .debug_str     0x00000000      0x1d2 buttons.o
+ .comment       0x00000000       0x31 buttons.o
+ .debug_frame   0x00000000       0x30 buttons.o
  .text          0x00000000        0x0 gpio.o
  .data          0x00000000        0x0 gpio.o
  .bss           0x00000000        0x0 gpio.o
@@ -27,6 +32,8 @@ Discarded input sections
                 0x00000000       0x40 gpio.o
  .text.clear_output_gpio
                 0x00000000       0x40 gpio.o
+ .text.toggle_output_gpio
+                0x00000000       0x32 gpio.o
  .text.enable_input_gpio
                 0x00000000       0x2c gpio.o
  .text.enable_pullup_gpio
@@ -34,9 +41,7 @@ Discarded input sections
  .text.read_gpio
                 0x00000000       0x2c gpio.o
  .text.init_pin_change_interrupt_gpio
-                0x00000000       0x84 gpio.o
- .text.init_external_interrupt0_gpio
-                0x00000000       0x1a gpio.o
+                0x00000000       0x9e gpio.o
  .text.init_external_interrupt1_gpio
                 0x00000000       0x1a gpio.o
  .bss.old_pins  0x00000000        0x1 gpio.o
@@ -57,14 +62,17 @@ Discarded input sections
                 0x00000000        0x8 knx.o
  .text.send_KNX_byte
                 0x00000000       0x14 knx.o
+ .text.generate_KNX
+                0x00000000       0x90 knx.o
  .text.check_adres
                 0x00000000       0x1e knx.o
+ .text.switch_led
+                0x00000000       0x40 knx.o
+ .text.changeDimmer
+                0x00000000       0x40 knx.o
  .text          0x00000000        0x0 main.o
  .data          0x00000000        0x0 main.o
  .bss           0x00000000        0x0 main.o
- .text          0x00000000        0x0 switch.o
- .data          0x00000000        0x0 switch.o
- .bss           0x00000000        0x0 switch.o
  .text          0x00000000        0x0 timer.o
  .data          0x00000000        0x0 timer.o
  .bss           0x00000000        0x0 timer.o
@@ -86,22 +94,6 @@ Discarded input sections
  .text          0x00000000        0x0 usart.o
  .data          0x00000000        0x0 usart.o
  .bss           0x00000000        0x0 usart.o
- .text.init_uart
-                0x00000000       0x10 usart.o
- .text.send_uart
-                0x00000000        0x8 usart.o
- .text.receive_uart
-                0x00000000        0x8 usart.o
- .text.uart_getc_f
-                0x00000000        0xc usart.o
- .text.uart_getc_wait
-                0x00000000        0xc usart.o
- .text.uart_putc_f
-                0x00000000        0x8 usart.o
- .text.uart_puts
-                0x00000000       0x1c usart.o
- .text.uart_puts_P
-                0x00000000       0x24 usart.o
  .data.sent     0x00000000        0x1 usart.o
  .text          0x00000000        0x0 d:/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25/tiny-stack\libgcc.a(_exit.o)
  .data          0x00000000        0x0 d:/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25/tiny-stack\libgcc.a(_exit.o)
@@ -167,11 +159,10 @@ user_signatures  0x00850000         0x00000400         rw !x
 Linker script and memory map
 
 LOAD D:/7.0/Packs/atmel/ATtiny_DFP/1.3.147/gcc/dev/attiny2313a/avr25/tiny-stack/crtattiny2313a.o
-LOAD debounce.o
+LOAD buttons.o
 LOAD gpio.o
 LOAD knx.o
 LOAD main.o
-LOAD switch.o
 LOAD timer.o
 LOAD usart.o
 START GROUP
@@ -281,7 +272,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x7bc
+.text           0x00000000      0x2f4
  *(.vectors)
  .vectors       0x00000000       0x2a D:/7.0/Packs/atmel/ATtiny_DFP/1.3.147/gcc/dev/attiny2313a/avr25/tiny-stack/crtattiny2313a.o
                 0x00000000                __vector_default
@@ -342,7 +333,9 @@ END GROUP
  .text          0x0000005c        0x2 D:/7.0/Packs/atmel/ATtiny_DFP/1.3.147/gcc/dev/attiny2313a/avr25/tiny-stack/crtattiny2313a.o
                 0x0000005c                __vector_12
                 0x0000005c                __bad_interrupt
+                0x0000005c                __vector_6
                 0x0000005c                __vector_3
+                0x0000005c                __vector_11
                 0x0000005c                __vector_13
                 0x0000005c                __vector_17
                 0x0000005c                __vector_19
@@ -357,72 +350,43 @@ END GROUP
                 0x0000005c                __vector_20
                 0x0000005e                . = ALIGN (0x2)
  *(.text.*)
- .text.__vector_6
-                0x0000005e      0x17e debounce.o
-                0x0000005e                __vector_6
- .text.callSignaledHandlers
-                0x000001dc       0x56 debounce.o
-                0x000001dc                callSignaledHandlers
- .text.registerDebouncer
-                0x00000232       0x60 debounce.o
-                0x00000232                registerDebouncer
- .text.signalChangedState
-                0x00000292       0x44 debounce.o
-                0x00000292                signalChangedState
- .text.initializeDebouncerTimer
-                0x000002d6        0xe debounce.o
-                0x000002d6                initializeDebouncerTimer
- .text.toggle_output_gpio
-                0x000002e4       0x32 gpio.o
-                0x000002e4                toggle_output_gpio
+ .text.init_external_interrupt0_gpio
+                0x0000005e       0x1a gpio.o
+                0x0000005e                init_external_interrupt0_gpio
  .text.__vector_1
-                0x00000316       0x14 gpio.o
-                0x00000316                __vector_1
+                0x00000078       0x14 gpio.o
+                0x00000078                __vector_1
  .text.__vector_2
-                0x0000032a       0x14 gpio.o
-                0x0000032a                __vector_2
- .text.generate_KNX
-                0x0000033e        0x4 knx.o
-                0x0000033e                generate_KNX
+                0x0000008c       0x14 gpio.o
+                0x0000008c                __vector_2
  .text.send_acknowledgement
-                0x00000342       0x1a knx.o
-                0x00000342                send_acknowledgement
+                0x000000a0       0x1a knx.o
+                0x000000a0                send_acknowledgement
  .text.receive_KNX
-                0x0000035c       0xc6 knx.o
-                0x0000035c                receive_KNX
- .text.switch_led
-                0x00000422       0x4a knx.o
-                0x00000422                switch_led
- .text.changeDimmer
-                0x0000046c       0x4a knx.o
-                0x0000046c                changeDimmer
- .text.main     0x000004b6        0x8 main.o
-                0x000004b6                main
- .text.ButtonClicker
-                0x000004be       0x9a switch.o
-                0x000004be                ButtonClicker
- .text.__vector_11
-                0x00000558       0x92 switch.o
-                0x00000558                __vector_11
- .text.buttons  0x000005ea       0x7a switch.o
-                0x000005ea                buttons
+                0x000000ba       0xc6 knx.o
+                0x000000ba                receive_KNX
+ .text.main     0x00000180        0xc main.o
+                0x00000180                main
+ .text.init_uart
+                0x0000018c       0x10 usart.o
+                0x0000018c                init_uart
  .text.uart_getc
-                0x00000664       0x44 usart.o
-                0x00000664                uart_getc
+                0x0000019c       0x44 usart.o
+                0x0000019c                uart_getc
  .text.uart_putc
-                0x000006a8       0x3a usart.o
-                0x000006a8                uart_putc
+                0x000001e0       0x3a usart.o
+                0x000001e0                uart_putc
  .text.__vector_8
-                0x000006e2       0x5e usart.o
-                0x000006e2                __vector_8
+                0x0000021a       0x5e usart.o
+                0x0000021a                __vector_8
  .text.__vector_7
-                0x00000740       0x78 usart.o
-                0x00000740                __vector_7
-                0x000007b8                . = ALIGN (0x2)
+                0x00000278       0x78 usart.o
+                0x00000278                __vector_7
+                0x000002f0                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x000007b8        0x0 d:/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25/tiny-stack\libgcc.a(_exit.o)
-                0x000007b8                _exit
-                0x000007b8                exit
+ .fini9         0x000002f0        0x0 d:/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25/tiny-stack\libgcc.a(_exit.o)
+                0x000002f0                _exit
+                0x000002f0                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -441,15 +405,15 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x000007b8        0x4 d:/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25/tiny-stack\libgcc.a(_exit.o)
+ .fini0         0x000002f0        0x4 d:/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25/tiny-stack\libgcc.a(_exit.o)
  *(.fini0)
-                0x000007bc                _etext = .
+                0x000002f4                _etext = .
 
-.data           0x00800060       0x3a load address 0x000007bc
+.data           0x00800060       0x3a load address 0x000002f4
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
- .data.amount_messages.2085
+ .data.amount_messages.2076
                 0x00800060        0x2 knx.o
  .data.data_buffer
                 0x00800062       0x17 knx.o
@@ -466,32 +430,28 @@ END GROUP
                 0x0080009a                _edata = .
                 0x0080009a                PROVIDE (__data_end, .)
 
-.bss            0x0080009a       0x2e
+.bss            0x0080009a        0x8
                 0x0080009a                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
- .bss.count.2084
+ .bss.count.2075
                 0x0080009a        0x2 knx.o
- .bss.parity_failed.2086
+ .bss.parity_failed.2077
                 0x0080009c        0x2 knx.o
  .bss.tx_tail   0x0080009e        0x1 usart.o
  .bss.tx_head   0x0080009f        0x1 usart.o
  .bss.rx_tail   0x008000a0        0x1 usart.o
  .bss.rx_head   0x008000a1        0x1 usart.o
  *(COMMON)
- COMMON         0x008000a2       0x25 debounce.o
-                0x008000a2                db
- COMMON         0x008000c7        0x1 switch.o
-                0x008000c7                lastState
-                0x008000c8                PROVIDE (__bss_end, .)
-                0x000007bc                __data_load_start = LOADADDR (.data)
-                0x000007f6                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x008000a2                PROVIDE (__bss_end, .)
+                0x000002f4                __data_load_start = LOADADDR (.data)
+                0x0000032e                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x008000c8        0x0
+.noinit         0x008000a2        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x008000c8                _end = .
+                0x008000a2                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -533,12 +493,10 @@ END GROUP
 
 .comment        0x00000000       0x30
  *(.comment)
- .comment       0x00000000       0x30 debounce.o
+ .comment       0x00000000       0x30 gpio.o
                                  0x31 (size before relaxing)
- .comment       0x00000030       0x31 gpio.o
  .comment       0x00000030       0x31 knx.o
  .comment       0x00000030       0x31 main.o
- .comment       0x00000030       0x31 switch.o
  .comment       0x00000030       0x31 usart.o
 
 .note.gnu.avr.deviceinfo
@@ -561,86 +519,68 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000      0x200
+.debug_aranges  0x00000000      0x158
  *(.debug_aranges)
  .debug_aranges
-                0x00000000       0x40 debounce.o
+                0x00000000       0x70 gpio.o
  .debug_aranges
-                0x00000040       0x70 gpio.o
+                0x00000070       0x88 knx.o
  .debug_aranges
-                0x000000b0       0x88 knx.o
+                0x000000f8       0x20 main.o
  .debug_aranges
-                0x00000138       0x20 main.o
- .debug_aranges
-                0x00000158       0x30 switch.o
- .debug_aranges
-                0x00000188       0x78 usart.o
+                0x00000118       0x40 usart.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x1b9d
+.debug_info     0x00000000     0x1360
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x456 D:/7.0/Packs/atmel/ATtiny_DFP/1.3.147/gcc/dev/attiny2313a/avr25/tiny-stack/crtattiny2313a.o
- .debug_info    0x00000456      0x26d debounce.o
- .debug_info    0x000006c3      0x27d gpio.o
- .debug_info    0x00000940      0x81c knx.o
- .debug_info    0x0000115c       0x9e main.o
- .debug_info    0x000011fa      0x4fc switch.o
- .debug_info    0x000016f6      0x4a7 usart.o
+ .debug_info    0x00000456      0x2a5 gpio.o
+ .debug_info    0x000006fb      0x961 knx.o
+ .debug_info    0x0000105c       0xfc main.o
+ .debug_info    0x00001158      0x208 usart.o
 
-.debug_abbrev   0x00000000      0xd38
+.debug_abbrev   0x00000000      0x9ef
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x41b D:/7.0/Packs/atmel/ATtiny_DFP/1.3.147/gcc/dev/attiny2313a/avr25/tiny-stack/crtattiny2313a.o
- .debug_abbrev  0x0000041b      0x15c debounce.o
- .debug_abbrev  0x00000577       0xe2 gpio.o
- .debug_abbrev  0x00000659      0x2e8 knx.o
- .debug_abbrev  0x00000941       0x65 main.o
- .debug_abbrev  0x000009a6      0x172 switch.o
- .debug_abbrev  0x00000b18      0x220 usart.o
+ .debug_abbrev  0x0000041b      0x122 gpio.o
+ .debug_abbrev  0x0000053d      0x2f7 knx.o
+ .debug_abbrev  0x00000834       0x9b main.o
+ .debug_abbrev  0x000008cf      0x120 usart.o
 
-.debug_line     0x00000000      0xd9c
+.debug_line     0x00000000      0x923
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x10c D:/7.0/Packs/atmel/ATtiny_DFP/1.3.147/gcc/dev/attiny2313a/avr25/tiny-stack/crtattiny2313a.o
- .debug_line    0x0000010c      0x1fe debounce.o
- .debug_line    0x0000030a      0x1f0 gpio.o
- .debug_line    0x000004fa      0x37a knx.o
- .debug_line    0x00000874       0x51 main.o
- .debug_line    0x000008c5      0x25f switch.o
- .debug_line    0x00000b24      0x278 usart.o
+ .debug_line    0x0000010c      0x210 gpio.o
+ .debug_line    0x0000031c      0x3e9 knx.o
+ .debug_line    0x00000705       0xab main.o
+ .debug_line    0x000007b0      0x173 usart.o
 
-.debug_frame    0x00000000      0x538
+.debug_frame    0x00000000      0x354
  *(.debug_frame)
- .debug_frame   0x00000000       0xec debounce.o
- .debug_frame   0x000000ec       0xdc gpio.o
- .debug_frame   0x000001c8      0x158 knx.o
- .debug_frame   0x00000320       0x24 main.o
- .debug_frame   0x00000344       0xa0 switch.o
- .debug_frame   0x000003e4      0x154 usart.o
+ .debug_frame   0x00000000       0xe8 gpio.o
+ .debug_frame   0x000000e8      0x17c knx.o
+ .debug_frame   0x00000264       0x24 main.o
+ .debug_frame   0x00000288       0xcc usart.o
 
-.debug_str      0x00000000      0x7a4
+.debug_str      0x00000000      0x5e0
  *(.debug_str)
  .debug_str     0x00000000      0x17b D:/7.0/Packs/atmel/ATtiny_DFP/1.3.147/gcc/dev/attiny2313a/avr25/tiny-stack/crtattiny2313a.o
- .debug_str     0x0000017b      0x236 debounce.o
-                                0x26a (size before relaxing)
- .debug_str     0x000003b1       0xf0 gpio.o
+ .debug_str     0x0000017b      0x232 gpio.o
                                 0x266 (size before relaxing)
- .debug_str     0x000004a1      0x198 knx.o
+ .debug_str     0x000003ad      0x1a1 knx.o
                                 0x340 (size before relaxing)
- .debug_str     0x00000639       0x19 main.o
-                                0x187 (size before relaxing)
- .debug_str     0x00000652       0x41 switch.o
-                                0x296 (size before relaxing)
- .debug_str     0x00000693      0x111 usart.o
-                                0x2b0 (size before relaxing)
+ .debug_str     0x0000054e       0x24 main.o
+                                0x1c2 (size before relaxing)
+ .debug_str     0x00000572       0x6e usart.o
+                                0x220 (size before relaxing)
 
-.debug_loc      0x00000000     0x121c
+.debug_loc      0x00000000      0xc54
  *(.debug_loc)
- .debug_loc     0x00000000      0x322 debounce.o
- .debug_loc     0x00000322      0x186 gpio.o
- .debug_loc     0x000004a8      0x730 knx.o
- .debug_loc     0x00000bd8      0x26c switch.o
- .debug_loc     0x00000e44      0x3d8 usart.o
+ .debug_loc     0x00000000      0x1d9 gpio.o
+ .debug_loc     0x000001d9      0x8ad knx.o
+ .debug_loc     0x00000a86      0x1ce usart.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -660,14 +600,12 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000      0x1e8
+.debug_ranges   0x00000000      0x148
  *(.debug_ranges)
- .debug_ranges  0x00000000       0x30 debounce.o
- .debug_ranges  0x00000030       0x60 gpio.o
- .debug_ranges  0x00000090       0xa8 knx.o
- .debug_ranges  0x00000138       0x10 main.o
- .debug_ranges  0x00000148       0x20 switch.o
- .debug_ranges  0x00000168       0x80 usart.o
+ .debug_ranges  0x00000000       0x60 gpio.o
+ .debug_ranges  0x00000060       0xa8 knx.o
+ .debug_ranges  0x00000108       0x10 main.o
+ .debug_ranges  0x00000118       0x30 usart.o
 
 .debug_macro
  *(.debug_macro)

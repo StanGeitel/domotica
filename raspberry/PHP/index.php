@@ -1,3 +1,9 @@
+<?php
+session_start();
+if(!isset($_SESSION['SESS_ADMINLOGGEDIN'])){
+	header("location: login.php");
+}
+?>
 <html>
 	<head>
 		<title>Welkom om de hoofdpagina</title>
@@ -7,7 +13,7 @@
 	<link rel="stylesheet" type="text/css" href="styleIndex.css"/>
 
 	<div class="navbar">
-		<a href="index.html">Home</a>
+		<a href="index.php">Home</a>
 		<a href="lights.php">Lights</a>
 		<a href="dimLights.php">DimLights</a>
 	</div>
@@ -17,7 +23,7 @@
 	</div>
 	
 	welkom op de webpagina van het KNX domotica systeem!</br>
-	<a href="lights.php">Lampen site</a>
+	<a href="logout.php">log out</a>
 	
 	<br>
 	<br>
@@ -27,8 +33,5 @@
 
 		
 	</div>
-
-
-	
 	</body>
 </html>

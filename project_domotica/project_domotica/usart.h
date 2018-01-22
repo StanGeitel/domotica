@@ -31,12 +31,8 @@ int uart_getc_f(FILE *stream);
 
 // Send a single char
 void uart_putc(uint8_t c);
-int uart_putc_f(char c, FILE *stream);
 
-// Send a string
-void uart_puts(const char *s);
-// Send a PROGMEM string
-void uart_puts_P(const char *s);
+
 
 
 

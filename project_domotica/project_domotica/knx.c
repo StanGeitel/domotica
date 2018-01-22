@@ -4,12 +4,22 @@
  * Created: 7-12-2017 14:58:00
  *  Author: Stan Geitel
  */ 
+
+
 #include <avr/io.h>
 #include <stdint.h>
 #include "knx.h"
 #include "gpio.h"
 #include "timer.h"
 #include "usart.h"
+
+#define HP_CF_VAL     0b10110100    //high priority
+#define HP_CF_REP_VAL 0b10100100
+#define CF_VAL        0b10111100    //low priority
+#define CF_REP_VAL    0b10101100
+#define ATRL_VAL      0b00000010
+
+#define TELE_LENGHT   9
 
 
 //set adres to 1.1.2
@@ -50,9 +60,9 @@ uint8_t reverse(uint8_t b) {
 					//transceive
 //-------------------------------------------------------------------------
 
-void generate_KNX(uint8_t priority, uint8_t length, uint8_t repeated, uint8_t data_array[], int size_data_array, uint8_t address){
-	if(check_bus_empty() == 1){
-		send_KNX_byte(generate_control_field(priority, repeated));
+void generate_KNX(uint8_t length, uint8_t repeated, uint8_t data_array[], int size_data_array, uint8_t address){
+	if(check_bus_empty() == 0){
+		send_KNX_byte(generate_control_field(TELE_LENGHT, repeated));
 		send_KNX_byte(area_line);
 		send_KNX_byte(bus_device);
 		send_KNX_byte(area_line);
@@ -72,7 +82,8 @@ void generate_KNX(uint8_t priority, uint8_t length, uint8_t repeated, uint8_t da
 
 		uint8_t c = uart_getc();
 		if(c == 0x30){//NACK
-			generate_KNX(normal_priority, length, 0, data_array, size_data_array, address);//send again as repeated
+			generate_KNX(length, 0, data_array, size_data_array, address);//send again as repeated
+
 		}
 
 	}
@@ -167,12 +178,7 @@ void receive_KNX(void){
 	static int amount_messages = 7;//amount of messages without user data
 	static int parity_failed = 0;
 
-	/*for(count = 0; count <= amount_messages; count++){
-		c = uart_getc();
-		if(UCSRA &(1<<UPE)){//parity check
-				//parity check failed
-				parity_failed = 1;
-		}*/
+
 		c = uart_getc();
 		if(UCSRA &(1<<UPE)){//parity check
 			//parity check failed
@@ -243,7 +249,7 @@ void switch_led(uint8_t address, int state){
 	int size_data_array = 2;
 	uint8_t length = 2;
 	uint8_t repeated = 1;//not repeated
-	generate_KNX(normal_priority, length, repeated, data_array, size_data_array, address);
+	generate_KNX(length, repeated, data_array, size_data_array, address);
 }
 
 void changeDimmer(uint8_t address, int state){
@@ -261,13 +267,5 @@ void changeDimmer(uint8_t address, int state){
 		
 		uint8_t length = 2;
 		uint8_t repeated = 1;//not repeated
-		generate_KNX(normal_priority, length, repeated, data_array, size_data_array, address);
+		generate_KNX(length, repeated, data_array, size_data_array, address);
 }
-
-/*
-void read_data(void){
-	if(check_adres() == 1){
-		uint8_t length = data_buffer[5] & 0x0F;
-		data_buffer[5]
-	}
-}*/
